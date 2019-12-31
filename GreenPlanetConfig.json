@@ -6,7 +6,7 @@
 		"sleepAfterExec": 150,
 		"daylightOffset_sec": 0,
 		"gmtOffset_sec": 7200,
-		"dataUpdateHost": "GreenPlanetServer.local",
+		"dataUpdateHost": "192.168.1.37",
 		"dataUpdateURI": "GreenPlanet/GreenPlanetConfig.json",
 		"dataUpdatePort": 80,
 		"loggerHost": "192.168.1.200",

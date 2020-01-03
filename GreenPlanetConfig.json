@@ -1,7 +1,7 @@
 {	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2	,
 		"targetFWVersion": 2019122805,
-		"delayBetweenExecs": 1000,
+		"delayBetweenExecs": 500,
 		"normalSleepTime": 30,
 		"sleepAfterExec": 150,
 		"daylightOffset_sec": 0,
@@ -81,7 +81,8 @@
 	],
 	"ServerConfiguration": {
 		"ServerConfigurationRefreshRate": 60,
-		"maxLogAge": 200
+		"maxLogAge": 200,
+		"recessTime": 170
 	}
 
 }

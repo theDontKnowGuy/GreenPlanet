@@ -55,7 +55,7 @@
 			"operationPlanName": "Shut down at 9pm",
 			"IRcodeID": 4,
 			"hour": 16,
-			"minute": 46,
+			"minute": 49,
 			"weekdays": "1234567"
 		},
 		{

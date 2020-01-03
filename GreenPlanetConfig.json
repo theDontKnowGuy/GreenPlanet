@@ -67,7 +67,7 @@
 			"weekdays": "1234567"
 		}
 	],
-	"IRcodes":[
+	"IRcode":[
 		{
 			"IRcodeID":3,
 			"IRcodeDescription" : "Turn AC off",

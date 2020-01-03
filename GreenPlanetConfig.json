@@ -27,6 +27,12 @@
 			"deviceGroup": "Main floor",
 			"deviceLocation": "clinic",
 			"memberInOperationPlans": "1,2"
+		},		{
+			"DeviceMAC": "24:6F:28:9E:49:5C",
+			"deviceName": "TaranisEye6 LOLIN2",
+			"deviceGroup": "Main floor",
+			"deviceLocation": "clinic",
+			"memberInOperationPlans": "1,2"
 		},
 		{
 			"DeviceMAC": "3C:71:BF:4D:C2:34",

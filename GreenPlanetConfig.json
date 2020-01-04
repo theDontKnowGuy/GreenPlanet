@@ -11,7 +11,10 @@
 		"dataUpdatePort": 80,
 		"loggerHost": "192.168.1.200",
 		"logTarget": "/MyRFDevicesHub/MyRFDevicesHubLogger.php",
-		"loggerHostPort": 80
+		"loggerHostPort": 80,
+		"red": 22,
+		"green": 13,
+		"blue": 20
 	},
 	"Devices": [
 		{

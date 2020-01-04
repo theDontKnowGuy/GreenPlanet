@@ -9,9 +9,10 @@
 		"dataUpdateHost": "192.168.1.37",
 		"dataUpdateURI": "/GreenPlanet/GreenPlanetConfig.json",
 		"dataUpdatePort": 80,
-		"loggerHost": "192.168.1.200",
-		"logTarget": "/MyRFDevicesHub/MyRFDevicesHubLogger.php",
-		"loggerHostPort": 80,
+		"loggerHost": "maker.ifttt.com",
+		"logTarget": "/trigger/GreenPlanet/with/key/dKCfx2KkgoPNCykJ3664Wa",
+		"loggerHostPort": 443,
+		"loggingType": 1,
 		"red": 22,
 		"green": 13,
 		"blue": 20
@@ -85,7 +86,10 @@
 	"ServerConfiguration": {
 		"ServerConfigurationRefreshRate": 60,
 		"maxLogAge": 200,
-		"recessTime": 170
+		"recessTime": 170,
+		"serverLoggerHost": "maker.ifttt.com",
+		"serverLogTarget": "/trigger/GreenPlanet/with/key/dKCfx2KkgoPNCykJ3664Wa",
+		"serverLoggerHostPort": 443
 	}
 
 }

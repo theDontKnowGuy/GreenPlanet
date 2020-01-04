@@ -1,4 +1,5 @@
 {	"GeneralConfiguration": {
+		"ConfigurationVersion": 100,
 		"DEBUGLEVEL": 2	,
 		"targetFWVersion": 2019122805,
 		"delayBetweenExecs": 1000,

@@ -1,7 +1,7 @@
-{	"GeneralConfiguration": {
-		"ConfigurationVersion": 100,
+{	"ConfigurationVersion": 101,		
+	"targetFWVersion": 2019122805,
+	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2	,
-		"targetFWVersion": 2019122805,
 		"delayBetweenExecs": 1000,
 		"normalSleepTime": 30,
 		"sleepAfterExec": 150,
@@ -28,13 +28,13 @@
 		},		
 		{
 			"DeviceMAC": "24:6F:28:9D:9A:64",
-			"deviceName": "TaranisEye3 LOLIN",
+			"deviceName": "TaranisEye3-LOLIN",
 			"deviceGroup": "Main floor",
 			"deviceLocation": "clinic",
 			"memberInOperationPlans": "1,2"
 		},		{
 			"DeviceMAC": "24:6F:28:9E:49:5C",
-			"deviceName": "TaranisEye6 LOLIN2",
+			"deviceName": "TaranisEye6-LOLIN2",
 			"deviceGroup": "Main floor",
 			"deviceLocation": "clinic",
 			"memberInOperationPlans": "1,2"

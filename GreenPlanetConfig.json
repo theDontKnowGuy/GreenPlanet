@@ -1,8 +1,8 @@
 {
-	"ConfigurationVersion": 102,
+	"ConfigurationVersion": 103,
 	"targetFWVersion": 2019122805,
 	"GeneralConfiguration": {
-		"DEBUGLEVEL": 2,
+		"DEBUGLEVEL": 5,
 		"delayBetweenExecs": 1000,
 		"normalSleepTime": 30,
 		"sleepAfterExec": 150,
@@ -13,7 +13,7 @@
 		"dataUpdatePort": 80,
 		"loggerHost": "192.168.1.37",
 		"logTarget": "/logs/",
-		"loggerHostPort": 443,
+		"loggerHostPort": 80,
 		"loggingType": 1,
 		"red": 22,
 		"green": 13,

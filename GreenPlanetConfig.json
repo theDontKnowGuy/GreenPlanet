@@ -15,9 +15,9 @@
 		"logTarget": "/logs/",
 		"loggerHostPort": 443,
 		"loggingType": 1,
-		"red": 22,
+		"red": 13,
 		"green": 11,
-		"blue": 13
+		"blue": 22
 	},
 	"Devices": [{
 			"DeviceMAC": "24:0A:C4:C6:3B:1C",

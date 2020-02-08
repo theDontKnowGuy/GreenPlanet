@@ -1,5 +1,5 @@
 {
-	"ConfigurationVersion": 102,
+	"ConfigurationVersion": 103,
 	"targetFWVersion": 2019122805,
 	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2,
@@ -17,7 +17,7 @@
 		"loggingType": 1,
 		"red": 22,
 		"green": 11,
-		"blue": 20
+		"blue": 13
 	},
 	"Devices": [{
 			"DeviceMAC": "24:0A:C4:C6:3B:1C",

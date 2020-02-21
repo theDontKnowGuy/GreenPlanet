@@ -13,7 +13,7 @@
 		"dataUpdatePort": 80,
 		"loggerHost": "192.168.1.52",
 		"logTarget": "/logs/",
-		"loggerHostPort": 443,
+		"loggerHostPort": 80,
 		"loggingType": 1,
 		"red": 13,
 		"green": 11,

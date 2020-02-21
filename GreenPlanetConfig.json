@@ -1,5 +1,5 @@
 {
-	"ConfigurationVersion": 103,
+	"ConfigurationVersion": 104,
 	"targetFWVersion": 2019122805,
 	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2,
@@ -8,10 +8,10 @@
 		"sleepAfterExec": 150,
 		"daylightOffset_sec": 0,
 		"gmtOffset_sec": 7200,
-		"dataUpdateHost": "192.168.1.37",
+		"dataUpdateHost": "192.168.1.52",
 		"dataUpdateURI": "/GreenPlanet/GreenPlanetConfig.json",
 		"dataUpdatePort": 80,
-		"loggerHost": "192.168.1.37",
+		"loggerHost": "192.168.1.52",
 		"logTarget": "/logs/",
 		"loggerHostPort": 443,
 		"loggingType": 1,
@@ -52,14 +52,21 @@
 			"deviceGroup": "Second Floor",
 			"deviceLocation": "clinic",
 			"memberInOperationPlans": "1,2"
+		},
+		{
+			"DeviceMAC": "A4:CF:12:9A:B7:54",
+			"deviceName": "TaranisEye5",
+			"deviceGroup": "Second Floor",
+			"deviceLocation": "clinic",
+			"memberInOperationPlans": "1,2"
 		}
 	],
 	"operationPlans": [{
 			"operationPlanID": 1,
 			"operationPlanName": "Shut down at 9pm",
-			"IRcodeID": 4,
+			"IRcodeID": 3,
 			"hour": 21,
-			"minute": 10,
+			"minute": 20,
 			"weekdays": "1234567"
 		},
 		{

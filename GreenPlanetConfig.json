@@ -15,8 +15,8 @@
 		"logTarget": "/trigger/GreenPlanet/with/key/dKCfx2KkgoPNCykJ3664Wa",
 		"loggerHostPort": 443,
 		"loggingType": 1,
-		"red": 13,
-		"green": 11,
+		"red": 11,
+		"green": 13,
 		"blue": 22
 	},
 	"Devices": [{

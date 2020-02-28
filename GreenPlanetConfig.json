@@ -12,7 +12,7 @@
 		"dataUpdateURI": "/GreenPlanet/GreenPlanetConfig.json",
 		"dataUpdatePort": 80,
 		"loggerHost": "maker.ifttt.com",
-		"logTarget": "/trigger/GreenPlanet/with/key/dKCfx2KkgoPNCykJ3664W",
+		"logTarget": "/trigger/GreenPlanet/with/key/dKCfx2KkgoPNCykJ3664Wa",
 		"loggerHostPort": 443,
 		"loggingType": 1,
 		"red": 13,

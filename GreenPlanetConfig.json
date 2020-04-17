@@ -1,14 +1,14 @@
 {
-	"ConfigurationVersion": 105,
+	"ConfigurationVersion": 106,
 	"targetFWVersion": 2019122805,
 	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2,
 		"delayBetweenExecs": 1000,
-		"normalSleepTime": 30,
+		"normalSleepTime": 3600,
 		"sleepAfterExec": 150,
 		"daylightOffset_sec": 0,
 		"gmtOffset_sec": 7200,
-		"dataUpdateHost": "192.168.1.52",
+		"dataUpdateHost": "192.168.1.103",
 		"dataUpdateURI": "/GreenPlanet/GreenPlanetConfig.json",
 		"dataUpdatePort": 80,
 		"loggerHost": "api.thingspeak.com",
@@ -80,9 +80,9 @@
 		{
 			"operationPlanID": 2,
 			"operationPlanName": "Turn on at 8am",
-			"IRcodeID": 3,
-			"hour": 14,
-			"minute": 0,
+			"IRcodeID": 4,
+			"hour": 20,
+			"minute": 35,
 			"weekdays": "1234567"
 		}
 	],

@@ -1,6 +1,6 @@
 {
 	"ConfigurationVersion": 200,
-	"targetFWVersion_client": 2020041705,
+	"targetFWVersion_client": 2020041801,
 	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2,
 		"delayBetweenExecs": 1000,

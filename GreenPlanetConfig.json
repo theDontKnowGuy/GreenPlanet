@@ -4,7 +4,7 @@
 	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2,
 		"delayBetweenExecs": 1000,
-		"normalSleepTime": 3600,
+		"normalSleepTime": 20,
 		"sleepAfterExec": 150,
 		"sleepAfterPanic": 300,
 		"daylightOffset_sec": 0,

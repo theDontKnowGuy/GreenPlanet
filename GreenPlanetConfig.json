@@ -6,6 +6,7 @@
 		"delayBetweenExecs": 1000,
 		"normalSleepTime": 3600,
 		"sleepAfterExec": 150,
+		"sleepAfterPanic": 300,
 		"daylightOffset_sec": 0,
 		"gmtOffset_sec": 7200,
 		"dataUpdateHost": "192.168.1.103",

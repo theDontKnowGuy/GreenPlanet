@@ -6,7 +6,7 @@
 		"normalSleepTime": 3600,
 		"sleepAfterExec": 3600,
 		"sleepAfterPanic": 3600,
-		"daylightOffset_sec": 0,
+		"daylightOffset_sec": 3600,
 		"gmtOffset_sec": 10800,
 		"dataUpdateHost": "raw.githubusercontent.com",
 		"dataUpdateURI": "/theDontKnowGuy/GreenPlanet/master/GreenPlanetConfig.json",

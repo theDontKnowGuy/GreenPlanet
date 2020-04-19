@@ -42,15 +42,15 @@
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":1,
 		"hour": 11,
-		"minute": 40,
+		"minute": 0,
 		"weekdays": "12345"
 	},
 	{
 		"operationPlanID": 2,
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":1,
-		"hour": 11,
-		"minute": 44,
+		"hour": 12,
+		"minute": 5,
 		"weekdays": "12345"
 	},
 	{

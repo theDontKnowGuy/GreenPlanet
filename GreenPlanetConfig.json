@@ -116,7 +116,7 @@
 		}
 	],
 	"ServerConfiguration": {
-		"ServerConfigurationRefreshRate": 600,
+		"ServerConfigurationRefreshRate": 120,
 		"maxLogAge": 900,
 		"recessTime": 170,
 		"serverLoggerHost": "api.thingspeak.com",

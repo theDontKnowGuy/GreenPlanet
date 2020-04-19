@@ -8,7 +8,7 @@
 		"sleepAfterExec": 3600,
 		"sleepAfterPanic": 3600,
 		"daylightOffset_sec": 0,
-		"gmtOffset_sec": 7200,
+		"gmtOffset_sec": 10800,
 		"dataUpdateHost": "raw.githubusercontent.com",
 		"dataUpdateURI": "/theDontKnowGuy/GreenPlanet/master/GreenPlanetConfig.json",
 		"dataUpdatePort": 443,
@@ -75,14 +75,14 @@
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":1,
 		"hour": 10,
-		"minute": 34,
+		"minute": 41,
 		"weekdays": "12345"
 	},{
 		"operationPlanID": 2,
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":1,
 		"hour": 10,
-		"minute": 32,
+		"minute": 44,
 		"weekdays": "12345"
 	},
 		{

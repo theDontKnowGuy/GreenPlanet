@@ -85,14 +85,14 @@
 		"minute": 44,
 		"weekdays": "12345"
 	},
-		{
+	{
 			"operationPlanID": 3,
 			"operationPlanName": "Shut down at 9pm",
 			"IRcodeID": 2,
 			"hour": 20,
 			"minute": 45,
 			"weekdays": "1234567"
-		}
+	}
 	],
 	"IRcode": [{
 			"IRcodeID": 3,
@@ -116,8 +116,8 @@
 		}
 	],
 	"ServerConfiguration": {
-		"ServerConfigurationRefreshRate": 60,
-		"maxLogAge": 200,
+		"ServerConfigurationRefreshRate": 600,
+		"maxLogAge": 900,
 		"recessTime": 170,
 		"serverLoggerHost": "api.thingspeak.com",
 		"serverLogTarget": "/channels/1023335/bulk_update.csv",

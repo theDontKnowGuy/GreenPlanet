@@ -1,5 +1,4 @@
-{
-	"ConfigurationVersion": 200,
+{"ConfigurationVersion": 200,
 	"targetFWVersion_client": 2020041801,
 	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2,
@@ -21,44 +20,11 @@
 		"green": 13,
 		"blue": 20
 	},
-	"Devices": [{
-			"DeviceMAC": "24:0A:C4:C6:3B:1C",
-			"deviceID": "701",
-			"deviceGroup": "Main floor",
-			"deviceLocation": "clinic",
-			"memberInOperationPlans": "1,2"
-		},
+	"Devices": [
 		{
-			"DeviceMAC": "24:6F:28:9D:9A:64",
-			"deviceID": "702",
-			"deviceGroup": "Main floor",
-			"deviceLocation": "clinic",
-			"memberInOperationPlans": "1,2"
-		}, {
 			"DeviceMAC": "24:6F:28:9E:49:5C",
 			"deviceID": "703",
 			"deviceGroup": "Main floor",
-			"deviceLocation": "clinic",
-			"memberInOperationPlans": "1,2"
-		},
-		{
-			"DeviceMAC": "3C:71:BF:4D:C2:34",
-			"deviceID": "704",
-			"deviceGroup": "Second Floor",
-			"deviceLocation": "clinic",
-			"memberInOperationPlans": "1,2"
-		},
-		{
-			"DeviceMAC": "3C:71:BF:52:E0:6C",
-			"deviceID": "705",
-			"deviceGroup": "Second Floor",
-			"deviceLocation": "clinic",
-			"memberInOperationPlans": "1,2"
-		},
-		{
-			"DeviceMAC": "A4:CF:12:9A:B7:54",
-			"deviceID": "706",
-			"deviceGroup": "Second Floor",
 			"deviceLocation": "clinic",
 			"memberInOperationPlans": "1,2"
 		},
@@ -70,14 +36,16 @@
 			"memberInOperationPlans": "1,2"
 		}
 	],
-	"operationPlans": [{
+	"operationPlans": [
+	{
 		"operationPlanID": 1,
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":1,
 		"hour": 10,
 		"minute": 41,
 		"weekdays": "12345"
-	},{
+	},
+	{
 		"operationPlanID": 2,
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":1,
@@ -86,15 +54,16 @@
 		"weekdays": "12345"
 	},
 	{
-			"operationPlanID": 3,
-			"operationPlanName": "Shut down at 9pm",
-			"IRcodeID": 2,
-			"hour": 20,
-			"minute": 45,
-			"weekdays": "1234567"
+		"operationPlanID": 3,
+		"operationPlanName": "Shut down at 9pm",
+		"IRcodeID": 2,
+		"hour": 20,
+		"minute": 45,
+		"weekdays": "1234567"
 	}
 	],
-	"IRcode": [{
+	"IRcode": [
+		{
 			"IRcodeID": 3,
 			"IRcodeDescription": "Turn AC off",
 			"IRCodeBitStream": [9063, 4462, 671, 1634, 672, 532, 676, 528, 684, 522, 674, 530, 682, 524, 674, 532, 682, 522, 676, 528, 672, 1634, 680, 526, 680, 1628, 686, 520, 666, 540, 668, 536, 680, 526, 680, 524, 682, 524, 680, 526, 682, 522, 684, 520, 680, 1628, 676, 528, 680, 526, 676, 530, 678, 528, 686, 520, 686, 520, 682, 1624, 690, 516, 684, 1622, 680, 526, 684, 522, 678, 1628, 688, 518, 680, 19964, 692, 510, 688, 518, 674, 530, 670, 536, 680, 526, 680, 524, 688, 518, 686, 520, 676, 1632, 682, 522, 686, 518, 684, 522, 678, 528, 676, 1630, 680, 526, 676, 530, 678, 528, 684, 522, 682, 524, 684, 522, 672, 534, 682, 522, 680, 526, 680, 526, 682, 524, 680, 526, 674, 532, 678, 526, 674, 1634, 684, 1624, 682, 1626, 680, 524, 683]
@@ -125,5 +94,4 @@
 		"serverLoggerHostPort": 443,
 		"targetFWVersion_server" : 2020041705
 	}
-
 }

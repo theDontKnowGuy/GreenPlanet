@@ -34,6 +34,13 @@
 			"deviceGroup": "Second Floor",
 			"deviceLocation": "clinic",
 			"memberInOperationPlans": "1,2"
+		},
+		{
+			"DeviceMAC": "24:6F:28:9D:9A:64",
+			"deviceID": "706",
+			"deviceGroup": "Second Floor",
+			"deviceLocation": "clinic",
+			"memberInOperationPlans": "1,2"
 		}
 	],
 	"operationPlans": [

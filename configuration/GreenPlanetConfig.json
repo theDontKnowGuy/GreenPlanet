@@ -55,16 +55,16 @@
 	{
 		"operationPlanID": 2,
 		"operationPlanName": "Turn on at 8am 24c",
-		"IRcodeID":1,
-		"hour": 12,
+		"IRcodeID":4,
+		"hour": 15,
 		"minute": 5,
-		"weekdays": "12345"
+		"weekdays": "1234567"
 	},
 	{
 		"operationPlanID": 3,
 		"operationPlanName": "Shut down at 9pm",
-		"IRcodeID": 2,
-		"hour": 20,
+		"IRcodeID": 4,
+		"hour": 16,
 		"minute": 45,
 		"weekdays": "1234567"
 	}

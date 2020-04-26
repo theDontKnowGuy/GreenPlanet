@@ -9,7 +9,7 @@
 		"daylightOffset_sec": 3600,
 		"gmtOffset_sec": 10800,
 		"dataUpdateHost": "raw.githubusercontent.com",
-		"dataUpdateURI": "/theDontKnowGuy/GreenPlanet/master/GreenPlanetConfig.json",
+		"dataUpdateURI": "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json",
 		"dataUpdatePort": 443,
 		"loggerHost": "api.thingspeak.com",
 		"logTarget": "/channels/1023335/bulk_update.csv",

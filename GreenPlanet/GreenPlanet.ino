@@ -1,4 +1,3 @@
-
 /*
    GreenPlanet by theDontKnowGuy
 
@@ -8,13 +7,13 @@
 */
 
 #include <Arduino.h>
-#include <secrets.h>
+#include "secrets.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// Firmware update over the air (FOTA) SECTION///////////////////////////////////////////????//////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const int FW_VERSION = 2020041801 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
+const int FW_VERSION = 2020042502 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
 const char* fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenPlanet/master/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
 #include <HTTPUpdate.h>
 
@@ -118,12 +117,12 @@ RTC_DATA_ATTR char c_dataUpdateURI[200];
 
 char* dataUpdateHost_fallback = "raw.githubusercontent.com";
 int dataUpdatePort_fallback = 443;
-String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/GreenPlanetConfig.json";   /// see example json file in github. leave value empty if no local server
+String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";   /// see example json file in github. leave 
 String dataUpdateURI_fallback_local = "/GreenPlanet/GreenPlanetConfig.json";   /// see example json file in github. leave value empty if no local server
 
 char* serverDataUpdateHost = "raw.githubusercontent.com";
 int serverDataUpdatePort = 443;
-String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/GreenPlanetConfig.json";
+String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";
 int ServerConfigurationRefreshRate = 60;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,11 +175,11 @@ struct tm timeinfo;
 #include <IRtext.h>
 #include <IRutils.h>
 const uint16_t kIrLed = 14;  // ESP8266 GPIO pin to use. Recommended: 4 (D2).
+IRsend irsend(kIrLed);  // Set the GPIO to be used to sending the message.
 
 long learningTH = 15000;
 
 const uint16_t kRecvPin = 15;
-IRsend irsend(kIrLed);  // Set the GPIO to be used to sending the message.
 
 
 const uint16_t kCaptureBufferSize = 2048;
@@ -210,7 +209,7 @@ float DHTh = 0;
 int maxEEPROMMessageLength = 1000;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////// WATCHGDOG SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////// WATCHGDOG SECTIO1N //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const int wdtTimeout = 22000;  //time in ms to trigger the watchdog // NOTE: less than that, on upgrade it barks. alternatively, kill dog before update
@@ -232,8 +231,8 @@ void IRAM_ATTR resetModule() {
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
 
 int delayBetweenExecs = 3;
-int sleepAfterExec = 160;
-int normalSleepTime = 12;
+int sleepAfterExec = 1800;
+int normalSleepTime = 1800;
 int sleepAfterPanic = 200;
 
 //#include "esp_system.h"
@@ -299,12 +298,13 @@ void setup() {
   timerAttachInterrupt(timer, &resetModule, true);  //attach callback
   timerAlarmWrite(timer, wdtTimeout * 1000, false); //set time in us
   timerAlarmEnable(timer);                          //enable interrupt
-
+  
+  MACID = mac2long(WiFi.macAddress());
+  
   if (log2Serial) Serial.begin(115200);
-  if (log2Serial) Serial.println(__FILE__);
 
   logThis(1, "Starting GreenPlanet Device by the DontKnowGuy", 2);
-  logThis(1, "Firmware version " + String (FW_VERSION), 2);
+  logThis(1, "Firmware version " + String (FW_VERSION) + ". Unique device identifier: " + MACID, 2);
 
   EEPROM.begin(4096);
   checkPanicMode();
@@ -312,7 +312,6 @@ void setup() {
   if (initiateNetwork() > 0) {
     networkReset();
   }
-
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
   printLocalTime();
   updateTime (0); ////??????????
@@ -345,7 +344,7 @@ void setup() {
   DHTh = DHTsensor.humidity;
   logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
 
-  Serial.println("Avail heap mem: " + String(system_get_free_heap_size()));
+  logThis(3,"Avail heap mem: " + String(system_get_free_heap_size()),2);
 
   logThis("Initialization Completed.", 3);
   digitalWrite(blue, HIGH); // system live indicator

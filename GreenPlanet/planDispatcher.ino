@@ -24,14 +24,7 @@ int calcTime2Sleep() {
   int timeDiff = normalSleepTime;
 
   for (int i = 0; i < inxParticipatingPlans; i++) {
-          Serial.println(myOperationPlans[i].hour);
       
-      Serial.println(timeinfo.tm_hour);      
-      Serial.println(timeinfo.tm_hour);
-      Serial.println(myOperationPlans[i].weekdays);
-      Serial.println(timeinfo.tm_wday + 1);      
-
-            
     if ((myOperationPlans[i].weekdays.indexOf(String(timeinfo.tm_wday + 1)) != 0) &&
         (myOperationPlans[i].hour - timeinfo.tm_hour >= 0) &&
         (myOperationPlans[i].minute - timeinfo.tm_min > 2 ))

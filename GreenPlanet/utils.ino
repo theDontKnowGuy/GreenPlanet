@@ -12,11 +12,14 @@ void blinkLiveLed() {
 
   }
   //  if(logBuffer.length() > 0) {if(networklogThis(logBuffer) == 0) {  logBuffer = ""; }}
-  if ((logAge++ > maxLogAge * 1000) && (networkLogBuffer.length() > 0))
+  logAge++;
+  if ((logAge > maxLogAge * 1000) && (networkLogBuffer.length() > 1))
     if (networklogThis(networkLogBuffer) == 0) {
       networkLogBuffer = "";
       logAge = 0;
     }
+    else
+    {logAge = 0; } // last sent was unsuccesful. lets wait ~10 sec and retry
 
   if ((totalLifes > 60 * 60 * 24 * 2) && (timeinfo.tm_hour == maintenanceRebootHour)) {
     logThis("Rebooting for maintenance...");
@@ -81,12 +84,12 @@ void boardpanic(int panicReason) {
   {
     Serial.println("Second panic call!!!!!!!!!!!!!!!!!!!!!!!!!!! Panic Reason is:" + String(panicReason));
     writeString(1, "PANIC=0"); //if fail next time - let's try restart instead
-    gotoSleep((isServer)?sleepAfterPanic:60, 1);
+    gotoSleep((isServer) ? sleepAfterPanic : 60, 1);
   }
 }
 
-void printLocalTime(){
-  
+void printLocalTime() {
+
   if (!getLocalTime(&timeinfo)) {
     Serial.println("Failed to obtain time");
     return;
@@ -103,7 +106,7 @@ void updateTime (uint64_t elapsedTime) { // elapsedTime in us
   }
 }
 
-String cleanQuote(String s){ 
+String cleanQuote(String s) {
   String s2 = "";
   for (int i = 0; i < s.length(); i++) {
     if (!(s[i] == char(34))) {
@@ -113,28 +116,12 @@ String cleanQuote(String s){
   return s2;
 }
 
-uint64_t string_to_mac(std::string const& s) {
-  unsigned char a[6];
-  int last = -1;
-  int rc = sscanf(s.c_str(), "%hhx:%hhx:%hhx:%hhx:%hhx:%hhx%n",
-                  a + 0, a + 1, a + 2, a + 3, a + 4, a + 5,
-                  &last);
-  if (rc != 6 || s.size() != last)
-    throw std::runtime_error("invalid mac address format " + s);
-  return
-    uint64_t(a[0]) << 40 |
-    uint64_t(a[1]) << 32 | (
-      // 32-bit instructions take fewer bytes on x86, so use them as much as possible.
-      uint32_t(a[2]) << 24 |
-      uint32_t(a[3]) << 16 |
-      uint32_t(a[4]) << 8 |
-      uint32_t(a[5])
-    );
-}
 
-uint32_t mac2long(String s) {
+String mac2long(String s) {
+  //246F289D9A64
 
   s.replace(":", "");
+  s = s.substring(6);
   s.replace("A", "10");
   s.replace("B", "11");
   s.replace("C", "12");
@@ -142,8 +129,5 @@ uint32_t mac2long(String s) {
   s.replace("E", "14");
   s.replace("F", "15");
 
-  uint32_t value = strtoul(s.c_str(), NULL, 10);
-  Serial.println(value);
-
-  return value;
+  return s;
 }

@@ -2,7 +2,7 @@ int initiateNetwork() {
   int result;
   digitalWrite(blue, HIGH);
 
-  logThis(1, "connecting to " + String(ssid), 1);
+  logThis(4, "connecting to " + String(ssid), 1);
 
   long interval = 4000;
   unsigned long currentMillis = millis(), previousMillis = millis();
@@ -259,7 +259,7 @@ NetworkResponse secureHttpRequestExecuter(char* host , int port, String URI, Str
   //WiFiClient client;
   WiFiClientSecure *client = new WiFiClientSecure;
 
-  logThis(2, "connecting with https to " + String(host));
+  logThis(3, "connecting with https to " + String(host));
 
   if (!client) {
     logThis("connection failed");
@@ -362,7 +362,7 @@ NetworkResponse httpRequestExecuter2(char* host , int port, String URI, String h
   //WiFiClient client;
   WiFiClient *client = new WiFiClient;
 
-  logThis(2, "connecting with http to " + String(host), 3);
+  logThis(3, "connecting with http to " + String(host), 3);
 
   if (!client) {
     logThis("connection failed");
@@ -440,7 +440,7 @@ NetworkResponse httpSecurePost(char* host , int port, String URI, String httpCom
   digitalWrite(blue, HIGH);
 
   WiFiClientSecure client;
-  logThis(2, "connecting with https to " + String(host));
+  logThis(3, "connecting with https to " + String(host));
 
   client.connect(host, port);
 
@@ -470,7 +470,7 @@ NetworkResponse httpSecurePost(char* host , int port, String URI, String httpCom
     myNetworkResponse.resultCode = 0;
 
     logThis(5, "Anticipatred response recived: " + line, 2);
-    logThis(5, "Body sent: " + httpComm, 2);
+    logThis(6, "Body sent: " + httpComm, 2);
 
     return myNetworkResponse;
   }

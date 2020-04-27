@@ -1,6 +1,6 @@
 int checkForFirmwareUpdates(JSONVar eyeConfig) {
 
-  logThis(1, "Checking for firmware updates.", 2);
+  logThis(3, "Checking for firmware updates.", 2);
   logThis(3, "Current firmware version: " + String(FW_VERSION) , 2);
   int newFWVersion;
   if (isServer)

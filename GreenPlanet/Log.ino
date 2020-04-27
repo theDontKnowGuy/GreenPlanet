@@ -33,8 +33,20 @@ void logThis(int debuglevel, String strMessage, int newLineHint) {
   strMessage.replace("\n", " ");
   strMessage.replace("&", "*");
 
+  String tDHTt = (DHTt == 0.0) ? "" : String(DHTt);
+  
   loggingCounter++;
-  String head = "999," + deviceID + "," + String((isServer) ? "1" : "0") + "," + bootCount + "," + loggingCounter + "," + DHTt + "," + MACID + "," + String(millis()) + "," + String(millis() - previousTimeStamp) + ",,,,";
+  
+  String head =   "999," + 
+                  deviceID + "," + 
+                  String((isServer) ? "1" : "0") + "," + 
+                  bootCount + "," + 
+                  loggingCounter + "," + 
+                  tDHTt + "," +
+                  MACID + "," + 
+                  String(millis()) + "," + 
+                  String(millis() - previousTimeStamp) + ",,,,";
+                  
   //add headers is new or ended previous msg with |
 
   int l = networkLogBuffer.length();

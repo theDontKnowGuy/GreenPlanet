@@ -7,7 +7,7 @@ JSONVar loadConfiguration() {
   if (JSON.stringify(myConfig) == "-1") myConfig = loadConfigurationFromEEPROM();
   if (JSON.stringify(myConfig) == "-1") {
     logThis("Panic. No configuration found. I'm Dead.");
-    ESP.restart();
+    boardpanic(3);
   }
   return myConfig;
 }
@@ -32,11 +32,10 @@ JSONVar loadConfigurationFromServer() {
    //not working: endpoint localUpdateServer = findLocalServer(serverMDNSname, "tcp");
     //if ((localUpdateServer.endpointDescription == "error_servernotfound") || (localUpdateServer.endpointDescription == "error_startMDNS"))
     if (true) // because it wasnt working
-    {
+    {   
       memcpy(dataUpdateHost, dataUpdateHost_fallback, 100);
       dataUpdatePort =    dataUpdatePort_fallback;
       dataUpdateURI =     dataUpdateURI_fallback;
-
     }
 //    else
 //    {
@@ -104,7 +103,7 @@ int parseConfiguration(JSONVar eyeConfig) {
   String s = JSON.stringify(eyeConfig["GeneralConfiguration"]["dataUpdateHost"]);
   s = cleanQuote(s);
   s.toCharArray(dataUpdateHost, s.length() + 1);
-  logThis(2, "Configuration server is now: " + String(dataUpdateHost));
+  logThis(3, "Configuration server is now: " + String(dataUpdateHost));
 
   dataUpdateURI =       eyeConfig["GeneralConfiguration"]["dataUpdateURI"];
   dataUpdateURI.toCharArray(c_dataUpdateURI, dataUpdateURI.length() + 1); // to survive deep sleep . strings dont
@@ -113,7 +112,7 @@ int parseConfiguration(JSONVar eyeConfig) {
   s = JSON.stringify(eyeConfig["GeneralConfiguration"]["loggerHost"]);
   s = cleanQuote(s);
   s.toCharArray(loggerHost, s.length() + 1);
-  logThis(2, "Logging server is now: " + String(loggerHost));
+  logThis(3, "Logging server is now: " + String(loggerHost));
 
   logTarget =       eyeConfig["GeneralConfiguration"]["logTarget"];
   logTarget.toCharArray(c_logTarget, logTarget.length() + 1); // to survive deep sleep . strings dont
@@ -126,7 +125,7 @@ int parseConfiguration(JSONVar eyeConfig) {
     s = JSON.stringify(eyeConfig["ServerConfiguration"]["serverLoggerHost"]);
     s = cleanQuote(s);
     s.toCharArray(loggerHost, s.length() + 1);
-    logThis(1, "Logging server for clients is now: " + String(loggerHost));
+    logThis(3, "Logging server for clients is now: " + String(loggerHost));
     logTarget =            eyeConfig["ServerConfiguration"]["serverLogTarget"];
     loggerHostPort =       int(eyeConfig["ServerConfiguration"]["serverLoggerHostPort"]);
   } else {
@@ -177,7 +176,6 @@ int parseConfiguration(JSONVar eyeConfig) {
   inxParticipatingPlans = i ;
   logThis(2, "Participating in " + String(inxParticipatingPlans) + " plans.", 2);
 
-
   i = 0;
 
   while (JSON.typeof(eyeConfig["IRcode"][i])   == "object")
@@ -200,7 +198,7 @@ int parseConfiguration(JSONVar eyeConfig) {
 
 #if defined(SERVER)
   ServerConfigurationRefreshRate = (int)eyeConfig["ServerConfiguration"]["ServerConfigurationRefreshRate"];
-  maxLogAge = (int)eyeConfig["ServerConfiguration"]["maxLogAge"];
+  maxLogAge =  (int)eyeConfig["ServerConfiguration"]["maxLogAge"];
   recessTime = (int)eyeConfig["ServerConfiguration"]["recessTime"];
 #endif
 

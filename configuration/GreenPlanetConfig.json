@@ -99,6 +99,6 @@
 		"serverLogTarget": "/channels/1023335/bulk_update.csv",
 		"serverWrite_api_key": "NGOL1T65IJHKTURU",
 		"serverLoggerHostPort": 443,
-		"targetFWVersion_server" : 2020041705
+		"targetFWVersion_server" : 2020042901
 	}
 }

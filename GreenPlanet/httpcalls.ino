@@ -148,8 +148,8 @@ NetworkResponse httpRequest(char* host, int port, String requestType, String URI
     return myNetworkResponse;
   }
 
-  logThis(5, "Headers: " + myNetworkResponse.header);
-  logThis(3, "Body:  " +    myNetworkResponse.body);
+  logThis(4, "Headers: " + myNetworkResponse.header);
+  logThis(6, "Body:  " +    myNetworkResponse.body);
 
   if ((myNetworkResponse.body.indexOf(successValidator) == -1) &&
       (myNetworkResponse.header.indexOf(successValidator) == -1))
@@ -466,9 +466,7 @@ NetworkResponse httpSecurePost(char* host , int port, String URI, String httpCom
   client.stop();
 
   if (line.indexOf(response) >= 0 )
-  { Serial.println("Anticipated response");
-    myNetworkResponse.resultCode = 0;
-
+  { myNetworkResponse.resultCode = 0;
     logThis(5, "Anticipatred response recived: " + line, 2);
     logThis(6, "Body sent: " + httpComm, 2);
 

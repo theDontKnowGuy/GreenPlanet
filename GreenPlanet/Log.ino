@@ -26,7 +26,6 @@ void logThis(int debuglevel, String strMessage, int newLineHint) {
   if (newLineHint > 1 ) post = "\n";
   if (log2Serial) Serial.print(pre + strMessage + post);
 
-
   strMessage.replace(",", " * ");
   strMessage.replace("|", " ** ");
   strMessage.replace(char(34), char(33));
@@ -34,36 +33,46 @@ void logThis(int debuglevel, String strMessage, int newLineHint) {
   strMessage.replace("&", "*");
 
   String tDHTt = (DHTt == 0.0) ? "" : String(DHTt);
-  
+
   loggingCounter++;
-  
-  String head =   "999," + 
-                  deviceID + "," + 
-                  String((isServer) ? "1" : "0") + "," + 
-                  bootCount + "," + 
-                  loggingCounter + "," + 
-                  tDHTt + "," +
-                  MACID + "," + 
-                  String(millis()) + "," + 
-                  String(millis() - previousTimeStamp) + ",,,,";
-                  
+
+  if (addFakeSec == -1) addFakeSec = timeinfo.tm_sec;
+  else if ((millis() - previousTimeStamp) >  1000 * 60) addFakeSec = timeinfo.tm_sec;
+  else {
+    addFakeSec++;
+    if (addFakeSec > 60) addFakeSec = 0;
+  }
+
+  String t = String(timeinfo.tm_year + 1900) + "-" + String(timeinfo.tm_mon + 1) + "-" + String(timeinfo.tm_mday) + "T" + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(addFakeSec) + "-0000";
+  String head =   t  + "," +                                      //timestamp
+                  deviceID + "," +                                //1
+                  MACID + "," +                                   //2
+                  loggingCounter + "," +                          //3
+                  bootCount + "," +                               //4
+                  FW_VERSION + "," +                              //5
+                  tDHTt + "," +                                   //6
+                  String(millis()) + "," +                        //7
+                  String(millis() - previousTimeStamp) + "," +    //8
+                  (float)debuglevel / 10 + "," +                  //lon
+                  (float)ConfigurationVersion / 10.0 + "," +      //lat
+                  String((t, isServer) ? "1" : "0") + "," ;       //elev
+
   //add headers is new or ended previous msg with |
 
   int l = networkLogBuffer.length();
-  if (l == 0 )
-  { networkLogBuffer = head;
+  if (l == 0)
+  { networkLogBuffer = head + networkLogBuffer + strMessage + "|";
+    previousTimeStamp = millis();
+    return;
+  }
+
+  if (networkLogBuffer.substring(l - 1 ) == "|")
+  { networkLogBuffer += head;
     previousTimeStamp = millis();
   }
 
-  if (l > 0 ) {
-    if (networkLogBuffer.substring(l - 1 , l) == "|") {
-      networkLogBuffer += head;
-      previousTimeStamp = millis();
-    }
-  }
-
   if (newLineHint == 1 ) {
-    if (!(networkLogBuffer.substring(l - 1, l) == ",")) {
+    if ((networkLogBuffer.substring(l - 1) == ",")) {
       networkLogBuffer += "|" + head ;
       previousTimeStamp = millis();
     }
@@ -85,7 +94,9 @@ int networklogThis(String message, bool asProxy = false) {
   NetworkResponse myNetworkResponse;
   switch (loggingType) {
     case 1: ///  thingspeak
-      message = "write_api_key=NGOL1T65IJHKTURU&time_format=relative&updates=" + message;
+
+      message.replace("1900-1-0T0", "1900-1-1T");
+      message = "write_api_key=NGOL1T65IJHKTURU&time_format=absolute&updates=" + message;
       myNetworkResponse = httpSecurePost("api.thingspeak.com", 443, logTarget, message, "HTTP/1.1 202 Accepted");
       break;
 
@@ -98,7 +109,8 @@ int networklogThis(String message, bool asProxy = false) {
   }
 
   if (myNetworkResponse.resultCode == 0) {
-    failedLogging2NetworkCounter =0;
+    failedLogging2NetworkCounter = 0;
+    logThis(2, "Log sent and received successfully.", 2);
   } else {
     Serial.println("FAILED LOGGING TO NETWORK");
     digitalWrite(red, HIGH); delay(60); digitalWrite(red, LOW);

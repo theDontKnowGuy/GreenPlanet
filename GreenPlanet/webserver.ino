@@ -76,7 +76,6 @@ void startWebServer() {
   server.on("/executePlan/{}", []() {
 
     String arg1 =  server.pathArg(0);
-    Serial.println(arg1);
     int IRcodeID;
     IRcodeID = arg1.toInt();
     String message = "";

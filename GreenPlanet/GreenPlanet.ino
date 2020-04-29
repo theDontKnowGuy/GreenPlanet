@@ -13,7 +13,7 @@
 //////////////////////// Firmware update over the air (FOTA) SECTION///////////////////////////////////////////????//////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const int FW_VERSION = 2020042502 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
+const int FW_VERSION = 2020042901 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
 const char* fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenPlanet/master/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
 #include <HTTPUpdate.h>
 
@@ -44,7 +44,7 @@ const int   httpsPort = 443;
 //////////////////////// WEBSERVER SECTION///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//#define SERVER
+#define SERVER
 
 #if defined(SERVER)
 
@@ -102,8 +102,8 @@ unsigned long previousTimeStamp = millis(), totalLifes, LiveSignalPreviousMillis
 int maxLogAge = 200;  //  how many sec to keep log before attempting to send.
 int logAge = 0 , LivePulseLedStatus = 0;
 int failedLogging2NetworkCounter = 0;
-
-
+int addFakeSec = -1;
+String firstLogTimeStamp = "";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// REMOTE CONFIGURATION SECTION ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,7 +117,7 @@ RTC_DATA_ATTR char c_dataUpdateURI[200];
 
 char* dataUpdateHost_fallback = "raw.githubusercontent.com";
 int dataUpdatePort_fallback = 443;
-String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";   /// see example json file in github. leave 
+String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";   /// see example json file in github. leave
 String dataUpdateURI_fallback_local = "/GreenPlanet/GreenPlanetConfig.json";   /// see example json file in github. leave value empty if no local server
 
 char* serverDataUpdateHost = "raw.githubusercontent.com";
@@ -298,9 +298,9 @@ void setup() {
   timerAttachInterrupt(timer, &resetModule, true);  //attach callback
   timerAlarmWrite(timer, wdtTimeout * 1000, false); //set time in us
   timerAlarmEnable(timer);                          //enable interrupt
-  
+
   MACID = mac2long(WiFi.macAddress());
-  
+
   if (log2Serial) Serial.begin(115200);
 
   logThis(1, "Starting GreenPlanet Device by the DontKnowGuy", 2);
@@ -344,7 +344,7 @@ void setup() {
   DHTh = DHTsensor.humidity;
   logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
 
-  logThis(3,"Avail heap mem: " + String(system_get_free_heap_size()),2);
+  logThis(3, "Avail heap mem: " + String(system_get_free_heap_size()), 2);
 
   logThis("Initialization Completed.", 3);
   digitalWrite(blue, HIGH); // system live indicator

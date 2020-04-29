@@ -1,5 +1,5 @@
-{"ConfigurationVersion": 200,
-	"targetFWVersion_client": 2020042701,
+{"ConfigurationVersion": 201,
+	"targetFWVersion_client": 2020042901,
 	"GeneralConfiguration": {
 		"DEBUGLEVEL": 2,
 		"delayBetweenExecs": 1000,
@@ -48,24 +48,24 @@
 		"operationPlanID": 1,
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":1,
-		"hour": 11,
-		"minute": 0,
-		"weekdays": "12345"
+		"hour": 16,
+		"minute": 26,
+		"weekdays": "1234567"
 	},
 	{
 		"operationPlanID": 2,
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":4,
-		"hour": 15,
-		"minute": 5,
+		"hour": 16,
+		"minute": 30,
 		"weekdays": "1234567"
 	},
 	{
 		"operationPlanID": 3,
 		"operationPlanName": "Shut down at 9pm",
 		"IRcodeID": 4,
-		"hour": 16,
-		"minute": 45,
+		"hour": 20,
+		"minute": 35,
 		"weekdays": "1234567"
 	}
 	],
@@ -99,6 +99,6 @@
 		"serverLogTarget": "/channels/1023335/bulk_update.csv",
 		"serverWrite_api_key": "NGOL1T65IJHKTURU",
 		"serverLoggerHostPort": 443,
-		"targetFWVersion_server" : 2020041705
+		"targetFWVersion_server" : 2020042901
 	}
 }

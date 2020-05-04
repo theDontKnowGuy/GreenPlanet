@@ -113,7 +113,7 @@ int networklogThis(String message, bool asProxy = false) {
     logThis(2, "Log sent and received successfully.", 2);
   } else {
     Serial.println("FAILED LOGGING TO NETWORK");
-    digitalWrite(red, HIGH); delay(60); digitalWrite(red, LOW);
+    digitalWrite(red, HIGH); vTaskDelay(60); digitalWrite(red, LOW);
     failedLogging2NetworkCounter++;
     if (failedLogging2NetworkCounter == 10) boardpanic(2);
     return 1;

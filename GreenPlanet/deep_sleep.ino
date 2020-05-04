@@ -25,16 +25,16 @@ void gotoSleep(int timeToSleep, int panicCode) {
       Serial.println("No network. will wait");
       for (int i = 0; i < 3; i++) {
         digitalWrite(red, HIGH);
-        delay(20);
+        vTaskDelay(20);
         digitalWrite(red, LOW);
-        delay(20);
+        vTaskDelay(20);
       }
       break;
   }
 
-  esp_sleep_enable_timer_wakeup(timeToSleep * uS_TO_S_FACTOR);
+  esp_sleep_enable_timer_wakeup(normalSleepTime * uS_TO_S_FACTOR);
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_OFF);
 
-  Serial.println("Good night now."); Serial.flush(); delay(2);
+  Serial.println("Good night now."); Serial.flush(); vTaskDelay(2);
   esp_deep_sleep_start();
 }

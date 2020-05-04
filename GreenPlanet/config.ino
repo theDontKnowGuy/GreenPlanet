@@ -1,4 +1,4 @@
-JSONVar loadConfiguration() {
+ JSONVar loadConfiguration() {
 
   JSONVar myConfig;
 
@@ -43,7 +43,6 @@ JSONVar loadConfigurationFromServer() {
 //      dataUpdatePort = localUpdateServer.port;
 //      dataUpdateURI = dataUpdateURI_fallback_local;
 //    }
-
   }
 
 #endif
@@ -93,7 +92,7 @@ int parseConfiguration(JSONVar eyeConfig) {
   green = (int)eyeConfig["GeneralConfiguration"]["green"];
   pinMode(red, OUTPUT); pinMode(green, OUTPUT); pinMode(blue, OUTPUT);
 
-  delayBetweenExecs =   eyeConfig["GeneralConfiguration"]["delayBetweenExecs"];
+  vTaskDelayBetweenExecs =   eyeConfig["GeneralConfiguration"]["vTaskDelayBetweenExecs"];
   normalSleepTime =     eyeConfig["GeneralConfiguration"]["normalSleepTime"];
   sleepAfterExec =      eyeConfig["GeneralConfiguration"]["sleepAfterExec"];
   daylightOffset_sec =  eyeConfig["GeneralConfiguration"]["daylightOffset_sec"];
@@ -103,7 +102,7 @@ int parseConfiguration(JSONVar eyeConfig) {
   String s = JSON.stringify(eyeConfig["GeneralConfiguration"]["dataUpdateHost"]);
   s = cleanQuote(s);
   s.toCharArray(dataUpdateHost, s.length() + 1);
-  logThis(3, "Configuration server is now: " + String(dataUpdateHost));
+  logThis(2, "Configuration server is now: " + String(dataUpdateHost));
 
   dataUpdateURI =       eyeConfig["GeneralConfiguration"]["dataUpdateURI"];
   dataUpdateURI.toCharArray(c_dataUpdateURI, dataUpdateURI.length() + 1); // to survive deep sleep . strings dont

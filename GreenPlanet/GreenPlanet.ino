@@ -43,8 +43,7 @@ const int   httpsPort = 443;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// WEBSERVER SECTION///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#define SERVER
+//#define SERVER
 
 #if defined(SERVER)
 
@@ -115,14 +114,15 @@ RTC_DATA_ATTR int dataUpdatePort;
 String dataUpdateURI;
 RTC_DATA_ATTR char c_dataUpdateURI[200];
 
+char* serverDataUpdateHost = "raw.githubusercontent.com";
+int serverDataUpdatePort = 443;
+String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";
+
 char* dataUpdateHost_fallback = "raw.githubusercontent.com";
 int dataUpdatePort_fallback = 443;
 String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";   /// see example json file in github. leave
 String dataUpdateURI_fallback_local = "/GreenPlanet/GreenPlanetConfig.json";   /// see example json file in github. leave value empty if no local server
 
-char* serverDataUpdateHost = "raw.githubusercontent.com";
-int serverDataUpdatePort = 443;
-String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";
 int ServerConfigurationRefreshRate = 60;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,7 +230,7 @@ void IRAM_ATTR resetModule() {
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
 
-int delayBetweenExecs = 3;
+int vTaskDelayBetweenExecs = 3;
 int sleepAfterExec = 1800;
 int normalSleepTime = 1800;
 int sleepAfterPanic = 200;
@@ -290,7 +290,7 @@ void setup() {
   pinMode(red, OUTPUT); pinMode(green, OUTPUT); pinMode(blue, OUTPUT);
 
   //#if defined(SERVER)
-  digitalWrite(green, HIGH); delay(50); digitalWrite(green, LOW); delay(50); digitalWrite(red, HIGH); delay(50); digitalWrite(red, LOW); delay(20); digitalWrite(blue, HIGH); delay(20); digitalWrite(blue, LOW);
+  digitalWrite(green, HIGH); vTaskDelay(50); digitalWrite(green, LOW); vTaskDelay(50); digitalWrite(red, HIGH); vTaskDelay(50); digitalWrite(red, LOW); vTaskDelay(20); digitalWrite(blue, HIGH); vTaskDelay(20); digitalWrite(blue, LOW);
   //#endif
 
   // Hardeware Watchdog
@@ -298,6 +298,7 @@ void setup() {
   timerAttachInterrupt(timer, &resetModule, true);  //attach callback
   timerAlarmWrite(timer, wdtTimeout * 1000, false); //set time in us
   timerAlarmEnable(timer);                          //enable interrupt
+
 
   MACID = mac2long(WiFi.macAddress());
 
@@ -327,8 +328,6 @@ void setup() {
   Serial.printf("\n" D_STR_IRRECVDUMP_STARTUP "\n", kRecvPin);
   irrecv.enableIRIn();  // Start the receiver
 
-  //    pinMode(learnButtonPin, INPUT);
-
   JSONVar myConfig = loadConfiguration();
   checkForFirmwareUpdates(myConfig);
   parseConfiguration(myConfig);
@@ -349,15 +348,58 @@ void setup() {
   logThis("Initialization Completed.", 3);
   digitalWrite(blue, HIGH); // system live indicator
 
-}
 
-void loop() {
   bool fired = planDispatcher();
 
 #if defined(SERVER)
-  server.handleClient();
-  blinkLiveLed();
+
+  xTaskCreatePinnedToCore(
+    serverOtherFunctions
+    ,  "serverOtherFunctions"   // A name just for humans
+    ,  10000  // This stack size can be checked & adjusted by reading the Stack Highwater
+    ,  NULL
+    ,  0  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+    ,  NULL
+    ,  1);
+
+
+  xTaskCreatePinnedToCore(
+    webServerFunction
+    ,  "webServerFunction"   // A name just for humans
+    ,  10000  // This stack size can be checked & adjusted by reading the Stack Highwater
+    ,  NULL
+    ,  3  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+    ,  NULL
+    ,  0);
+
+
 #else
   gotoSleep(calcTime2Sleep());
+  planDispatcher();
 #endif
+}  //setup
+
+#if defined(SERVER)
+void webServerFunction(void *pvParameters) {
+
+  (void) pvParameters;
+  for (;;) {
+    server.handleClient();
+    vTaskDelay(10);
+    timerWrite(timer, 0); //reset timer (feed watchdog)
+  }
+}
+
+void serverOtherFunctions(void *pvParameters) {
+  (void) pvParameters;
+  for (;;) {
+    planDispatcher();
+    blinkLiveLed();
+    timerWrite(timer, 0); //reset timer (feed watchdog)
+  }
+}
+#endif
+
+void loop() {
+  vTaskDelay(3000); timerWrite(timer, 0);
 }

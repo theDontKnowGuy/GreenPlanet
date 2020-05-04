@@ -1,7 +1,6 @@
 void blinkLiveLed() {
   updateTime (0); ////??????????
-
-  timerWrite(timer, 0); //reset timer (feed watchdog)
+//  timerWrite(timer, 0); //reset timer (feed watchdog)
 
   if (millis() - LiveSignalPreviousMillis > 500) {
     digitalWrite(blue, !(LivePulseLedStatus));

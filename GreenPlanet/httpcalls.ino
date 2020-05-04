@@ -8,9 +8,9 @@ int initiateNetwork() {
   unsigned long currentMillis = millis(), previousMillis = millis();
   int countConnect = 0 ;
 
-  WiFi.begin(ssid, password);  delay(1000);
+  WiFi.begin(ssid, password);  vTaskDelay(1000);
   while ((WiFi.status() != WL_CONNECTED) && (countConnect < 20)) {
-    delay(300);  Serial.print(".");
+    vTaskDelay(300);  Serial.print(".");
     countConnect ++;
   }
   if (countConnect == 20) {
@@ -65,7 +65,7 @@ void networkReset() {
   WiFi.disconnect();
 
   logThis("PERFORMING NETWORK RESET!");
-  delay(1000);
+  vTaskDelay(1000);
   timerWrite(timer, 0); //reset timer (feed watchdog)
 
   if (initiateNetwork() == 0) {
@@ -73,7 +73,7 @@ void networkReset() {
     digitalWrite(red, LOW);
     return;
   }
-  delay(3000);
+  vTaskDelay(3000);
   timerWrite(timer, 0); //reset timer (feed watchdog)
 
   if (initiateNetwork() == 0) {
@@ -143,7 +143,7 @@ NetworkResponse httpRequest(char* host, int port, String requestType, String URI
     logThis("Extremely short headers: " + String(myNetworkResponse.headerLength) + "\n " + String(myNetworkResponse.header));
     myNetworkResponse.resultCode = 4;
     digitalWrite(green, LOW);
-    digitalWrite(red, HIGH); delay(500); digitalWrite(red, LOW); delay(500); digitalWrite(red, HIGH); delay(500); digitalWrite(red, LOW); delay(500);
+    digitalWrite(red, HIGH); vTaskDelay(500); digitalWrite(red, LOW); vTaskDelay(500); digitalWrite(red, HIGH); vTaskDelay(500); digitalWrite(red, LOW); vTaskDelay(500);
 
     return myNetworkResponse;
   }
@@ -264,7 +264,7 @@ NetworkResponse secureHttpRequestExecuter(char* host , int port, String URI, Str
   if (!client) {
     logThis("connection failed");
     delete client;
-    digitalWrite(red, HIGH);delay(500); digitalWrite(red, LOW);delay(500);digitalWrite(red, HIGH);delay(500); digitalWrite(red, LOW);
+    digitalWrite(red, HIGH);vTaskDelay(500); digitalWrite(red, LOW);vTaskDelay(500);digitalWrite(red, HIGH);vTaskDelay(500); digitalWrite(red, LOW);
     myNetworkResponse.resultCode = 3;
     return myNetworkResponse;
   }
@@ -447,7 +447,7 @@ NetworkResponse httpSecurePost(char* host , int port, String URI, String httpCom
   if (!client) {
     logThis("connection failed");
     client.stop();
-    digitalWrite(red, HIGH); delay(500); digitalWrite(red, LOW); delay(500); digitalWrite(red, HIGH); delay(500); digitalWrite(red, LOW); delay(500);
+    digitalWrite(red, HIGH); vTaskDelay(500); digitalWrite(red, LOW); vTaskDelay(500); digitalWrite(red, HIGH); vTaskDelay(500); digitalWrite(red, LOW); vTaskDelay(500);
     myNetworkResponse.resultCode = 3;
     return myNetworkResponse;
   }

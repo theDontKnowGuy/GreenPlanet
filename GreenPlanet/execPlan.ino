@@ -12,8 +12,8 @@ int execPlan(int IRCodeID) {
 
   logThis(2, "Calling IR sequance", 1);
   irsend.sendRaw(myIRcode[idxIRPlanToRun].IRCodeBitStream, myIRcode[idxIRPlanToRun].IRCodeBitStreamLength, 38);  // Send a raw data capture at 38kHz.
-  digitalWrite(green, HIGH); delay(50); digitalWrite(green, LOW);
-  delay(delayBetweenExecs*3);
+  digitalWrite(green, HIGH); vTaskDelay(50); digitalWrite(green, LOW);
+  vTaskDelay(vTaskDelayBetweenExecs*3);
   
   }
   return 0;

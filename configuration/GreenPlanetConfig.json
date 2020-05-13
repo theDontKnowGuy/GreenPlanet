@@ -26,21 +26,21 @@
 			"deviceID": "703",
 			"deviceGroup": "Main floor",
 			"deviceLocation": "clinic",
-			"memberInOperationPlans": "1,2"
+			"memberInOperationPlans": "1,2,3,4"
 		},
 		{
 			"DeviceMAC": "24:6F:28:A9:AF:98",
 			"deviceID": "707",
 			"deviceGroup": "Second Floor",
 			"deviceLocation": "clinic",
-			"memberInOperationPlans": "1,2"
+			"memberInOperationPlans": "1,2,3,4"
 		},
 		{
 			"DeviceMAC": "24:6F:28:9D:9A:64",
 			"deviceID": "706",
 			"deviceGroup": "Second Floor",
 			"deviceLocation": "clinic",
-			"memberInOperationPlans": "1,2"
+			"memberInOperationPlans": "1,2,3,4"
 		}
 	],
 	"operationPlans": [
@@ -48,24 +48,24 @@
 		"operationPlanID": 1,
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":1,
-		"hour": 8,
-		"minute": 37,
+		"hour": 15,
+		"minute": 30,
 		"weekdays": "1234567"
 	},
 	{
 		"operationPlanID": 2,
 		"operationPlanName": "Turn on at 8am 24c",
 		"IRcodeID":4,
-		"hour": 9,
-		"minute": 37,
+		"hour": 16,
+		"minute": 30,
 		"weekdays": "1234567"
 	},
 	{
 		"operationPlanID": 3,
 		"operationPlanName": "Shut down at 9pm",
 		"IRcodeID": 4,
-		"hour": 7,
-		"minute": 37,
+		"hour": 17,
+		"minute": 30,
 		"weekdays": "1234567"
 	}
 	],

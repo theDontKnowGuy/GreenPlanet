@@ -14,7 +14,7 @@
 //////////////////////// Firmware update over the air (FOTA) SECTION///////////////////////////////////////////????//////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const int FW_VERSION = 2020051401 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
+const int FW_VERSION = 2020051400 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
 const char* fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenPlanet/master/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
 #include <HTTPUpdate.h>
 

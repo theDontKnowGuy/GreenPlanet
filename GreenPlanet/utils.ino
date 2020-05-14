@@ -1,14 +1,16 @@
 void blinkLiveLed() {
   updateTime (0); ////??????????
-//  timerWrite(timer, 0); //reset timer (feed watchdog)
+  //  timerWrite(timer, 0); //reset timer (feed watchdog)
 
-  if (millis() - LiveSignalPreviousMillis > 500) {
+  if (millis() - LiveSignalPreviousMillis > 50) {
     digitalWrite(blue, !(LivePulseLedStatus));
     LivePulseLedStatus  = !(LivePulseLedStatus);
     totalLifes += 1;
     LiveSignalPreviousMillis = millis();
     DHTsensor.read();
-
+    DHTt = DHTsensor.getTemperature();
+    DHTh = DHTsensor.getHumidity();
+    
   }
   //  if(logBuffer.length() > 0) {if(networklogThis(logBuffer) == 0) {  logBuffer = ""; }}
   logAge++;
@@ -18,7 +20,9 @@ void blinkLiveLed() {
       logAge = 0;
     }
     else
-    {logAge = 0; } // last sent was unsuccesful. lets wait ~10 sec and retry
+    {
+      logAge = 0;  // last sent was unsuccesful. lets wait ~10 sec and retry
+    }
 
   if ((totalLifes > 60 * 60 * 24 * 2) && (timeinfo.tm_hour == maintenanceRebootHour)) {
     logThis("Rebooting for maintenance...");
@@ -45,6 +49,7 @@ void blinkLiveLed() {
 
 void blinkLiveLedFast() {
   timerWrite(timer, 0); //reset timer (feed watchdog)
+  vTaskDelay(10 / portTICK_RATE_MS);
 
   if (millis() - LiveSignalPreviousMillis > 100) {
     digitalWrite(green, !(LivePulseLedStatus));

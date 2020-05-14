@@ -2,9 +2,10 @@
    GreenPlanet by theDontKnowGuy
 
    Control programmable IR remote controls
+   Version 2.0 - Webserver goes to a seperate core to give a quicker service to clients
    Version 1.0 - Basic functionality works
 
-*/
+*/ 
 
 #include <Arduino.h>
 #include "secrets.h"
@@ -13,7 +14,7 @@
 //////////////////////// Firmware update over the air (FOTA) SECTION///////////////////////////////////////////????//////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const int FW_VERSION = 2020042901 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
+const int FW_VERSION = 2020051301 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
 const char* fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenPlanet/master/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
 #include <HTTPUpdate.h>
 
@@ -39,7 +40,6 @@ typedef struct {
 
 const int   httpsPort = 443;
 
-///////////////////////////////////networkLogBuffer//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// WEBSERVER SECTION///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,7 +230,7 @@ void IRAM_ATTR resetModule() {
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
 
-int vTaskDelayBetweenExecs = 3;
+int delayBetweenExecs = 3;
 int sleepAfterExec = 1800;
 int normalSleepTime = 1800;
 int sleepAfterPanic = 200;
@@ -289,9 +289,7 @@ void setup() {
 
   pinMode(red, OUTPUT); pinMode(green, OUTPUT); pinMode(blue, OUTPUT);
 
-  //#if defined(SERVER)
-  digitalWrite(green, HIGH); vTaskDelay(50); digitalWrite(green, LOW); vTaskDelay(50); digitalWrite(red, HIGH); vTaskDelay(50); digitalWrite(red, LOW); vTaskDelay(20); digitalWrite(blue, HIGH); vTaskDelay(20); digitalWrite(blue, LOW);
-  //#endif
+  digitalWrite(green, HIGH);delay(50); digitalWrite(green, LOW); delay(50);digitalWrite(green, HIGH);delay(50); digitalWrite(green, LOW); delay(50);
 
   // Hardeware Watchdog
   timer = timerBegin(0, 80, true);                  //timer 0, div 80
@@ -299,13 +297,17 @@ void setup() {
   timerAlarmWrite(timer, wdtTimeout * 1000, false); //set time in us
   timerAlarmEnable(timer);                          //enable interrupt
 
-
   MACID = mac2long(WiFi.macAddress());
 
   if (log2Serial) Serial.begin(115200);
 
   logThis(1, "Starting GreenPlanet Device by the DontKnowGuy", 2);
   logThis(1, "Firmware version " + String (FW_VERSION) + ". Unique device identifier: " + MACID, 2);
+
+  bootCount++;
+  logThis(2, "This is boot No. " + String(bootCount), 3);
+  if (bootCount == 1) { digitalWrite(red, HIGH);delay(100); digitalWrite(red, LOW); delay(50);digitalWrite(red, HIGH);delay(100); digitalWrite(red, LOW); delay(50);digitalWrite(red, HIGH);delay(100); digitalWrite(red, LOW); delay(50);}
+  if (bootCount > 48)   ESP.restart();
 
   EEPROM.begin(4096);
   checkPanicMode();
@@ -321,8 +323,7 @@ void setup() {
   // chrono = micros();
   LiveSignalPreviousMillis = millis();
 
-  logThis(2, "This is boot No. " + String(bootCount) + " of Device " + String(deviceID), 3);
-  bootCount++;
+  logThis(2, "This is device " + String(deviceID), 3);
 
   irsend.begin();
   Serial.printf("\n" D_STR_IRRECVDUMP_STARTUP "\n", kRecvPin);
@@ -339,8 +340,8 @@ void setup() {
 #endif
 
   DHTsensor.read();
-  DHTt = DHTsensor.temperature;
-  DHTh = DHTsensor.humidity;
+  DHTt = DHTsensor.getTemperature();
+  DHTh = DHTsensor.getHumidity();
   logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
 
   logThis(3, "Avail heap mem: " + String(system_get_free_heap_size()), 2);
@@ -385,21 +386,24 @@ void webServerFunction(void *pvParameters) {
   (void) pvParameters;
   for (;;) {
     server.handleClient();
-    vTaskDelay(10);
+    vTaskDelay(10 / portTICK_RATE_MS);
     timerWrite(timer, 0); //reset timer (feed watchdog)
   }
 }
 
 void serverOtherFunctions(void *pvParameters) {
+
   (void) pvParameters;
   for (;;) {
     planDispatcher();
     blinkLiveLed();
     timerWrite(timer, 0); //reset timer (feed watchdog)
+    vTaskDelay(10 / portTICK_RATE_MS);
   }
 }
 #endif
 
 void loop() {
-  vTaskDelay(3000); timerWrite(timer, 0);
+  vTaskDelay(10 / portTICK_RATE_MS);
+  timerWrite(timer, 0);
 }

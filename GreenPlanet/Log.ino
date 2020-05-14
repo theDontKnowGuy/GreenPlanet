@@ -24,6 +24,7 @@ void logThis(int debuglevel, String strMessage, int newLineHint) {
 
   if (newLineHint == 1) pre = "\n";
   if (newLineHint > 1 ) post = "\n";
+  
   if (log2Serial) Serial.print(pre + strMessage + post);
 
   strMessage.replace(",", " * ");
@@ -36,6 +37,8 @@ void logThis(int debuglevel, String strMessage, int newLineHint) {
 
   loggingCounter++;
 
+  //getLocalTime(&timeinfo);
+      
   if (addFakeSec == -1) addFakeSec = timeinfo.tm_sec;
   else if ((millis() - previousTimeStamp) >  1000 * 60) addFakeSec = timeinfo.tm_sec;
   else {
@@ -98,6 +101,7 @@ int networklogThis(String message, bool asProxy = false) {
       message.replace("1900-1-0T0", "1900-1-1T");
       message = "write_api_key=NGOL1T65IJHKTURU&time_format=absolute&updates=" + message;
       myNetworkResponse = httpSecurePost("api.thingspeak.com", 443, logTarget, message, "HTTP/1.1 202 Accepted");
+
       break;
 
     case 2:   //// PHPSERVER

@@ -82,13 +82,18 @@ void startWebServer() {
     int r = execPlan(IRcodeID);
     message = "Consider it done for plan " + String(IRcodeID);
     server.send(200, "text/plain", message);
-
   });
 
-server.on("/learn", []() {
-  learnCode();
+  server.on("/reboot", []() {
 
-});
+    logThis(1, "reboot per webserver order");
+    networklogThis(networkLogBuffer);
+    ESP.restart();
+  });
+
+  server.on("/learn", []() {
+    learnCode();
+  });
 
   server.onNotFound(handleNotFound);
 }

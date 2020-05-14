@@ -1,4 +1,4 @@
- JSONVar loadConfiguration() {
+JSONVar loadConfiguration() {
 
   JSONVar myConfig;
 
@@ -29,20 +29,20 @@ JSONVar loadConfigurationFromServer() {
     dataUpdateURI = String(c_dataUpdateURI); //getting c_dataUpdateURI from EEProm then converting back to string.
   }
   else { // not found in EEPROM
-   //not working: endpoint localUpdateServer = findLocalServer(serverMDNSname, "tcp");
+    //not working: endpoint localUpdateServer = findLocalServer(serverMDNSname, "tcp");
     //if ((localUpdateServer.endpointDescription == "error_servernotfound") || (localUpdateServer.endpointDescription == "error_startMDNS"))
     if (true) // because it wasnt working
-    {   
+    {
       memcpy(dataUpdateHost, dataUpdateHost_fallback, 100);
       dataUpdatePort =    dataUpdatePort_fallback;
       dataUpdateURI =     dataUpdateURI_fallback;
     }
-//    else
-//    {
-//      memcpy(dataUpdateHost, localUpdateServer.host, 100);
-//      dataUpdatePort = localUpdateServer.port;
-//      dataUpdateURI = dataUpdateURI_fallback_local;
-//    }
+    //    else
+    //    {
+    //      memcpy(dataUpdateHost, localUpdateServer.host, 100);
+    //      dataUpdatePort = localUpdateServer.port;
+    //      dataUpdateURI = dataUpdateURI_fallback_local;
+    //    }
   }
 
 #endif
@@ -92,13 +92,13 @@ int parseConfiguration(JSONVar eyeConfig) {
   green = (int)eyeConfig["GeneralConfiguration"]["green"];
   pinMode(red, OUTPUT); pinMode(green, OUTPUT); pinMode(blue, OUTPUT);
 
-  vTaskDelayBetweenExecs =   eyeConfig["GeneralConfiguration"]["vTaskDelayBetweenExecs"];
+  delayBetweenExecs =   eyeConfig["GeneralConfiguration"]["delayBetweenExecs"];
   normalSleepTime =     eyeConfig["GeneralConfiguration"]["normalSleepTime"];
   sleepAfterExec =      eyeConfig["GeneralConfiguration"]["sleepAfterExec"];
   daylightOffset_sec =  eyeConfig["GeneralConfiguration"]["daylightOffset_sec"];
   gmtOffset_sec =       eyeConfig["GeneralConfiguration"]["gmtOffset_sec"];
   sleepAfterPanic =     eyeConfig["GeneralConfiguration"]["sleepAfterPanic"];
-  
+
   String s = JSON.stringify(eyeConfig["GeneralConfiguration"]["dataUpdateHost"]);
   s = cleanQuote(s);
   s.toCharArray(dataUpdateHost, s.length() + 1);

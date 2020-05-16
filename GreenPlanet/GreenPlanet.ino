@@ -443,7 +443,7 @@ void loop()
   timerWrite(timer, 0); //reset timer (feed watchdog)
 #else
   planDispatcher();
-  gotosleep(calcSleepTime());
+  gotosleep(calcTime2Sleep());
 
 #endif
 }

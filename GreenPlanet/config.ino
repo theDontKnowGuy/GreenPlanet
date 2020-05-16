@@ -1,7 +1,6 @@
 JSONVar loadConfiguration() {
 
   JSONVar myConfig;
-
   myConfig = loadConfigurationFromServer();
 
   if (JSON.stringify(myConfig) == "-1") myConfig = loadConfigurationFromEEPROM();

@@ -1,19 +1,21 @@
-String learnCode() {
+String learnCode()
+{
 
   logThis("Start Learning......", 2);
   unsigned long learningTimer = millis();
 
-  irrecv.enableIRIn();  // Start the receiver
+  irrecv.enableIRIn(); // Start the receiver
   bool found = false;
   irrecv.resume();
-Serial.print("Setup: Executing on core ");
-Serial.println(xPortGetCoreID());
-  while ((millis() - learningTimer < learningTH) && (!found)) {
+  Serial.print("Setup: Executing on core ");
+  Serial.println(xPortGetCoreID());
+  while ((millis() - learningTimer < learningTH) && (!found))
+  {
 
     blinkLiveLedFast();
 
-    if (irrecv.decode(&results)) {
-
+    if (irrecv.decode(&results))
+    {
 
       // Display a crude timestamp.
       uint32_t now = millis();
@@ -27,7 +29,8 @@ Serial.println(xPortGetCoreID());
       Serial.print(resultToHumanReadableBasic(&results));
       // Display any extra A/C info if we have it.
       String description = IRAcUtils::resultAcToString(&results);
-      if (description.length()) Serial.println(D_STR_MESGDESC ": " + description);
+      if (description.length())
+        Serial.println(D_STR_MESGDESC ": " + description);
       //yield();  // Feed the WDT as the text output can take a while to print.
       // Output the results as source code
       Serial.println(resultToSourceCode(&results));
@@ -36,15 +39,15 @@ Serial.println(xPortGetCoreID());
       Serial.println(resultToHumanReadableBasic(&results));
       Serial.println(getCorrectedRawLength(&results));
 
-      Serial.println();    // Blank line between entries
+      Serial.println(); // Blank line between entries
 
       // yield();             // Feed the WDT (again)
       found = true;
-      
+
       String s = resultToHumanReadableBasic(&results);
-      logThis(1,"New code learned: " + s,2);
+      logThis(1, "New code learned: " + s, 2);
       //writeString(10, buildRawCode(&results));
-      
+
       digitalWrite(green, LOW); //maybe the blink remained on
       return s;
     }
@@ -54,6 +57,4 @@ Serial.println(xPortGetCoreID());
   digitalWrite(green, LOW); //maybe the blink remained on
 
   return "1";
-
-
 }

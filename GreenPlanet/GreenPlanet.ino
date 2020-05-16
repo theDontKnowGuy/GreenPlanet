@@ -5,7 +5,7 @@
    Version 2.0 - Webserver goes to a seperate core to give a quicker service to clients
    Version 1.0 - Basic functionality works
 
-*/ 
+*/
 
 #include <Arduino.h>
 #include "secrets.h"
@@ -14,8 +14,9 @@
 //////////////////////// Firmware update over the air (FOTA) SECTION///////////////////////////////////////////????//////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const int FW_VERSION = 2020051400 ; /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
-const char* fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenPlanet/master/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
+const int FW_VERSION = 2020051400;                                                                   /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
+const char *fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenPlanet/master/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
+//const char* fwUrlBase = "http://192.168.1.200/GreenPlanet/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
 #include <HTTPUpdate.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +31,8 @@ const char* fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenP
 #include <HTTPClient.h>
 #include <WiFiClientSecure.h>
 
-typedef struct {
+typedef struct
+{
   int resultCode;
   String header;
   String body;
@@ -38,12 +40,12 @@ typedef struct {
   int bodyLength;
 } NetworkResponse;
 
-const int   httpsPort = 443;
+const int httpsPort = 443;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// WEBSERVER SECTION///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//#define SERVER
+#define SERVER
 
 #if defined(SERVER)
 
@@ -54,7 +56,8 @@ WebServer server(80);
 const bool isServer = false;
 #endif
 
-typedef struct {
+typedef struct
+{
   String endpointDescription;
   String descriptor;
   char host[100];
@@ -65,15 +68,14 @@ typedef struct {
 } endpoint;
 
 #include <ESPmDNS.h>
-char* serverMDNSname = "GreenPlanet"; //clients will look for http://GreenPlanet.local
-
+char *serverMDNSname = "GreenPlanet"; //clients will look for http://GreenPlanet.local
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// LOGGING SECTION/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int DEBUGLEVEL = 2;   // set between 0 and 5. This value will be overridden by dynamic network configuration json if it has a higher value
-bool log2Serial = true;   //move to false in production to save some time
+int DEBUGLEVEL = 2;     // set between 0 and 5. This value will be overridden by dynamic network configuration json if it has a higher value
+bool log2Serial = true; //move to false in production to save some time
 
 //int loggingType = 2;
 //char loggerHost[100] = "192.168.1.52";
@@ -96,10 +98,10 @@ String write_api_key = "";
 //RTC_DATA_ATTR int loggerHostPort = 443;
 
 String logBuffer = "";
-String networkLogBuffer = "" ;
+String networkLogBuffer = "";
 unsigned long previousTimeStamp = millis(), totalLifes, LiveSignalPreviousMillis = millis(), lastMessageTiming = 0;
-int maxLogAge = 200;  //  how many sec to keep log before attempting to send.
-int logAge = 0 , LivePulseLedStatus = 0;
+int maxLogAge = 200; //  how many sec to keep log before attempting to send.
+int logAge = 0, LivePulseLedStatus = 0;
 int failedLogging2NetworkCounter = 0;
 int addFakeSec = -1;
 String firstLogTimeStamp = "";
@@ -114,14 +116,14 @@ RTC_DATA_ATTR int dataUpdatePort;
 String dataUpdateURI;
 RTC_DATA_ATTR char c_dataUpdateURI[200];
 
-char* serverDataUpdateHost = "raw.githubusercontent.com";
+char *serverDataUpdateHost = "raw.githubusercontent.com";
 int serverDataUpdatePort = 443;
 String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";
 
-char* dataUpdateHost_fallback = "raw.githubusercontent.com";
+char *dataUpdateHost_fallback = "raw.githubusercontent.com";
 int dataUpdatePort_fallback = 443;
-String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";   /// see example json file in github. leave
-String dataUpdateURI_fallback_local = "/GreenPlanet/GreenPlanetConfig.json";   /// see example json file in github. leave value empty if no local server
+String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json"; /// see example json file in github. leave
+String dataUpdateURI_fallback_local = "/GreenPlanet/GreenPlanetConfig.json";                               /// see example json file in github. leave value empty if no local server
 
 int ServerConfigurationRefreshRate = 60;
 
@@ -133,7 +135,7 @@ int red = 2;
 int green = 13;
 int blue = 20;
 
-int maintenanceRebootHour = 4;  // the hub will reboot once a day at aproximitly this UTC hour (default 4 am), provided it was running ~24 hours
+int maintenanceRebootHour = 4; // the hub will reboot once a day at aproximitly this UTC hour (default 4 am), provided it was running ~24 hours
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// JSON SECTION ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,9 +150,9 @@ JSONVar eyeConfig;
 
 #include <time.h>
 
-const char* ntpServer = "pool.ntp.org";
-long  gmtOffset_sec = 7200;
-int   daylightOffset_sec = 0;
+const char *ntpServer = "pool.ntp.org";
+long gmtOffset_sec = 7200;
+int daylightOffset_sec = 0;
 struct tm timeinfo;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +165,6 @@ struct tm timeinfo;
 //char* MQTTHost = "192.168.1.200";
 //int MQTTPort = 1883;
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// IR SECTION//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,13 +175,12 @@ struct tm timeinfo;
 #include <IRac.h>
 #include <IRtext.h>
 #include <IRutils.h>
-const uint16_t kIrLed = 14;  // ESP8266 GPIO pin to use. Recommended: 4 (D2).
-IRsend irsend(kIrLed);  // Set the GPIO to be used to sending the message.
+const uint16_t kIrLed = 14; // ESP8266 GPIO pin to use. Recommended: 4 (D2).
+IRsend irsend(kIrLed);      // Set the GPIO to be used to sending the message.
 
 long learningTH = 15000;
 
 const uint16_t kRecvPin = 15;
-
 
 const uint16_t kCaptureBufferSize = 2048;
 const uint16_t kMinUnknownSize = 12;
@@ -188,16 +188,16 @@ const uint8_t kTimeout = 50;
 
 int maxSignalLength = 200;
 IRrecv irrecv(kRecvPin, kCaptureBufferSize, kTimeout, true);
-decode_results results;  // Somewhere to store the results
+decode_results results; // Somewhere to store the results
 
-uint16_t  ACcode[200] ;
+uint16_t ACcode[200];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// DHT SECTION  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <dhtnew.h>
+//#include <dhtnew.h>
 #define DHTleg 4
-DHTNEW DHTsensor(DHTleg);
+//DHTNEW DHTsensor(DHTleg);
 float DHTt = 0;
 float DHTh = 0;
 
@@ -212,14 +212,15 @@ int maxEEPROMMessageLength = 1000;
 //////////////////////// WATCHGDOG SECTIO1N //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const int wdtTimeout = 22000;  //time in ms to trigger the watchdog // NOTE: less than that, on upgrade it barks. alternatively, kill dog before update
+const int wdtTimeout = 22000; //time in ms to trigger the watchdog // NOTE: less than that, on upgrade it barks. alternatively, kill dog before update
 hw_timer_t *timer = NULL;
 RTC_DATA_ATTR byte bootCount = 0;
 RTC_DATA_ATTR time_t rightNow;
 RTC_DATA_ATTR uint64_t Mics = 0;
 //unsigned long chrono;
 
-void IRAM_ATTR resetModule() {
+void IRAM_ATTR resetModule()
+{
   ets_printf("reboot for freeze\n");
   esp_restart();
 }
@@ -228,7 +229,7 @@ void IRAM_ATTR resetModule() {
 //////////////////////// DEEPSLEEP SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
+#define uS_TO_S_FACTOR 1000000ULL /* Conversion factor for micro seconds to seconds */
 
 int delayBetweenExecs = 3;
 int sleepAfterExec = 1800;
@@ -243,13 +244,14 @@ RTC_DATA_ATTR int RTCpanicStateCode = 0;
 //////////////////////// THIS PROGRAM SPECIFIC SECTION //////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-String deviceID;// = "Unknown";  // will be overwritten by dynamically loaded configuration file. if you see this on the hub - update configuration to new MAC
-String deviceGroup = "New Devices";   // will be overwritten by dynamically loaded configuration file. if you see this on the hub - associate new device to a group
-String deviceLocation = "default";    // same idea
-String memberInOperationPlans = "";    // same idea
-String MACID;   // MAC address converted to long
+String deviceID;                    // = "Unknown";  // will be overwritten by dynamically loaded configuration file. if you see this on the hub - update configuration to new MAC
+String deviceGroup = "New Devices"; // will be overwritten by dynamically loaded configuration file. if you see this on the hub - associate new device to a group
+String deviceLocation = "default";  // same idea
+String memberInOperationPlans = ""; // same idea
+String MACID;                       // MAC address converted to long
 
-typedef struct {
+typedef struct
+{
   int operationPlanID;
   String operationPlanName;
   int IRcodeID;
@@ -260,7 +262,8 @@ typedef struct {
 } operationPlans;
 operationPlans myOperationPlans[10];
 
-typedef struct {
+typedef struct
+{
   int IRcodeID;
   String IRcodeDescription;
   uint16_t IRCodeBitStream[300];
@@ -285,11 +288,21 @@ String serverConfiguration = "";
 //////////////////////// END OF DECLERATION /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void setup() {
+void setup()
+{
 
-  pinMode(red, OUTPUT); pinMode(green, OUTPUT); pinMode(blue, OUTPUT);
+  pinMode(red, OUTPUT);
+  pinMode(green, OUTPUT);
+  pinMode(blue, OUTPUT);
 
-  digitalWrite(green, HIGH);delay(50); digitalWrite(green, LOW); delay(50);digitalWrite(green, HIGH);delay(50); digitalWrite(green, LOW); delay(50);
+  digitalWrite(green, HIGH);
+  delay(50);
+  digitalWrite(green, LOW);
+  delay(50);
+  digitalWrite(green, HIGH);
+  delay(50);
+  digitalWrite(green, LOW);
+  delay(50);
 
   // Hardeware Watchdog
   timer = timerBegin(0, 80, true);                  //timer 0, div 80
@@ -299,39 +312,56 @@ void setup() {
 
   MACID = mac2long(WiFi.macAddress());
 
-  if (log2Serial) Serial.begin(115200);
+  if (log2Serial)
+    Serial.begin(115200);
 
   logThis(1, "Starting GreenPlanet Device by the DontKnowGuy", 2);
-  logThis(1, "Firmware version " + String (FW_VERSION) + ". Unique device identifier: " + MACID, 2);
+  logThis(1, "Firmware version " + String(FW_VERSION) + ". Unique device identifier: " + MACID, 2);
 
   bootCount++;
   logThis(2, "This is boot No. " + String(bootCount), 3);
-  if (bootCount == 1) { digitalWrite(red, HIGH);delay(100); digitalWrite(red, LOW); delay(50);digitalWrite(red, HIGH);delay(100); digitalWrite(red, LOW); delay(50);digitalWrite(red, HIGH);delay(100); digitalWrite(red, LOW); delay(50);}
-  if (bootCount > 48)   ESP.restart();
+  if (bootCount == 1)
+  {
+    digitalWrite(red, HIGH);
+    delay(100);
+    digitalWrite(red, LOW);
+    delay(50);
+    digitalWrite(red, HIGH);
+    delay(100);
+    digitalWrite(red, LOW);
+    delay(50);
+    digitalWrite(red, HIGH);
+    delay(100);
+    digitalWrite(red, LOW);
+    delay(50);
+  }
+  if (bootCount > 48)
+    ESP.restart();
 
   EEPROM.begin(4096);
   checkPanicMode();
 
-  if (initiateNetwork() > 0) {
+  if (initiateNetwork() > 0)
+  {
     networkReset();
   }
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
   printLocalTime();
-  updateTime (0); ////??????????
+  updateTime(0);        ////??????????
   timerWrite(timer, 0); //reset timer (feed watchdog)
 
   // chrono = micros();
   LiveSignalPreviousMillis = millis();
 
-  logThis(2, "This is device " + String(deviceID), 3);
-
   irsend.begin();
   Serial.printf("\n" D_STR_IRRECVDUMP_STARTUP "\n", kRecvPin);
-  irrecv.enableIRIn();  // Start the receiver
+  irrecv.enableIRIn(); // Start the receiver
 
   JSONVar myConfig = loadConfiguration();
   checkForFirmwareUpdates(myConfig);
   parseConfiguration(myConfig);
+
+  logThis(2, "This is device " + String(deviceID), 3);
 
 #if defined(SERVER)
   logThis(1, "I am a server", 2);
@@ -339,25 +369,21 @@ void setup() {
   startWebServer();
 #endif
 
-  DHTsensor.read();
-  DHTt = DHTsensor.getTemperature();
-  DHTh = DHTsensor.getHumidity();
+  //DHTsensor.read();
+  DHTt =900;// DHTsensor.getTemperature();
+  DHTh = 900;//DHTsensor.getHumidity();
   logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
 
   logThis(3, "Avail heap mem: " + String(system_get_free_heap_size()), 2);
 
   logThis("Initialization Completed.", 3);
   digitalWrite(blue, HIGH); // system live indicator
-
-
-  bool fired = planDispatcher();
-
 #if defined(SERVER)
 
   xTaskCreatePinnedToCore(
     serverOtherFunctions
     ,  "serverOtherFunctions"   // A name just for humans
-    ,  10000  // This stack size can be checked & adjusted by reading the Stack Highwater
+    ,  15000  // This stack size can be checked & adjusted by reading the Stack Highwater
     ,  NULL
     ,  0  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
     ,  NULL
@@ -367,7 +393,7 @@ void setup() {
   xTaskCreatePinnedToCore(
     webServerFunction
     ,  "webServerFunction"   // A name just for humans
-    ,  10000  // This stack size can be checked & adjusted by reading the Stack Highwater
+    ,  15000  // This stack size can be checked & adjusted by reading the Stack Highwater
     ,  NULL
     ,  3  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
     ,  NULL
@@ -375,8 +401,8 @@ void setup() {
 
 
 #else
-  gotoSleep(calcTime2Sleep());
   planDispatcher();
+  gotoSleep(calcTime2Sleep());   ///is this order right ????????
 #endif
 }  //setup
 

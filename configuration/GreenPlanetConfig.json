@@ -1040,8 +1040,8 @@
   ],
   "ServerConfiguration": {
     "ServerConfigurationRefreshRate": 120,
-    "maxLogAge": 150,
-    "recessTime": 170,
+    "maxLogAge": 600,
+    "recessTime": 600,
     "serverLoggerHost": "api.thingspeak.com",
     "serverLogTarget": "/channels/1023335/bulk_update.csv",
     "serverWrite_api_key": "NGOL1T65IJHKTURU",

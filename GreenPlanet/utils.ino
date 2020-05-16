@@ -9,9 +9,9 @@ void blinkLiveLed()
     LivePulseLedStatus = !(LivePulseLedStatus);
     totalLifes += 1;
     LiveSignalPreviousMillis = millis();
-//    DHTsensor.read();
-  //  DHTt = DHTsensor.getTemperature();
-   // DHTh = DHTsensor.getHumidity();
+    DHTsensor.read();
+    DHTt = DHTsensor.getTemperature();
+    DHTh = DHTsensor.getHumidity();
   }
   //  if(logBuffer.length() > 0) {if(networklogThis(logBuffer) == 0) {  logBuffer = ""; }}
 
@@ -51,7 +51,7 @@ void blinkLiveLed()
 void blinkLiveLedFast()
 {
   timerWrite(timer, 0); //reset timer (feed watchdog)
-  vTaskDelay(10 / portTICK_RATE_MS);
+  delay(10 / portTICK_RATE_MS);
 
   if (millis() - LiveSignalPreviousMillis > 100)
   {

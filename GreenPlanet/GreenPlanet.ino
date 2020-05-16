@@ -195,9 +195,9 @@ uint16_t ACcode[200];
 //////////////////////// DHT SECTION  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//#include <dhtnew.h>
+#include <dhtnew.h>
 #define DHTleg 4
-//DHTNEW DHTsensor(DHTleg);
+DHTNEW DHTsensor(DHTleg);
 float DHTt = 0;
 float DHTh = 0;
 
@@ -369,42 +369,43 @@ void setup()
   startWebServer();
 #endif
 
-  //DHTsensor.read();
-  DHTt =900;// DHTsensor.getTemperature();
-  DHTh = 900;//DHTsensor.getHumidity();
+  DHTsensor.read();
+  DHTt = DHTsensor.getTemperature();
+  DHTh = DHTsensor.getHumidity();
   logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
 
   logThis(3, "Avail heap mem: " + String(system_get_free_heap_size()), 2);
 
   logThis("Initialization Completed.", 3);
   digitalWrite(blue, HIGH); // system live indicator
-#if defined(SERVER)
+}
+/* #if false
+ *  #if defined(SERVER)
 
   xTaskCreatePinnedToCore(
-    serverOtherFunctions
-    ,  "serverOtherFunctions"   // A name just for humans
-    ,  15000  // This stack size can be checked & adjusted by reading the Stack Highwater
-    ,  NULL
-    ,  0  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-    ,  NULL
-    ,  1);
-
+      serverOtherFunctions, "serverOtherFunctions" // A name just for humans
+      ,
+      7000 // This stack size can be checked & adjusted by reading the Stack Highwater
+      ,
+      NULL, 0 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+      ,
+      NULL, 1);
 
   xTaskCreatePinnedToCore(
-    webServerFunction
-    ,  "webServerFunction"   // A name just for humans
-    ,  15000  // This stack size can be checked & adjusted by reading the Stack Highwater
-    ,  NULL
-    ,  3  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-    ,  NULL
-    ,  0);
-
+      webServerFunction, "webServerFunction" // A name just for humans
+      ,
+      7000 // This stack size can be checked & adjusted by reading the Stack Highwater
+      ,
+      NULL, 3 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+      ,
+      NULL, 0);
 
 #else
   planDispatcher();
-  gotoSleep(calcTime2Sleep());   ///is this order right ????????
+  gotoSleep(calcTime2Sleep()); ///is this order right ????????
 #endif
-}  //setup
+} //setup
+
 
 #if defined(SERVER)
 void webServerFunction(void *pvParameters) {
@@ -412,7 +413,7 @@ void webServerFunction(void *pvParameters) {
   (void) pvParameters;
   for (;;) {
     server.handleClient();
-    vTaskDelay(10 / portTICK_RATE_MS);
+    delay(10 / portTICK_RATE_MS);
     timerWrite(timer, 0); //reset timer (feed watchdog)
   }
 }
@@ -424,12 +425,25 @@ void serverOtherFunctions(void *pvParameters) {
     planDispatcher();
     blinkLiveLed();
     timerWrite(timer, 0); //reset timer (feed watchdog)
-    vTaskDelay(10 / portTICK_RATE_MS);
+    delay(10 / portTICK_RATE_MS);
   }
+}void loop()
+{
+  delay(10 / portTICK_RATE_MS);
+  timerWrite(timer, 0);
 }
 #endif
+#endif*/
+void loop()
+{
+#if defined(SERVER)
+  server.handleClient();
+  planDispatcher();
+  blinkLiveLed();
+  timerWrite(timer, 0); //reset timer (feed watchdog)
+#else
+  planDispatcher();
+  gotosleep(calcSleepTime());
 
-void loop() {
-  vTaskDelay(10 / portTICK_RATE_MS);
-  timerWrite(timer, 0);
+#endif
 }

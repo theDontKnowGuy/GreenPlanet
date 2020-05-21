@@ -1,6 +1,6 @@
 {
   "ConfigurationVersion": 203,
-  "targetFWVersion_client": 2020051401,
+  "targetFWVersion_client": 2020052102,
   "GeneralConfiguration": {
     "DEBUGLEVEL": 2,
     "delayBetweenExecs": 1000,
@@ -1046,6 +1046,6 @@
     "serverLogTarget": "/channels/1023335/bulk_update.csv",
     "serverWrite_api_key": "NGOL1T65IJHKTURU",
     "serverLoggerHostPort": 443,
-    "targetFWVersion_server": 2020051401
+    "targetFWVersion_server": 2020052102
   }
 }

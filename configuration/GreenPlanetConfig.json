@@ -59,7 +59,7 @@
     },
     {
       "DeviceMAC": "24:0A:C4:C5:BA:8C",
-      "deviceID": "500",
+      "deviceID": "502",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
       "memberInOperationPlans": "1,2,3,4"

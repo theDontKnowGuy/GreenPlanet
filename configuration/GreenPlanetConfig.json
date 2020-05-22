@@ -48,7 +48,8 @@
       "deviceID": "500",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,2,3,4",
+      "irled": 25
     },
     {
       "DeviceMAC": "24:6F:28:A8:4D:F4",

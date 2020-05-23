@@ -23,158 +23,158 @@
   },
   "Devices": [
     {
-      "DMAC": "24:6F:28:9E:49:5C",
-      "dID": "703",
-      "dGrp": "Main",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:9E:49:5C",
+      "deviceID": "703",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A9:AF:98",
-      "dID": "707",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:A9:AF:98",
+      "deviceID": "707",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:9D:9A:64",
-      "dID": "706",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:9D:9A:64",
+      "deviceID": "706",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A8:4D:F4",
-      "dID": "500",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:A8:4D:F4",
+      "deviceID": "500",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A8:23:F0",
-      "dID": "501",
-      "dGrp": "Main",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4",
+      "DeviceMAC": "24:6F:28:A8:23:F0",
+      "deviceID": "501",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4",
       "irled": 25
     },
     {
-      "DMAC": "24:0A:C4:C5:BA:8C",
-      "dID": "502",
-      "dGrp": "Main",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:0A:C4:C5:BA:8C",
+      "deviceID": "502",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A9:AF:XX",
-      "dID": "503",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "deviceID": "503",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:9E:49:XX",
-      "dID": "504",
-      "dGrp": "Main",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:9E:49:XX",
+      "deviceID": "504",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A9:AF:XX",
-      "dID": "505",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "deviceID": "505",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:9E:49:XX",
-      "dID": "506",
-      "dGrp": "Main",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:9E:49:XX",
+      "deviceID": "506",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A9:AF:XX",
-      "dID": "507",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "deviceID": "507",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:9E:49:XX",
-      "dID": "508",
-      "dGrp": "Main",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:9E:49:XX",
+      "deviceID": "508",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A9:AF:XX",
-      "dID": "509",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "deviceID": "509",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:9E:49:XX",
-      "dID": "510",
-      "dGrp": "Main",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:9E:49:XX",
+      "deviceID": "510",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A9:AF:XX",
-      "dID": "511",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "deviceID": "511",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:9E:49:XX",
-      "dID": "512",
-      "dGrp": "Main",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:9E:49:XX",
+      "deviceID": "512",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DMAC": "24:6F:28:A9:AF:XX",
-      "dID": "513",
-      "dGrp": "2 fl",
-      "dLoc": "clinic",
-      "Oplans": "1,2,3,4"
+      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "deviceID": "513",
+      "deviceGroup": "Second Floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "1,2,3,4"
     }
   ],
   "operationPlans": [
     {
-      "opID": 1,
-      "opName": "Turn on at 8am 24c",
+      "operationPlanID": 1,
+      "operationPlanName": "Turn on at 8am 24c",
       "IRcodeID": 1,
       "hour": 2,
       "minute": 30,
-      "wkdys": "1234567"
+      "weekdays": "1234567"
     },
     {
-      "opID": 2,
-      "opName": "Turn on at 8am 24c",
+      "operationPlanID": 2,
+      "operationPlanName": "Turn on at 8am 24c",
       "IRcodeID": 4,
       "hour": 1,
       "minute": 45,
-      "wkdys": "1234567"
+      "weekdays": "1234567"
     },
     {
-      "opID": 3,
-      "opName": "Shut down at 9pm",
+      "operationPlanID": 3,
+      "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 4,
       "hour": 3,
       "minute": 30,
-      "wkdys": "1234567"
+      "weekdays": "1234567"
     },
     {
-      "opID": 4,
-      "opName": "Shut down at 9pm apple",
+      "operationPlanID": 4,
+      "operationPlanName": "Shut down at 9pm apple",
       "IRcodeID": 4,
       "hour": 23,
       "minute": 30,
-      "wkdys": "1234567"
+      "weekdays": "1234567"
     }
   ],
   "IRcode": [

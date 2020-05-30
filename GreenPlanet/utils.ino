@@ -2,17 +2,17 @@ void blinkLiveLed()
 {
   updateTime(0); ////??????????
   //  timerWrite(timer, 0); //reset timer (feed watchdog)
-
-  if (millis() - LiveSignalPreviousMillis > 50)
-  {
-    digitalWrite(blue, !(LivePulseLedStatus));
-    LivePulseLedStatus = !(LivePulseLedStatus);
-    totalLifes += 1;
-    LiveSignalPreviousMillis = millis();
-    DHTsensor.read();
-    DHTt = DHTsensor.getTemperature();
-    DHTh = DHTsensor.getHumidity();
-  }
+//digitalWrite(blue, LOW);
+//  if (millis() - LiveSignalPreviousMillis > 500)
+//  {
+//    digitalWrite(blue, !(LivePulseLedStatus));
+//    LivePulseLedStatus = !(LivePulseLedStatus);
+//    totalLifes += 1;
+//    LiveSignalPreviousMillis = millis();
+//    DHTsensor.read();
+//    DHTt = DHTsensor.getTemperature();
+//    DHTh = DHTsensor.getHumidity();
+//  }
   //  if(logBuffer.length() > 0) {if(networklogThis(logBuffer) == 0) {  logBuffer = ""; }}
 
   if ((maxLogAge < logAge++) && (networkLogBuffer.length() > 1))
@@ -37,10 +37,8 @@ void blinkLiveLed()
 
   if ((totalLifes % (ServerConfigurationRefreshRate * 2) == 0) || (serverConfiguration == ""))
   {
-    JSONVar myConfig = loadConfiguration();
-    checkForFirmwareUpdates(myConfig);
-    parseConfiguration(myConfig);
-    serverConfiguration = JSON.stringify(myConfig);
+    //JSONVar
+    parseConfiguration(loadConfiguration());
     logThis(1, "Server Configuration refreshed", 2);
     totalLifes += 1;
   }
@@ -153,4 +151,13 @@ String mac2long(String s)
   s.replace("F", "15");
 
   return s;
+}
+
+void printmem() {
+  Serial.println("system_get_free_heap_size: " + String(system_get_free_heap_size()) + " ESP.getFreeHeap(): " + String(ESP.getFreeHeap()));
+  Serial.println(" heap_caps_get_largest_free_block(MALLOC_CAP_EXEC))): " + String(heap_caps_get_largest_free_block(MALLOC_CAP_EXEC)));
+  Serial.println(" heap_caps_get_largest_free_block(MALLOC_CAP_32BIT))): " + String(heap_caps_get_largest_free_block(MALLOC_CAP_32BIT)));
+  Serial.println(" heap_caps_get_largest_free_block(MALLOC_CAP_8BIT))): " + String(heap_caps_get_largest_free_block(MALLOC_CAP_8BIT)));
+  Serial.println(" heap_caps_get_largest_free_block(MALLOC_CAP_DMA))): " + String(heap_caps_get_largest_free_block(MALLOC_CAP_DMA)));
+
 }

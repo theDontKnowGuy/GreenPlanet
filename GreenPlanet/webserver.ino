@@ -1,38 +1,38 @@
 #if (!defined(SERVER))
 
-endpoint findLocalServer(const char *service, const char *protocol)
-{
-
-  endpoint localServer;
-  localServer.endpointDescription = "local esp32 server";
-
-  if (!MDNS.begin("ESP32_Browser"))
-  {
-    Serial.println("Error setting up MDNS responder!");
-    localServer.endpointDescription = "error_startMDNS";
-    return localServer;
-  }
-
-  Serial.printf("Browsing for service _%s._%s.local. ... ", service, protocol);
-  int n = MDNS.queryService(service, protocol);
-  if (n == 0)
-  {
-    logThis(1, "no local servers found", 3);
-    localServer.endpointDescription = "error_servernotfound";
-    return localServer;
-  }
-  else
-  {
-    localServer.endpointDescription = MDNS.hostname(0);
-    String s = String() + MDNS.IP(0)[0] + "." + MDNS.IP(0)[1] + "." + MDNS.IP(0)[2] + "." + MDNS.IP(0)[3];
-    Serial.println(String(service) + " service found on " + s);
-    s.toCharArray(localServer.host, 16);
-    localServer.port = MDNS.port(0);
-    logThis(2, "Local server found: " + String(localServer.endpointDescription) + " at " + String(localServer.host) + ": " + String(localServer.port), 2);
-  }
-
-  return localServer;
-}
+//endpoint findLocalServer(const char *service, const char *protocol)
+//{
+//
+//  endpoint localServer;
+//  localServer.endpointDescription = "local esp32 server";
+//
+//  if (!MDNS.begin("ESP32_Browser"))
+//  {
+//    Serial.println("Error setting up MDNS responder!");
+//    localServer.endpointDescription = "error_startMDNS";
+//    return localServer;
+//  }
+//
+//  Serial.printf("Browsing for service _%s._%s.local. ... ", service, protocol);
+//  int n = MDNS.queryService(service, protocol);
+//  if (n == 0)
+//  {
+//    logThis(1, "no local servers found", 3);
+//    localServer.endpointDescription = "error_servernotfound";
+//    return localServer;
+//  }
+//  else
+//  {
+//    localServer.endpointDescription = MDNS.hostname(0);
+//    String s = String() + MDNS.IP(0)[0] + "." + MDNS.IP(0)[1] + "." + MDNS.IP(0)[2] + "." + MDNS.IP(0)[3];
+//    Serial.println(String(service) + " service found on " + s);
+//    s.toCharArray(localServer.host, 16);
+//    localServer.port = MDNS.port(0);
+//    logThis(2, "Local server found: " + String(localServer.endpointDescription) + " at " + String(localServer.host) + ": " + String(localServer.port), 2);
+//  }
+//
+//  return localServer;
+//}
 
 #endif
 
@@ -41,15 +41,15 @@ endpoint findLocalServer(const char *service, const char *protocol)
 void startWebServer()
 {
 
-  if (!MDNS.begin(serverMDNSname))
-  {
-    logThis(1, "Error setting up MDNS responder!");
-    networkReset();
-  }
-
-  MDNS.addService(String(serverMDNSname), "tcp", 80);
-
-  logThis(1, "mDNS responder started on http://" + String(serverMDNSname) + ".local", 3);
+  //  if (!MDNS.begin(serverMDNSname))
+  //  {
+  //    logThis(1, "Error setting up MDNS responder!");
+  //    networkReset();
+  //  }
+  //
+  //  MDNS.addService(String(serverMDNSname), "tcp", 80);
+  //
+  //  logThis(1, "mDNS responder started on http://" + String(serverMDNSname) + ".local", 3);
   server.begin();
   server.on("/GreenPlanet/GreenPlanetConfig.json", handleGetConfig);
 
@@ -97,10 +97,20 @@ void startWebServer()
     ESP.restart();
   });
 
+  server.on("/testIR", []() {
+    handleTestIR();
+  });
+
+  server.on("/testColors", []() {
+    handleTestColors();
+  });
+
   server.on("/learn", []() {
     learnCode();
   });
-
+  server.on("/testWeed", []() {
+    testWeed();
+  });
   server.onNotFound(handleNotFound);
 }
 
@@ -137,6 +147,113 @@ void handleNotFound()
   }
 
   server.send(404, "text/plain", message);
+}
+
+
+void handleTestIR()
+{
+
+
+  char body[100] = "Running Test";
+  server.send(200, "text/html", body);
+
+  Serial.println("long ir seq");
+
+  for (int k = 0; k < 5; k++) {
+    //    for (int i = 0; i < 8; i++) {
+    //      digitalWrite(blue, HIGH);
+    //  //    digitalWrite(kIrLed, HIGH);
+    //      delay(2000);
+    //      timerWrite(timer, 0); //reset timer (feed watchdog)
+    //      digitalWrite(blue, LOW);
+    //      digitalWrite(kIrLed, LOW);
+    //      delay(500);
+    //    }
+
+    digitalWrite(red, HIGH);
+    delay(500);
+    digitalWrite(red, LOW);
+    delay(500);
+    timerWrite(timer, 0); //reset timer (feed watchdog)
+
+    Serial.println(kIrLed);
+
+    for (int i = 0; i < 2; i++) {
+      execPlan(4);//enable interrupt
+      timerWrite(timer, 0); //reset timer (feed watchdog)
+
+    }
+
+    digitalWrite(red, HIGH);
+    delay(500);
+    digitalWrite(red, LOW);
+
+    digitalWrite(red, HIGH);
+    delay(1000);
+    digitalWrite(red, LOW);
+
+    timerWrite(timer, 0); //reset timer (feed watchdog)
+
+  }
+}
+
+
+void handleTestColors()
+{
+
+
+  char body[100] = "Running Test";
+  server.send(200, "text/html", body);
+    digitalWrite(green, LOW);
+    digitalWrite(red, LOW);
+    digitalWrite(blue, LOW);
+    digitalWrite(kIrLed, LOW);
+
+  Serial.println("color seq");
+  for (int k = 0; k < 15; k++) {
+    timerWrite(timer, 0); //reset timer (feed watchdog)
+    digitalWrite(blue, HIGH);
+    delay(500);
+    digitalWrite(blue, LOW);
+    delay(500);
+    digitalWrite(red, HIGH);
+    delay(500);
+    digitalWrite(red, LOW);
+    delay(500);
+    digitalWrite(green, HIGH);
+    delay(500);    
+    digitalWrite(green, LOW);
+    delay(500);
+    digitalWrite( kIrLed, HIGH);
+    delay(500);
+    digitalWrite(kIrLed , LOW);
+    delay(500);
+  }
+}
+void testWeed() {
+  digitalWrite(blue , LOW);
+  Serial.println("weed seq");
+  digitalWrite(green, HIGH);
+  delay(500);
+  digitalWrite(green , LOW);
+  delay(500);
+  digitalWrite(green, HIGH);
+  delay(500);
+  digitalWrite(green , LOW);
+  delay(500);
+  digitalWrite(green, HIGH);
+  delay(500);
+  digitalWrite(green , LOW);
+  delay(500);
+  digitalWrite(green, HIGH);
+  delay(500);
+  digitalWrite(green , LOW);
+  delay(500);
+  digitalWrite(green, HIGH);
+  delay(500);
+  digitalWrite(green , LOW);
+  delay(500);
+
 }
 
 #endif

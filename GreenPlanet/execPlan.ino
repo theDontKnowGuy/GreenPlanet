@@ -1,5 +1,7 @@
 int execPlan(int IRCodeID)
 {
+  IRsend irsend(kIrLed);      // Set the GPIO to be used to sending the message.
+  irsend.begin();
 
   int idxIRPlanToRun = -1;
   for (int i = 0; i <= inxParticipatingIRCodes; i++)

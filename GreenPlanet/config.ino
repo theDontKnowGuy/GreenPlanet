@@ -3,11 +3,26 @@ JSONVar loadConfiguration() {
   JSONVar myConfig;
   myConfig = loadConfigurationFromServer();
 
+
   if (JSON.stringify(myConfig) == "-1") myConfig = loadConfigurationFromEEPROM();
   if (JSON.stringify(myConfig) == "-1") {
     logThis("Panic. No configuration found. I'm Dead.");
     boardpanic(3);
   }
+
+
+  int newFWVersion;
+  if (isServer)
+    newFWVersion = (int)myConfig["ServerConfiguration"]["targetFWVersion_server"];
+  else
+    newFWVersion = (int)myConfig["targetFWVersion_client"];
+
+  checkForFirmwareUpdates(newFWVersion);
+
+#if defined(SERVER)
+  serverConfiguration = JSON.stringify(myConfig);
+#endif
+
   return myConfig;
 }
 
@@ -45,7 +60,6 @@ JSONVar loadConfigurationFromServer() {
   }
 
 #endif
-
   NetworkResponse myNetworkResponse = httpRequest(dataUpdateHost, dataUpdatePort, "GET", dataUpdateURI, "", "}", 0);
 
   if (!(myNetworkResponse.resultCode) == 0) {
@@ -142,6 +156,11 @@ int parseConfiguration(JSONVar eyeConfig) {
       memberInOperationPlans = eyeConfig["Devices"][i]["memberInOperationPlans"]   ;
       logThis(2, "Device found. Device name: " + deviceID , 2);
       found = true;
+      if (JSON.typeof(eyeConfig["Devices"][i]["irled"]) == "number")
+      {
+        kIrLed = int(eyeConfig["Devices"][i]["irled"]);
+        digitalWrite(kIrLed, LOW);
+      }
     }
     i++;
   }

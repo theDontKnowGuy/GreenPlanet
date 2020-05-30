@@ -45,7 +45,7 @@ void logThis(int debuglevel, String strMessage, int newLineHint)
 
   loggingCounter++;
 
-  //getLocalTime(&timeinfo);
+  if (  ihaveTime  )  getLocalTime(&timeinfo);
 
   if (addFakeSec == -1)
     addFakeSec = timeinfo.tm_sec;
@@ -118,35 +118,35 @@ int networklogThis(String message, bool asProxy = false)
   NetworkResponse myNetworkResponse;
   switch (loggingType)
   {
-  case 1: ///  thingspeak
+    case 1: ///  thingspeak
 
-    message.replace("1900-1-0T0", "1900-1-1T");
-    message = "write_api_key=NGOL1T65IJHKTURU&time_format=absolute&updates=" + message;
-    myNetworkResponse = httpSecurePost("api.thingspeak.com", 443, logTarget, message, "HTTP/1.1 202 Accepted");
+      message.replace("1900-1-0T0", "1900-1-1T");
+      message = "write_api_key=NGOL1T65IJHKTURU&time_format=absolute&updates=" + message;
+      myNetworkResponse = httpSecurePost("api.thingspeak.com", 443, logTarget, message, "HTTP/1.1 202 Accepted");
 
-    break;
+      break;
 
-  case 2: //// PHPSERVER
-    String m;
-    message.replace("\n", " | ");
-    m = "msg = | " + deviceID + ", " + (isServer) ? " - client, " : " - server, " + String(WiFi.localIP().toString().c_str()) + message;
-    myNetworkResponse = httpRequest(loggerHost, loggerHostPort, "POST", logTarget, m, "Logged successfully", 0);
-    break;
+    case 2: //// PHPSERVER
+      String m;
+      message.replace("\n", " | ");
+      m = "msg = | " + deviceID + ", " + (isServer) ? " - client, " : " - server, " + String(WiFi.localIP().toString().c_str()) + message;
+      myNetworkResponse = httpRequest(loggerHost, loggerHostPort, "POST", logTarget, m, "Logged successfully", 0);
+      break;
   }
 
   if (myNetworkResponse.resultCode == 0)
   {
     failedLogging2NetworkCounter = 0;
-    logThis(2, "Log sent and received successfully.", 2);
+    logThis(2, "Log sent and received successfully.", 3);
   }
   else
   {
-    Serial.println("FAILED LOGGING TO NETWORK");
+    logThis(1,"FAILED LOGGING TO NETWORK",3);
     digitalWrite(red, HIGH);
     delay(60);
     digitalWrite(red, LOW);
     failedLogging2NetworkCounter++;
-    if (failedLogging2NetworkCounter == 10)
+    if (failedLogging2NetworkCounter == 5)
       boardpanic(2);
     return 1;
   }

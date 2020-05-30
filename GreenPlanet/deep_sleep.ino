@@ -1,4 +1,26 @@
 
+void callback(){
+  
+}
+
+void wakeupReason(){
+
+  touchPin = esp_sleep_get_touchpad_wakeup_status();
+
+  esp_sleep_wakeup_cause_t wakeup_reason;
+
+  wakeup_reason = esp_sleep_get_wakeup_cause();
+
+  switch (wakeup_reason)
+  {
+    case ESP_SLEEP_WAKEUP_TIMER : logThis(1, "Wakeup caused by timer"); break;
+    case ESP_SLEEP_WAKEUP_TOUCHPAD : logThis(1, "Wakeup caused by touchpad"); break;
+    case ESP_SLEEP_WAKEUP_ULP : logThis(1, "Wakeup caused by ULP program"); break;
+    default : logThis(1, "Wakeup was not caused by deep sleep: " +String(wakeup_reason)); break;
+  }
+
+}
+
 void RTC_IRAM_ATTR esp_wake_deep_sleep(void)
 {
   esp_default_wake_deep_sleep();
@@ -37,11 +59,14 @@ void gotoSleep(int timeToSleep, int panicCode)
     break;
   }
 
+  touchAttachInterrupt(T4, callback, WakeUpSensorThreshold);
+  esp_sleep_enable_touchpad_wakeup();
+
   esp_sleep_enable_timer_wakeup(timeToSleep * uS_TO_S_FACTOR);
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_OFF);
 
   Serial.println("Good night now.");
   Serial.flush();
-  delay(2);
+  delay(20);
   esp_deep_sleep_start();
 }

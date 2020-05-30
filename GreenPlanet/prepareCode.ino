@@ -1,3 +1,5 @@
+#if (defined(SERVER))
+
 String buildRawCode(const decode_results *const results)
 {
   String output = "";
@@ -36,3 +38,5 @@ String buildRawCode(const decode_results *const results)
 
   return output;
 }
+
+#endif

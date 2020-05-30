@@ -1,3 +1,5 @@
+#if defined (SERVER)
+
 String learnCode()
 {
 
@@ -58,3 +60,5 @@ String learnCode()
 
   return "1";
 }
+
+#endif

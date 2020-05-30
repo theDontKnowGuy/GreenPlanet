@@ -143,7 +143,7 @@ int networklogThis(String message, bool asProxy = false)
   {
     logThis(1,"FAILED LOGGING TO NETWORK",3);
     digitalWrite(red, HIGH);
-    delay(60);
+    vTaskDelay(60);
     digitalWrite(red, LOW);
     failedLogging2NetworkCounter++;
     if (failedLogging2NetworkCounter == 5)

@@ -52,9 +52,9 @@ void gotoSleep(int timeToSleep, int panicCode)
     for (int i = 0; i < 3; i++)
     {
       digitalWrite(red, HIGH);
-      delay(20);
+      vTaskDelay(20);
       digitalWrite(red, LOW);
-      delay(20);
+      vTaskDelay(20);
     }
     break;
   }
@@ -67,6 +67,6 @@ void gotoSleep(int timeToSleep, int panicCode)
 
   Serial.println("Good night now.");
   Serial.flush();
-  delay(20);
+  vTaskDelay(20);
   esp_deep_sleep_start();
 }

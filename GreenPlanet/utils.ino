@@ -49,7 +49,7 @@ void blinkLiveLed()
 void blinkLiveLedFast()
 {
   timerWrite(timer, 0); //reset timer (feed watchdog)
-  delay(10 / portTICK_RATE_MS);
+  vTaskDelay(10 / portTICK_RATE_MS);
 
   if (millis() - LiveSignalPreviousMillis > 100)
   {

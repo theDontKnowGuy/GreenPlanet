@@ -1,7 +1,7 @@
 int initiateNetwork()
 {
   int result;
-  digitalWrite(blue, HIGH);
+//  digitalWrite(blue, HIGH);
 
   logThis(4, "connecting to " + String(ssid), 1);
 
@@ -10,14 +10,14 @@ int initiateNetwork()
   int countConnect = 0;
 
   WiFi.begin(ssid, password);
-  delay(1000);
-  while ((WiFi.status() != WL_CONNECTED) && (countConnect < 20))
+  vTaskDelay(50);
+  while ((WiFi.status() != WL_CONNECTED) && (countConnect < 200))
   {
-    delay(300);
+    vTaskDelay(50);
     Serial.print(".");
     countConnect++;
   }
-  if (countConnect == 20)
+  if (countConnect == 200)
   {
     Serial.println("Timeout waiting for network");
     digitalWrite(red, HIGH);
@@ -43,7 +43,7 @@ int initiateNetwork()
     logThis("Network problem error code" + String(result), 2);
   }
 
-  digitalWrite(blue, LOW);
+//  digitalWrite(blue, LOW);
 
   return result;
 }
@@ -78,7 +78,7 @@ void networkReset()
   WiFi.disconnect();
 
   logThis("PERFORMING NETWORK RESET!");
-  delay(1000);
+  vTaskDelay(1000);
   timerWrite(timer, 0); //reset timer (feed watchdog)
 
   if (initiateNetwork() == 0)
@@ -87,7 +87,7 @@ void networkReset()
     digitalWrite(red, LOW);
     return;
   }
-  delay(3000);
+  vTaskDelay(3000);
   timerWrite(timer, 0); //reset timer (feed watchdog)
 
   if (initiateNetwork() == 0)
@@ -172,13 +172,13 @@ NetworkResponse httpRequest(char *host, int port, String requestType, String URI
     myNetworkResponse.resultCode = 4;
     digitalWrite(green, LOW);
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
-    delay(500);
+    vTaskDelay(500);
 
     return myNetworkResponse;
   }
@@ -212,7 +212,7 @@ NetworkResponse httpRequestExecuter(char *host, int port, String URI, String htt
   myNetworkResponse.body = "";
 
   int resultCode = 0;
-  digitalWrite(blue, HIGH);
+//  digitalWrite(blue, HIGH);
   // WiFiClientSecure client;
   WiFiClient client;
 
@@ -285,7 +285,7 @@ NetworkResponse httpRequestExecuter(char *host, int port, String URI, String htt
 
   myNetworkResponse.resultCode = 0;
   client.stop();
-  digitalWrite(blue, LOW);
+//  digitalWrite(blue, LOW);
   return myNetworkResponse;
 }
 
@@ -296,7 +296,7 @@ NetworkResponse secureHttpRequestExecuter(char *host, int port, String URI, Stri
   myNetworkResponse.body = "";
 
   int resultCode = 0;
-  digitalWrite(blue, HIGH);
+ // digitalWrite(blue, HIGH);
   //WiFiClientSecure client;
   //WiFiClient client;
   WiFiClientSecure *client = new WiFiClientSecure;
@@ -308,16 +308,19 @@ NetworkResponse secureHttpRequestExecuter(char *host, int port, String URI, Stri
     logThis("connection failed");
     delete client;
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
     myNetworkResponse.resultCode = 3;
     return myNetworkResponse;
   }
-  HTTPClient https;
+
+  HTTPClient https;   
+  
+
   // client.print(httpComm);
 
   String connectionString = "http://" + String(host) + ":" + String(port) + URI;
@@ -397,9 +400,9 @@ NetworkResponse secureHttpRequestExecuter(char *host, int port, String URI, Stri
   myNetworkResponse.resultCode = 0;
   https.end();
   delete client;
-  digitalWrite(blue, LOW);    
+ // digitalWrite(blue, LOW);    
 
- Serial.println(ESP.getFreeHeap());
+
   return myNetworkResponse;
 }
 
@@ -411,7 +414,7 @@ NetworkResponse httpRequestExecuter2(char *host, int port, String URI, String ht
   myNetworkResponse.body = "";
 
   int resultCode = 0;
-  digitalWrite(blue, HIGH);
+ // digitalWrite(blue, HIGH);
   // WiFiClientSecure client;
   //WiFiClient client;
   WiFiClient *client = new WiFiClient;
@@ -488,7 +491,7 @@ NetworkResponse httpRequestExecuter2(char *host, int port, String URI, String ht
   myNetworkResponse.resultCode = 0;
 
   delete client;
-  digitalWrite(blue, LOW);
+//  digitalWrite(blue, LOW);
   return myNetworkResponse;
 }
 
@@ -499,7 +502,7 @@ NetworkResponse httpSecurePost(char *host, int port, String URI, String httpComm
   myNetworkResponse.header = "";
   myNetworkResponse.body = "";
   int resultCode = 0;
-  digitalWrite(blue, HIGH);
+//  digitalWrite(blue, HIGH);
 
   WiFiClientSecure client;
   logThis(3, "connecting with https to " + String(host));
@@ -511,13 +514,13 @@ NetworkResponse httpSecurePost(char *host, int port, String URI, String httpComm
     logThis("connection failed");
     client.stop();
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
-    delay(500);
+    vTaskDelay(500);
     myNetworkResponse.resultCode = 3;
     return myNetworkResponse;
   }

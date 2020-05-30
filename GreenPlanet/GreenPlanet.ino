@@ -4,7 +4,6 @@
    Control programmable IR remote controls
    Version 2.0 - Webserver goes to a seperate core to give a quicker service to clients
    Version 1.0 - Basic functionality works
-
 */
 
 #include <Arduino.h>
@@ -14,10 +13,11 @@
 //////////////////////// Firmware update over the air (FOTA) SECTION///////////////////////////////////////////????//////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const int FW_VERSION = 2020051400;                                                                   /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
+#include <HTTPUpdate.h>
+
+const int FW_VERSION = 2020052901;                                                                   /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
 const char *fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenPlanet/master/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
 //const char* fwUrlBase = "http://192.168.1.200/GreenPlanet/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
-#include <HTTPUpdate.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// NETWORK SECTION/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,8 +132,8 @@ int ServerConfigurationRefreshRate = 60;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int red = 2;
-int green = 13;
-int blue = 20;
+int green = 17;
+int blue = 12;
 
 int maintenanceRebootHour = 4; // the hub will reboot once a day at aproximitly this UTC hour (default 4 am), provided it was running ~24 hours
 
@@ -154,6 +154,7 @@ const char *ntpServer = "pool.ntp.org";
 long gmtOffset_sec = 7200;
 int daylightOffset_sec = 0;
 struct tm timeinfo;
+bool ihaveTime = false;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// MQTT SECTION ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,11 +176,10 @@ struct tm timeinfo;
 #include <IRac.h>
 #include <IRtext.h>
 #include <IRutils.h>
-const uint16_t kIrLed = 14; // ESP8266 GPIO pin to use. Recommended: 4 (D2).
-IRsend irsend(kIrLed);      // Set the GPIO to be used to sending the message.
 
 long learningTH = 15000;
 
+uint16_t kIrLed = 14;
 const uint16_t kRecvPin = 15;
 
 const uint16_t kCaptureBufferSize = 2048;
@@ -230,8 +230,9 @@ void IRAM_ATTR resetModule()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #define uS_TO_S_FACTOR 1000000ULL /* Conversion factor for micro seconds to seconds */
-
-int delayBetweenExecs = 3;
+int WakeUpSensorThreshold = 50;    /* Greater the value, more the sensitivity */
+touch_pad_t touchPin;
+int vTaskDelayBetweenExecs = 3;
 int sleepAfterExec = 1800;
 int normalSleepTime = 1800;
 int sleepAfterPanic = 200;
@@ -290,19 +291,12 @@ String serverConfiguration = "";
 
 void setup()
 {
-
   pinMode(red, OUTPUT);
   pinMode(green, OUTPUT);
   pinMode(blue, OUTPUT);
+  pinMode(kIrLed, OUTPUT); digitalWrite(kIrLed, LOW);
 
-  digitalWrite(green, HIGH);
-  delay(50);
-  digitalWrite(green, LOW);
-  delay(50);
-  digitalWrite(green, HIGH);
-  delay(50);
-  digitalWrite(green, LOW);
-  delay(50);
+  digitalWrite(blue, HIGH); vTaskDelay(100); digitalWrite(blue, LOW); digitalWrite(red, LOW); digitalWrite(green, LOW);
 
   // Hardeware Watchdog
   timer = timerBegin(0, 80, true);                  //timer 0, div 80
@@ -318,26 +312,6 @@ void setup()
   logThis(1, "Starting GreenPlanet Device by the DontKnowGuy", 2);
   logThis(1, "Firmware version " + String(FW_VERSION) + ". Unique device identifier: " + MACID, 2);
 
-  bootCount++;
-  logThis(2, "This is boot No. " + String(bootCount), 3);
-  if (bootCount == 1)
-  {
-    digitalWrite(red, HIGH);
-    delay(100);
-    digitalWrite(red, LOW);
-    delay(50);
-    digitalWrite(red, HIGH);
-    delay(100);
-    digitalWrite(red, LOW);
-    delay(50);
-    digitalWrite(red, HIGH);
-    delay(100);
-    digitalWrite(red, LOW);
-    delay(50);
-  }
-  if (bootCount > 48)
-    ESP.restart();
-
   EEPROM.begin(4096);
   checkPanicMode();
 
@@ -345,60 +319,65 @@ void setup()
   {
     networkReset();
   }
+  pinMode(19, OUTPUT); digitalWrite(19, HIGH);
+
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
   printLocalTime();
+  ihaveTime = true;
   updateTime(0);        ////??????????
   timerWrite(timer, 0); //reset timer (feed watchdog)
 
-  // chrono = micros();
   LiveSignalPreviousMillis = millis();
+  bootCount++;
+  logThis(0, "This is boot No. " + String(bootCount), 3);
+  if (bootCount == 1)
+  {
+    digitalWrite(red, HIGH); vTaskDelay(100); digitalWrite(red, LOW); vTaskDelay(50); digitalWrite(red, HIGH); vTaskDelay(100); digitalWrite(red, LOW); vTaskDelay(50); digitalWrite(red, HIGH); vTaskDelay(100); digitalWrite(red, LOW); vTaskDelay(50);
+  }
+  if (bootCount > 48)
+    ESP.restart();
 
-  irsend.begin();
   Serial.printf("\n" D_STR_IRRECVDUMP_STARTUP "\n", kRecvPin);
-  irrecv.enableIRIn(); // Start the receiver
+  if (isServer) irrecv.enableIRIn(); // Start the receiver
 
-  JSONVar myConfig = loadConfiguration();
-  checkForFirmwareUpdates(myConfig);
-  parseConfiguration(myConfig);
+  parseConfiguration(loadConfiguration());
 
   logThis(2, "This is device " + String(deviceID), 3);
 
 #if defined(SERVER)
   logThis(1, "I am a server", 2);
-  serverConfiguration = JSON.stringify(myConfig);
   startWebServer();
 #endif
 
+  wakeupReason();
   DHTsensor.read();
   DHTt = DHTsensor.getTemperature();
   DHTh = DHTsensor.getHumidity();
   logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
 
-  logThis(3, "Avail heap mem: " + String(system_get_free_heap_size()), 2);
-
   logThis("Initialization Completed.", 3);
-  digitalWrite(blue, HIGH); // system live indicator
-}
-/* #if false
- *  #if defined(SERVER)
+  digitalWrite(blue, LOW); // system live indicator
+
+
+#if defined(SERVER)
 
   xTaskCreatePinnedToCore(
-      serverOtherFunctions, "serverOtherFunctions" // A name just for humans
-      ,
-      7000 // This stack size can be checked & adjusted by reading the Stack Highwater
-      ,
-      NULL, 0 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-      ,
-      NULL, 1);
+    serverOtherFunctions, "serverOtherFunctions" // A name just for humans
+    ,
+    7000 // This stack size can be checked & adjusted by reading the Stack Highwater
+    ,
+    NULL, 0 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+    ,
+    NULL, 1);
 
   xTaskCreatePinnedToCore(
-      webServerFunction, "webServerFunction" // A name just for humans
-      ,
-      7000 // This stack size can be checked & adjusted by reading the Stack Highwater
-      ,
-      NULL, 3 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-      ,
-      NULL, 0);
+    webServerFunction, "webServerFunction" // A name just for humans
+    ,
+    7000 // This stack size can be checked & adjusted by reading the Stack Highwater
+    ,
+    NULL, 3 // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+    ,
+    NULL, 0);
 
 #else
   planDispatcher();
@@ -413,7 +392,7 @@ void webServerFunction(void *pvParameters) {
   (void) pvParameters;
   for (;;) {
     server.handleClient();
-    delay(10 / portTICK_RATE_MS);
+    vTaskDelay(10 / portTICK_RATE_MS);
     timerWrite(timer, 0); //reset timer (feed watchdog)
   }
 }
@@ -425,25 +404,13 @@ void serverOtherFunctions(void *pvParameters) {
     planDispatcher();
     blinkLiveLed();
     timerWrite(timer, 0); //reset timer (feed watchdog)
-    delay(10 / portTICK_RATE_MS);
+    vTaskDelay(10 / portTICK_RATE_MS);
   }
-}void loop()
-{
-  delay(10 / portTICK_RATE_MS);
-  timerWrite(timer, 0);
 }
 #endif
-#endif*/
+
 void loop()
 {
-#if defined(SERVER)
-  server.handleClient();
-  planDispatcher();
-  blinkLiveLed();
-  timerWrite(timer, 0); //reset timer (feed watchdog)
-#else
-  planDispatcher();
-  gotoSleep(calcTime2Sleep());
-
-#endif
+  vTaskDelay(10 / portTICK_RATE_MS);
+  timerWrite(timer, 0);
 }

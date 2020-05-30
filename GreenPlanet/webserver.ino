@@ -163,17 +163,17 @@ void handleTestIR()
     //    for (int i = 0; i < 8; i++) {
     //      digitalWrite(blue, HIGH);
     //  //    digitalWrite(kIrLed, HIGH);
-    //      delay(2000);
+    //      vTaskDelay(2000);
     //      timerWrite(timer, 0); //reset timer (feed watchdog)
     //      digitalWrite(blue, LOW);
     //      digitalWrite(kIrLed, LOW);
-    //      delay(500);
+    //      vTaskDelay(500);
     //    }
 
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
-    delay(500);
+    vTaskDelay(500);
     timerWrite(timer, 0); //reset timer (feed watchdog)
 
     Serial.println(kIrLed);
@@ -185,11 +185,11 @@ void handleTestIR()
     }
 
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
 
     digitalWrite(red, HIGH);
-    delay(1000);
+    vTaskDelay(1000);
     digitalWrite(red, LOW);
 
     timerWrite(timer, 0); //reset timer (feed watchdog)
@@ -213,46 +213,46 @@ void handleTestColors()
   for (int k = 0; k < 15; k++) {
     timerWrite(timer, 0); //reset timer (feed watchdog)
     digitalWrite(blue, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(blue, LOW);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(red, LOW);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(green, HIGH);
-    delay(500);    
+    vTaskDelay(500);    
     digitalWrite(green, LOW);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite( kIrLed, HIGH);
-    delay(500);
+    vTaskDelay(500);
     digitalWrite(kIrLed , LOW);
-    delay(500);
+    vTaskDelay(500);
   }
 }
 void testWeed() {
   digitalWrite(blue , LOW);
   Serial.println("weed seq");
   digitalWrite(green, HIGH);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green , LOW);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green, HIGH);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green , LOW);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green, HIGH);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green , LOW);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green, HIGH);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green , LOW);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green, HIGH);
-  delay(500);
+  vTaskDelay(500);
   digitalWrite(green , LOW);
-  delay(500);
+  vTaskDelay(500);
 
 }
 

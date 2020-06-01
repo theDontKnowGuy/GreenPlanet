@@ -16,7 +16,7 @@
     "logTarget": "/channels/1023335/bulk_update.csv",
     "write_api_key": "NGOL1T65IJHKTURU",
     "loggerHostPort": 443,
-    "loggingType": 2,
+    "loggingType": 1,
     "red": 2,
     "green": 17,
     "blue": 12

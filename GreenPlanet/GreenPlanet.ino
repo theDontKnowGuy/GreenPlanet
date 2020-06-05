@@ -247,7 +247,7 @@ int WakeUpSensorThreshold = 50;    /* Greater the value, more the sensitivity */
 touch_pad_t touchPin;
 int vTaskDelayBetweenExecs = 3;
 int sleepAfterExec = 1800;
-int normalSleepTime = 1800;
+int sleepTime = 1800;
 int sleepAfterPanic = 200;
 
 //#include "esp_system.h"

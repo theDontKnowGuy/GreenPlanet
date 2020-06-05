@@ -25,7 +25,7 @@ bool planDispatcher()
 int calcTime2Sleep()
 {
 
-  int timeDiff = normalSleepTime;
+  int timeDiff = sleepTime;
 
   for (int i = 0; i < inxParticipatingPlans; i++)
   {

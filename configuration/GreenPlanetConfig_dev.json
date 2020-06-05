@@ -1043,8 +1043,8 @@
     "ServerConfigurationRefreshRate": 1200,
     "maxLogAge": 6000,
     "recessTime": 6000,
-    "serverLoggerHost": "api.thingspeak.com",
-    "serverLogTarget": "/channels/1023335/bulk_update.csv",
+    "serverLoggerHost": "maker.ifttt.com",
+    "serverLogTarget": "/trigger/GreenPlanet2/with/key/cop304vj9Hmdlf547a-zbB",
     "serverWrite_api_key": "NGOL1T65IJHKTURU",
     "serverLoggerHostPort": 443,
     "targetFWVersion_server": 2020052102

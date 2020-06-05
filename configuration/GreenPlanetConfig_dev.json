@@ -16,7 +16,7 @@
     "logTarget": "/trigger/GreenPlanet2/with/key/cop304vj9Hmdlf547a-zbB",
     "write_api_key": "NGOL1T65IJHKTURU",
     "loggerHostPort": 443,
-    "loggingType": 1,
+    "loggingType": 3,
     "red": 2,
     "green": 17,
     "blue": 12
@@ -1043,6 +1043,7 @@
     "ServerConfigurationRefreshRate": 1200,
     "maxLogAge": 6000,
     "recessTime": 6000,
+        "loggingType": 3,
     "serverLoggerHost": "maker.ifttt.com",
     "serverLogTarget": "/trigger/GreenPlanet2/with/key/cop304vj9Hmdlf547a-zbB",
     "serverWrite_api_key": "NGOL1T65IJHKTURU",

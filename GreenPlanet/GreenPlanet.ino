@@ -10,9 +10,9 @@
 #include "secrets.h"
 
 
-#define RELEASE false
+#define RELEASE true
 //#define SERVER
-const int FW_VERSION = 2020060501;   
+const int FW_VERSION = 2020060502;   
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -317,6 +317,7 @@ void setup()
 
   if (log2Serial)
     Serial.begin(115200);
+
 #if (RELEASE)
 #else
   logThis(1, "********** NOT A RELEASE VERSION ******************* NOT A RELEASE VERSION ******************* NOT A RELEASE VERSION ********* ", 2);

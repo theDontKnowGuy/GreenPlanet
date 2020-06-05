@@ -1,6 +1,6 @@
 {
   "ConfigurationVersion": 203,
-  "targetFWVersion_client": 2020060501,
+  "targetFWVersion_client": 2020060502,
   "GeneralConfiguration": {
     "DEBUGLEVEL": 2,
     "delayBetweenExecs": 1000,
@@ -169,7 +169,7 @@
     },
     {
       "operationPlanID": 4,
-      "operationPlanName": "Shut down at 9pm apple",
+      "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 4,
       "hour": 23,
       "minute": 30,

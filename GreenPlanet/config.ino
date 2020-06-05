@@ -212,10 +212,11 @@ int parseConfiguration(JSONVar eyeConfig) {
 
   inxParticipatingIRCodes = i;
 
-  j = 0;
+  j = 0;     
   while (JSON.typeof(eyeConfig["sleepPlans"][j]) == "object") {
-    if (timeinfo.tm_hour > (int)eyeConfig["sleepPlans"][j]["planStartHour"]) 
-            sleepTime = (int)eyeConfig["sleepPlans"][j]["planStartHour"];
+    if (timeinfo.tm_hour > (int)eyeConfig["sleepPlans"][j]["planStartHour"])
+      sleepTime = (int)eyeConfig["sleepPlans"][j]["sleepTime"];
+    j++;
   }
 
 

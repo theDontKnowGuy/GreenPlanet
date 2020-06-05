@@ -4,7 +4,6 @@
   "GeneralConfiguration": {
     "DEBUGLEVEL": 2,
     "delayBetweenExecs": 1000,
-    "normalSleepTime": 1800,
     "sleepAfterExec": 3600,
     "sleepAfterPanic": 3600,
     "daylightOffset_sec": 3600,
@@ -175,6 +174,24 @@
       "hour": 23,
       "minute": 30,
       "weekdays": "1234567"
+    }
+  ],
+  "sleepPlans": [
+    {
+      "planStartHour": 1,
+      "sleepTime": 10800
+    },
+    {
+      "planStartHour": 8,
+      "sleepTime": 1800
+    },
+    {
+      "planStartHour": 14,
+      "sleepTime": 1800
+    },
+    {
+      "planStartHour": 21,
+      "sleepTime": 10800
     }
   ],
   "IRcode": [
@@ -1043,7 +1060,7 @@
     "ServerConfigurationRefreshRate": 1200,
     "maxLogAge": 6000,
     "recessTime": 6000,
-        "loggingType": 3,
+    "loggingType": 3,
     "serverLoggerHost": "maker.ifttt.com",
     "serverLogTarget": "/trigger/GreenPlanet2/with/key/cop304vj9Hmdlf547a-zbB",
     "serverWrite_api_key": "NGOL1T65IJHKTURU",

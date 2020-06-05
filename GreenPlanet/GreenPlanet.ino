@@ -9,15 +9,20 @@
 #include <Arduino.h>
 #include "secrets.h"
 
+
+#define RELEASE false
+//#define SERVER
+const int FW_VERSION = 2020060501;   
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// Firmware update over the air (FOTA) SECTION///////////////////////////////////////////????//////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <HTTPUpdate.h>
 
-const int FW_VERSION = 2020052901;                                                                   /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
+#include <HTTPUpdate.h>                                                                /// year_month_day_counternumber 2019 is the year, 04 is the month, 17 is the day 01 is the in day release
 const char *fwUrlBase = "https://raw.githubusercontent.com/theDontKnowGuy/GreenPlanet/master/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
-//const char* fwUrlBase = "http://192.168.1.200/GreenPlanet/fota/"; /// put your server URL where the *.bin & version files are saved in your http ( Apache? ) server
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// NETWORK SECTION/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +50,7 @@ const int httpsPort = 443;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////// WEBSERVER SECTION///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define SERVER
+
 
 #if defined(SERVER)
 
@@ -77,17 +82,20 @@ char *serverMDNSname = "GreenPlanet"; //clients will look for http://GreenPlanet
 int DEBUGLEVEL = 2;     // set between 0 and 5. This value will be overridden by dynamic network configuration json if it has a higher value
 bool log2Serial = true; //move to false in production to save some time
 
-//int loggingType = 2;
-//char loggerHost[100] = "192.168.1.52";
-////String logTarget =     "/MyRFDevicesHub/MyRFDevicesHubLogger.php"; /// leave empty if no local logging server (will only Serial.print logs)
-//String logTarget =     "/logs"; /// leave empty if no local logging server (will only Serial.print logs)
+
+//char loggerHost[100] = "192.168.1.200";
+//String logTarget =     "/MyRFDevicesHub/MyRFDevicesHubLogger.php"; /// leave empty if no local logging server (will only Serial.print logs)
+////String logTarget =     "/logs"; /// leave empty if no local logging server (will only Serial.print logs)
 //int loggerHostPort = 80;
 
-RTC_DATA_ATTR int loggingType = 1;
+RTC_DATA_ATTR int loggingType = 3;
 RTC_DATA_ATTR int loggingCounter = 0;
 RTC_DATA_ATTR char c_logTarget[200];
-RTC_DATA_ATTR char loggerHost[100] = "api.thingspeak.com";
-/// defined in secrets.h :   String logTarget =     "channels/<channel code here>/bulk_update.csv"; /// leave empty if no local logging server (will only Serial.print logs)
+//RTC_DATA_ATTR char loggerHost[100] = "api.thingspeak.com";
+RTC_DATA_ATTR char loggerHost[100] = "maker.ifttt.com";
+//RTC_DATA_ATTR char loggerHost[100] = "192.168.1.200";
+//defined in secrets.h :   String logTarget =     "channels/<channel code here>/bulk_update.csv"; 
+//defined in secrets.h :   String logTarget = "/trigger/GreenPlanet2/with/key/xxxxxxx-xxx";
 RTC_DATA_ATTR int loggerHostPort = 443;
 String write_api_key = "";
 
@@ -118,11 +126,16 @@ RTC_DATA_ATTR char c_dataUpdateURI[200];
 
 char *serverDataUpdateHost = "raw.githubusercontent.com";
 int serverDataUpdatePort = 443;
+
+#if (RELEASE)
 String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";
+#else
+String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig_dev.json";
+#endif
 
 char *dataUpdateHost_fallback = "raw.githubusercontent.com";
 int dataUpdatePort_fallback = 443;
-String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json"; /// see example json file in github. leave
+String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig_dev.json"; /// see example json file in github. leave
 String dataUpdateURI_fallback_local = "/GreenPlanet/GreenPlanetConfig.json";                               /// see example json file in github. leave value empty if no local server
 
 int ServerConfigurationRefreshRate = 60;
@@ -291,11 +304,7 @@ String serverConfiguration = "";
 
 void setup()
 {
-  pinMode(red, OUTPUT);
-  pinMode(green, OUTPUT);
-  pinMode(blue, OUTPUT);
-  pinMode(kIrLed, OUTPUT); digitalWrite(kIrLed, LOW);
-
+  pinMode(red, OUTPUT);  pinMode(green, OUTPUT);  pinMode(blue, OUTPUT); pinMode(kIrLed, OUTPUT); digitalWrite(kIrLed, LOW);
   digitalWrite(blue, HIGH); vTaskDelay(100); digitalWrite(blue, LOW); digitalWrite(red, LOW); digitalWrite(green, LOW);
 
   // Hardeware Watchdog
@@ -308,7 +317,10 @@ void setup()
 
   if (log2Serial)
     Serial.begin(115200);
-
+#if (RELEASE)
+#else
+  logThis(1, "********** NOT A RELEASE VERSION ******************* NOT A RELEASE VERSION ******************* NOT A RELEASE VERSION ********* ", 2);
+#endif
   logThis(1, "Starting GreenPlanet Device by the DontKnowGuy", 2);
   logThis(1, "Firmware version " + String(FW_VERSION) + ". Unique device identifier: " + MACID, 2);
 
@@ -319,7 +331,6 @@ void setup()
   {
     networkReset();
   }
-  pinMode(19, OUTPUT); digitalWrite(19, HIGH);
 
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
   printLocalTime();
@@ -353,11 +364,10 @@ void setup()
   DHTsensor.read();
   DHTt = DHTsensor.getTemperature();
   DHTh = DHTsensor.getHumidity();
-  logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
 
+  logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
   logThis("Initialization Completed.", 3);
   digitalWrite(blue, LOW); // system live indicator
-
 
 #if defined(SERVER)
 

@@ -18,6 +18,11 @@ int checkForFirmwareUpdates(int newFWVersion)
   else
     fwImageURL = fwImageURL + "_c.bin";
   logThis(2, "Firmware version URL: " + fwImageURL, 2);
+  if (networklogThis(networkLogBuffer) == 0)   // flush log to network before start fooling around
+  {
+    networkLogBuffer = "";
+    logAge = 0;
+  }
 
   WiFiClientSecure *client = new WiFiClientSecure;
   HTTPClient httpClient;

@@ -44,7 +44,7 @@ void logThis(int debuglevel, String strMessage, int newLineHint)
   String tDHTt = (DHTt == 0.0) ? "" : String(DHTt);
 
   loggingCounter++;
-
+  
   if (  ihaveTime  )  getLocalTime(&timeinfo);
 
   if (addFakeSec == -1)
@@ -58,8 +58,10 @@ void logThis(int debuglevel, String strMessage, int newLineHint)
       addFakeSec = 0;
   }
 
-  String t = String(timeinfo.tm_year + 1900) + "-" + String(timeinfo.tm_mon + 1) + "-" + String(timeinfo.tm_mday) + "T" + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(addFakeSec) + "-0000";
-
+  String t;
+  if (loggingType==1) t = String(timeinfo.tm_year + 1900) + "-" + String(timeinfo.tm_mon + 1) + "-" + String(timeinfo.tm_mday) + "T" + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(addFakeSec) + "-0000";
+  if (loggingType==3) t = String(timeinfo.tm_year + 1900) + "/" + String(timeinfo.tm_mon + 1) + "/" + String(timeinfo.tm_mday) + " " + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(addFakeSec);
+  
   String head = t + "," +                                    //timestamp
                 deviceID + "," +                             //1
                 MACID + "," +                                //2
@@ -114,8 +116,10 @@ int networklogThis(String message, bool asProxy = false)
   if (DEBUGLEVEL == 6)
     return 0;
   timerWrite(timer, 0); //reset timer (feed watchdog)
-
   NetworkResponse myNetworkResponse;
+
+  String m;
+
   switch (loggingType)
   {
     case 1: ///  thingspeak
@@ -127,10 +131,19 @@ int networklogThis(String message, bool asProxy = false)
       break;
 
     case 2: //// PHPSERVER
-      String m;
-      message.replace("\n", " | ");
-      m = "msg = | " + deviceID + ", " + (isServer) ? " - client, " : " - server, " + String(WiFi.localIP().toString().c_str()) + message;
+
+
+      // message.replace("\n", " | ");
+      m = "msg=" + message;
+
       myNetworkResponse = httpRequest(loggerHost, loggerHostPort, "POST", logTarget, m, "Logged successfully", 0);
+
+      break;
+
+    case 3: //// IFTTT
+
+      myNetworkResponse = httpRequest("maker.ifttt.com", loggerHostPort, "POST", logTarget, "{\"value1\":\"" + message + "\"}", "Congratulations! You've", 0);
+
       break;
   }
 
@@ -141,10 +154,11 @@ int networklogThis(String message, bool asProxy = false)
   }
   else
   {
-    logThis(1,"FAILED LOGGING TO NETWORK",3);
+    logThis(1, "FAILED LOGGING TO NETWORK", 3);
     digitalWrite(red, HIGH);
     vTaskDelay(60);
     digitalWrite(red, LOW);
+    RTCpanicStateCode = 3;
     failedLogging2NetworkCounter++;
     if (failedLogging2NetworkCounter == 5)
       boardpanic(2);

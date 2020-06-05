@@ -13,10 +13,10 @@ void wakeupReason(){
 
   switch (wakeup_reason)
   {
-    case ESP_SLEEP_WAKEUP_TIMER : logThis(1, "Wakeup caused by timer"); break;
-    case ESP_SLEEP_WAKEUP_TOUCHPAD : logThis(1, "Wakeup caused by touchpad"); break;
-    case ESP_SLEEP_WAKEUP_ULP : logThis(1, "Wakeup caused by ULP program"); break;
-    default : logThis(1, "Wakeup was not caused by deep sleep: " +String(wakeup_reason)); break;
+    case ESP_SLEEP_WAKEUP_TIMER : logThis(3, "Wakeup caused by timer"); break;
+    case ESP_SLEEP_WAKEUP_TOUCHPAD : logThis(31, "Wakeup caused by touchpad"); break;
+    case ESP_SLEEP_WAKEUP_ULP : logThis(3, "Wakeup caused by ULP program"); break;
+    default : logThis(3, "Wakeup was not caused by deep sleep: " +String(wakeup_reason)); break;
   }
 
 }

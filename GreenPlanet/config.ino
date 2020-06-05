@@ -115,7 +115,7 @@ int parseConfiguration(JSONVar eyeConfig) {
   String s = JSON.stringify(eyeConfig["GeneralConfiguration"]["dataUpdateHost"]);
   s = cleanQuote(s);
   s.toCharArray(dataUpdateHost, s.length() + 1);
-  logThis(2, "Configuration server is now: " + String(dataUpdateHost));
+  logThis(3, "Configuration server is now: " + String(dataUpdateHost));
 
   dataUpdateURI =       eyeConfig["GeneralConfiguration"]["dataUpdateURI"];
   dataUpdateURI.toCharArray(c_dataUpdateURI, dataUpdateURI.length() + 1); // to survive deep sleep . strings dont
@@ -140,12 +140,12 @@ int parseConfiguration(JSONVar eyeConfig) {
     logThis(3, "Logging server for clients is now: " + String(loggerHost));
     logTarget =            eyeConfig["ServerConfiguration"]["serverLogTarget"];
     loggerHostPort =       int(eyeConfig["ServerConfiguration"]["serverLoggerHostPort"]);
+    loggingType =           int(eyeConfig["ServerConfiguration"]["loggingType"]);
   } else {
     logTarget =            eyeConfig["GeneralConfiguration"]["logTarget"];
     loggerHostPort =       int(eyeConfig["GeneralConfiguration"]["loggerHostPort"]);
+    loggingType =           int(eyeConfig["GeneralConfiguration"]["loggingType"]);
   }
-  loggingType =           int(eyeConfig["GeneralConfiguration"]["loggingType"]);
-
   int i = 0; bool found = false;
   while ( JSON.typeof(eyeConfig["Devices"][i]) == "object") {
 
@@ -154,7 +154,7 @@ int parseConfiguration(JSONVar eyeConfig) {
       deviceLocation = eyeConfig["Devices"][i]["deviceLocation"]   ;
       deviceGroup = eyeConfig["Devices"][i]["deviceGroup"]   ;
       memberInOperationPlans = eyeConfig["Devices"][i]["memberInOperationPlans"]   ;
-      logThis(2, "Device found. Device name: " + deviceID , 2);
+      logThis(3, "Device found. Device name: " + deviceID , 2);
       found = true;
       if (JSON.typeof(eyeConfig["Devices"][i]["irled"]) == "number")
       {
@@ -191,7 +191,7 @@ int parseConfiguration(JSONVar eyeConfig) {
     j++;
   }
   inxParticipatingPlans = i ;
-  logThis(2, "Participating in " + String(inxParticipatingPlans) + " plans.", 2);
+  logThis(3, "Participating in " + String(inxParticipatingPlans) + " plans.", 2);
 
   i = 0;
 
@@ -219,5 +219,5 @@ int parseConfiguration(JSONVar eyeConfig) {
   recessTime = (int)eyeConfig["ServerConfiguration"]["recessTime"];
 #endif
 
-  logThis(1, "Network configuration loaded and parsed succesfully", 3);
+  logThis(3, "Network configuration loaded and parsed succesfully", 3);
 }

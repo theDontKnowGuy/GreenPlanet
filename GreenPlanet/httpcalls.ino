@@ -216,7 +216,7 @@ NetworkResponse httpRequestExecuter(char *host, int port, String URI, String htt
   // WiFiClientSecure client;
   WiFiClient client;
 
-  logThis(2, "connecting to " + String(host));
+  logThis(3, "connecting to " + String(host));
 
   if (!client.connect(host, port))
   {
@@ -327,7 +327,7 @@ NetworkResponse secureHttpRequestExecuter(char *host, int port, String URI, Stri
   if (https.begin(*client, connectionString))
   {
 
-    https.addHeader("Content-Type", "application/x-www-form-urlencoded"); //Specify content-type header
+//    https.addHeader("Content-Type", "application/x-www-form-urlencoded"); //Specify content-type header
     https.addHeader("User-Agent", "ESP32WiFi/1.1");                       //Specify content-type header
     int httpCode = -1;
 
@@ -339,10 +339,12 @@ NetworkResponse secureHttpRequestExecuter(char *host, int port, String URI, Stri
     {
 
       https.addHeader("Connection", "close");                             //Specify content-type header
-      https.addHeader("User-Agent", "application/x-www-form-urlencoded"); //Specify content-type header
+      //https.addHeader("User-Agent", "application/x-www-form-urlencoded"); //Specify content-type header
+     https.addHeader("Content-Type", "application/json"); //Specify content-type header
       https.addHeader("X-THINGSPEAKAPIKEY", "OAYEJT42I0SNZLVW");          //Specify content-type header
 
       https.addHeader("Content-Length", String(httpComm.length())); //Specify content-type header
+
       httpCode = https.POST(httpComm);
     }
     /*
@@ -528,7 +530,10 @@ NetworkResponse httpSecurePost(char *host, int port, String URI, String httpComm
   client.print("POST " + URI + " HTTP/1.1\n");
   client.print("Host: " + String(host) + "\n");
   client.print("Connection: close\n");
-  client.print("Content-Type: application/x-www-form-urlencoded\n");
+  client.print("Content-Type: application/json\n");
+ 
+//  client.print("Content-Type: application/x-www-form-urlencoded\n");
+
   client.print("Content-Length: ");
   client.print(httpComm.length());
   client.print("\n\n");

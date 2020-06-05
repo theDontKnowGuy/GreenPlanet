@@ -2,17 +2,17 @@ void blinkLiveLed()
 {
   updateTime(0); ////??????????
   //  timerWrite(timer, 0); //reset timer (feed watchdog)
-//digitalWrite(blue, LOW);
-//  if (millis() - LiveSignalPreviousMillis > 500)
-//  {
-//    digitalWrite(blue, !(LivePulseLedStatus));
-//    LivePulseLedStatus = !(LivePulseLedStatus);
-//    totalLifes += 1;
-//    LiveSignalPreviousMillis = millis();
-//    DHTsensor.read();
-//    DHTt = DHTsensor.getTemperature();
-//    DHTh = DHTsensor.getHumidity();
-//  }
+  //digitalWrite(blue, LOW);
+  //  if (millis() - LiveSignalPreviousMillis > 500)
+  //  {
+  //    digitalWrite(blue, !(LivePulseLedStatus));
+  //    LivePulseLedStatus = !(LivePulseLedStatus);
+  //    totalLifes += 1;
+  //    LiveSignalPreviousMillis = millis();
+  //    DHTsensor.read();
+  //    DHTt = DHTsensor.getTemperature();
+  //    DHTh = DHTsensor.getHumidity();
+  //  }
   //  if(logBuffer.length() > 0) {if(networklogThis(logBuffer) == 0) {  logBuffer = ""; }}
 
   if ((maxLogAge < logAge++) && (networkLogBuffer.length() > 1))
@@ -74,6 +74,7 @@ int checkPanicMode(void)
   else
     RTCpanicStateCode = panicState.substring(7, 1).toInt();
 
+  logThis(0, "Panic mode code " + String(RTCpanicStateCode) + " was detected from previous deep sleep cycle.", 2);
   return RTCpanicStateCode;
 }
 
@@ -96,7 +97,7 @@ void boardpanic(int panicReason)
   {
     Serial.println("Second panic call!!!!!!!!!!!!!!!!!!!!!!!!!!! Panic Reason is:" + String(panicReason));
     writeString(1, "PANIC=0"); //if fail next time - let's try restart instead
-    gotoSleep((isServer) ? sleepAfterPanic : 60, 1);
+    gotoSleep((isServer) ? sleepAfterPanic : sleepAfterPanic, 1);
   }
 }
 

@@ -2,7 +2,7 @@ void writeString(char add, String data)
 {
 
   int _size = data.length();
-  logThis(2, "storing " + data + " \n of size: " + _size);
+  logThis(3, "storing " + data + " \n of size: " + _size);
 
   int i;
   for (i = 0; i < _size; i++)

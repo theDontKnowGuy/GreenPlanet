@@ -48,7 +48,8 @@
       "deviceID": "500",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,2,3,4",
+      "blue": 34
     },
     {
       "DeviceMAC": "24:6F:28:A8:23:F0",

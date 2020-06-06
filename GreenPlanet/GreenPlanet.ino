@@ -12,7 +12,7 @@
 
 #define RELEASE true
 //#define SERVER
-const int FW_VERSION = 2020060502;   
+const int FW_VERSION = 2020060601;   
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -249,6 +249,7 @@ int vTaskDelayBetweenExecs = 3;
 int sleepAfterExec = 1800;
 int sleepTime = 1800;
 int sleepAfterPanic = 200;
+int sleepRandFactor = 120;
 
 //#include "esp_system.h"
 

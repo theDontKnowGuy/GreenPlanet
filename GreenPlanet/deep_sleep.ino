@@ -1,9 +1,9 @@
 
-void callback(){
-  
+void callback() {
+
 }
 
-void wakeupReason(){
+void wakeupReason() {
 
   touchPin = esp_sleep_get_touchpad_wakeup_status();
 
@@ -16,7 +16,7 @@ void wakeupReason(){
     case ESP_SLEEP_WAKEUP_TIMER : logThis(3, "Wakeup caused by timer"); break;
     case ESP_SLEEP_WAKEUP_TOUCHPAD : logThis(31, "Wakeup caused by touchpad"); break;
     case ESP_SLEEP_WAKEUP_ULP : logThis(3, "Wakeup caused by ULP program"); break;
-    default : logThis(3, "Wakeup was not caused by deep sleep: " +String(wakeup_reason)); break;
+    default : logThis(3, "Wakeup was not caused by deep sleep: " + String(wakeup_reason)); break;
   }
 
 }
@@ -35,32 +35,35 @@ void gotoSleep(int timeToSleep)
 
 void gotoSleep(int timeToSleep, int panicCode)
 {
-
+  esp_random();
+  timeToSleep = timeToSleep - (sleepRandFactor/2)  + random(sleepRandFactor);
   logThis(2, "Going to sleep now for " + String(timeToSleep) + " secs....", 1);
   logThis(2, "This cycle took: " + String(millis()), 1);
 
   switch (panicCode)
   {
-  case 0: //normal
-    networklogThis(networkLogBuffer);
-    Serial.println("This cycle really took (including last logging network roundtrip): " + String(millis()));
-    break;
-  case 1:
-    //no network, reset failed, will wait
-    RTCpanicStateCode = 1;
-    Serial.println("No network. will wait");
-    for (int i = 0; i < 3; i++)
-    {
-      digitalWrite(red, HIGH);
-      vTaskDelay(20);
-      digitalWrite(red, LOW);
-      vTaskDelay(20);
-    }
-    break;
+    case 0: //normal
+      networklogThis(networkLogBuffer);
+      Serial.println("This cycle really took (including last logging network roundtrip): " + String(millis()));
+      break;
+    case 1:
+      //no network, reset failed, will wait
+      RTCpanicStateCode = 1;
+      Serial.println("No network. will wait");
+      for (int i = 0; i < 3; i++)
+      {
+        digitalWrite(red, HIGH);
+        vTaskDelay(20);
+        digitalWrite(red, LOW);
+        vTaskDelay(20);
+      }
+      break;
   }
 
   touchAttachInterrupt(T4, callback, WakeUpSensorThreshold);
   esp_sleep_enable_touchpad_wakeup();
+
+
 
   esp_sleep_enable_timer_wakeup(timeToSleep * uS_TO_S_FACTOR);
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_OFF);

@@ -6,7 +6,7 @@ bool planDispatcher()
   for (int i = 0; i < inxParticipatingPlans; i++)
   {
 
-    if ((myOperationPlans[i].weekdays.indexOf(String(timeinfo.tm_wday + 1)) >= 0) && ((timeinfo.tm_hour == myOperationPlans[i].hour) && (abs(timeinfo.tm_min - myOperationPlans[i].minute) <= 2)))
+    if ((myOperationPlans[i].weekdays.indexOf(String(timeinfo.tm_wday + 1)) >= 0) && ((timeinfo.tm_hour == myOperationPlans[i].hour) && (abs(timeinfo.tm_min - myOperationPlans[i].minute) <= 4)))
     {
       if ((millis() - myOperationPlans[i].recentExecution < recessTime * 1000) && (!(myOperationPlans[i].recentExecution == 0)))
       {
@@ -40,6 +40,6 @@ int calcTime2Sleep()
         timeDiff = tmp_timediff;
     }
   }
-  logThis(2, "Going to wake in " + String(timeDiff), 2);
+  logThis(3, "Going to wake in " + String(timeDiff), 2);
   return timeDiff;
 }

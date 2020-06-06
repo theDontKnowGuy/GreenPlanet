@@ -1,9 +1,10 @@
 {
   "ConfigurationVersion": 203,
-  "targetFWVersion_client": 2020060502,
+  "targetFWVersion_client": 2020060601,
   "GeneralConfiguration": {
     "DEBUGLEVEL": 2,
     "delayBetweenExecs": 1000,
+    "sleepRandFactor": 120,
     "sleepAfterExec": 3600,
     "sleepAfterPanic": 3600,
     "daylightOffset_sec": 3600,

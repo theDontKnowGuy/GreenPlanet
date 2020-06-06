@@ -110,6 +110,7 @@ int parseConfiguration(JSONVar eyeConfig) {
   daylightOffset_sec =  eyeConfig["GeneralConfiguration"]["daylightOffset_sec"];
   gmtOffset_sec =       eyeConfig["GeneralConfiguration"]["gmtOffset_sec"];
   sleepAfterPanic =     eyeConfig["GeneralConfiguration"]["sleepAfterPanic"];
+  sleepRandFactor =     eyeConfig["GeneralConfiguration"]["sleepRandFactor"];
 
   String s = JSON.stringify(eyeConfig["GeneralConfiguration"]["dataUpdateHost"]);
   s = cleanQuote(s);
@@ -212,7 +213,7 @@ int parseConfiguration(JSONVar eyeConfig) {
 
   inxParticipatingIRCodes = i;
 
-  j = 0;     
+  j = 0;
   while (JSON.typeof(eyeConfig["sleepPlans"][j]) == "object") {
     if (timeinfo.tm_hour > (int)eyeConfig["sleepPlans"][j]["planStartHour"])
       sleepTime = (int)eyeConfig["sleepPlans"][j]["sleepTime"];

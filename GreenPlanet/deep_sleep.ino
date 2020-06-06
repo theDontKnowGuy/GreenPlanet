@@ -66,7 +66,7 @@ void gotoSleep(int timeToSleep, int panicCode)
 
 
   esp_sleep_enable_timer_wakeup(timeToSleep * uS_TO_S_FACTOR);
-  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_OFF);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_AUTO);
 
   Serial.println("Good night now.");
   Serial.flush();

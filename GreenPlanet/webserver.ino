@@ -116,7 +116,7 @@ void startWebServer()
 
 void handleGetConfig()
 {
-  logThis(2, "Request for configuration served", 1);
+  logThis(3, "Request for configuration served", 1);
   int l = serverConfiguration.length() + 1;
   char body[l];
   serverConfiguration.toCharArray(body, l);

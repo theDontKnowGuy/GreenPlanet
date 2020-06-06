@@ -12,7 +12,7 @@
 
 #define RELEASE true
 //#define SERVER
-const int FW_VERSION = 2020060601;   
+const int FW_VERSION = 2020060602;   
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -323,8 +323,8 @@ void setup()
 #else
   logThis(1, "********** NOT A RELEASE VERSION ******************* NOT A RELEASE VERSION ******************* NOT A RELEASE VERSION ********* ", 2);
 #endif
-  logThis(1, "Starting GreenPlanet Device by the DontKnowGuy", 2);
-  logThis(1, "Firmware version " + String(FW_VERSION) + ". Unique device identifier: " + MACID, 2);
+  logThis(3, "Starting GreenPlanet Device by the DontKnowGuy", 2);
+  logThis(3, "Firmware version " + String(FW_VERSION) + ". Unique device identifier: " + MACID, 2);
 
   EEPROM.begin(4096);
   checkPanicMode();
@@ -355,7 +355,7 @@ void setup()
 
   parseConfiguration(loadConfiguration());
 
-  logThis(2, "This is device " + String(deviceID), 3);
+  logThis(3, "This is device " + String(deviceID), 3);
 
 #if defined(SERVER)
   logThis(1, "I am a server", 2);
@@ -368,7 +368,7 @@ void setup()
   DHTh = DHTsensor.getHumidity();
 
   logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
-  logThis("Initialization Completed.", 3);
+  logThis(3,"Initialization Completed.", 3);
   digitalWrite(blue, LOW); // system live indicator
 
 #if defined(SERVER)

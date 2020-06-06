@@ -24,7 +24,7 @@ int initiateNetwork()
     return 1;
   }
 
-  logThis(1, "\nConnected to Wifi. IP Address: " + String(WiFi.localIP().toString().c_str()) + " MAC address: " + String(WiFi.macAddress()), 2);
+  logThis(1, "Connected to Wifi. IP Address: " + String(WiFi.localIP().toString().c_str()) + " MAC address: " + String(WiFi.macAddress()), 2);
 
   result = httpTestRequest();
 

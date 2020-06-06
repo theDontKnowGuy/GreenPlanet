@@ -122,7 +122,7 @@
       "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "DeviceMAC": "24:6F:28:A8:2B:DC",
       "deviceID": "511",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",

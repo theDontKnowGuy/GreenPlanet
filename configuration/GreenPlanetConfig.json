@@ -49,7 +49,7 @@
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
       "memberInOperationPlans": "1,2,3,4",
-      "blue": 34
+      "blue": 32
     },
     {
       "DeviceMAC": "24:6F:28:A8:23:F0",
@@ -137,14 +137,14 @@
       "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "DeviceMAC": "A4:CF:12:99:EF:AC",
       "deviceID": "513",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
       "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "DeviceMAC": "24:6F:28:A8:52:DC",
       "deviceID": "514",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",

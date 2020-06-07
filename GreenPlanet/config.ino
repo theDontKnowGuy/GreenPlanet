@@ -103,6 +103,7 @@ int parseConfiguration(JSONVar eyeConfig) {
   red = (int)eyeConfig["GeneralConfiguration"]["red"];
   blue = (int)eyeConfig["GeneralConfiguration"]["blue"];
   green = (int)eyeConfig["GeneralConfiguration"]["green"];
+
   pinMode(red, OUTPUT); pinMode(green, OUTPUT); pinMode(blue, OUTPUT);
 
   vTaskDelayBetweenExecs =   eyeConfig["GeneralConfiguration"]["vTaskDelayBetweenExecs"];
@@ -159,7 +160,14 @@ int parseConfiguration(JSONVar eyeConfig) {
       if (JSON.typeof(eyeConfig["Devices"][i]["irled"]) == "number")
       {
         kIrLed = int(eyeConfig["Devices"][i]["irled"]);
+        pinMode(kIrLed, OUTPUT);
         digitalWrite(kIrLed, LOW);
+      }
+      if (JSON.typeof(eyeConfig["Devices"][i]["blue"]) == "number")
+      {
+        blue = int(eyeConfig["Devices"][i]["blue"]);
+        pinMode(blue, OUTPUT);
+        digitalWrite(blue, LOW);
       }
     }
     i++;

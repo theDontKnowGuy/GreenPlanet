@@ -74,7 +74,7 @@ int checkPanicMode(void)
   else
     RTCpanicStateCode = panicState.substring(7, 1).toInt();
 
-  logThis(0, "Panic mode code " + String(RTCpanicStateCode) + " was detected from previous deep sleep cycle.", 2);
+  if (RTCpanicStateCode != 0) logThis(0, "Panic mode code " + String(RTCpanicStateCode) + " was detected from previous deep sleep cycle.", 2);
   return RTCpanicStateCode;
 }
 

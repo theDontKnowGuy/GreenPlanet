@@ -14,7 +14,7 @@ bool planDispatcher()
       }
       fired = true;
       myOperationPlans[i].recentExecution = millis();
-      logThis(3, "Calling execution of plan  " + String(myOperationPlans[i].operationPlanID) + " - " + myOperationPlans[i].operationPlanName, 2);
+      logThis(1, "Calling execution of plan  " + String(myOperationPlans[i].operationPlanID) + " - " + myOperationPlans[i].operationPlanName, 2);
       execPlan(int(myOperationPlans[i].IRcodeID));
     }
   }

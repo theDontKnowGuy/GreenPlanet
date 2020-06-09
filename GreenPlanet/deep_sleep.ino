@@ -14,7 +14,7 @@ void wakeupReason() {
   switch (wakeup_reason)
   {
     case ESP_SLEEP_WAKEUP_TIMER : logThis(3, "Wakeup caused by timer"); break;
-    case ESP_SLEEP_WAKEUP_TOUCHPAD : logThis(31, "Wakeup caused by touchpad"); break;
+    case ESP_SLEEP_WAKEUP_TOUCHPAD : logThis(3, "Wakeup caused by touchpad"); break;
     case ESP_SLEEP_WAKEUP_ULP : logThis(3, "Wakeup caused by ULP program"); break;
     default : logThis(3, "Wakeup was not caused by deep sleep: " + String(wakeup_reason)); break;
   }
@@ -62,8 +62,6 @@ void gotoSleep(int timeToSleep, int panicCode)
 
   touchAttachInterrupt(T4, callback, WakeUpSensorThreshold);
   esp_sleep_enable_touchpad_wakeup();
-
-
 
   esp_sleep_enable_timer_wakeup(timeToSleep * uS_TO_S_FACTOR);
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_AUTO);

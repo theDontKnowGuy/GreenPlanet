@@ -184,7 +184,7 @@
       "operationPlanID": 1,
       "operationPlanName": "Turn on at 8am 24c",
       "IRcodeID": 1,
-      "hour": 21,
+      "hour": 1,
       "minute": 30,
       "weekdays": "1234567"
     },
@@ -192,7 +192,7 @@
       "operationPlanID": 2,
       "operationPlanName": "Turn on at 8am 24c",
       "IRcodeID": 4,
-      "hour": 21,
+      "hour": 2,
       "minute": 45,
       "weekdays": "1234567"
     },
@@ -200,7 +200,7 @@
       "operationPlanID": 3,
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 4,
-      "hour": 8,
+      "hour": 3,
       "minute": 0,
       "weekdays": "1234567"
     },
@@ -208,7 +208,7 @@
       "operationPlanID": 4,
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 4,
-      "hour": 23,
+      "hour": 7,
       "minute": 30,
       "weekdays": "1234567"
     }

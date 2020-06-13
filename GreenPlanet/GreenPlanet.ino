@@ -12,7 +12,7 @@
 
 #define RELEASE true
 //#define SERVER
-const int FW_VERSION = 2020060901;   
+const int FW_VERSION = 2020061301;   
 int DEBUGLEVEL = 2;     // set between 0 and 5. This value will be overridden by dynamic network configuration json if it has a higher value
 
 
@@ -422,5 +422,5 @@ void serverOtherFunctions(void *pvParameters) {
 void loop()
 {
   vTaskDelay(10 / portTICK_RATE_MS);
-  timerWrite(timer, 0);Serial.println("boring");
+  timerWrite(timer, 0);
 }

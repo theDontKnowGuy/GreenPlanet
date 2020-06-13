@@ -11,13 +11,13 @@ int initiateNetwork()
 
   WiFi.begin(ssid, password);
   vTaskDelay(50);
-  while ((WiFi.status() != WL_CONNECTED) && (countConnect < 200))
+  while ((WiFi.status() != WL_CONNECTED) && (countConnect < 100))
   {
     vTaskDelay(50);
     Serial.print(".");
     countConnect++;
   }
-  if (countConnect == 200)
+  if (countConnect == 100)
   {
     Serial.println("Timeout waiting for network");
     digitalWrite(red, HIGH);

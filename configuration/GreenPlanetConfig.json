@@ -151,29 +151,15 @@
       "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "DeviceMAC": "A4:CF:12:9A:C8:B8",
       "deviceID": "515",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
       "memberInOperationPlans": "1,2,3,4"
     },
     {
-      "DeviceMAC": "24:6F:28:A9:AF:XX",
+      "DeviceMAC": "A4:CF:12:9A:5A:64",
       "deviceID": "516",
-      "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
-    },
-    {
-      "DeviceMAC": "24:6F:28:A9:AF:XX",
-      "deviceID": "517",
-      "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
-    },
-    {
-      "DeviceMAC": "24:6F:28:A9:AF:XX",
-      "deviceID": "518",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
       "memberInOperationPlans": "1,2,3,4"

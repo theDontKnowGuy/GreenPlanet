@@ -126,7 +126,7 @@ int networklogThis(String message, bool asProxy = false)
 
       message.replace("1900-1-0T0", "1900-1-1T");
       message = "write_api_key=NGOL1T65IJHKTURU&time_format=absolute&updates=" + message;
-      myNetworkResponse = httpSecurePost("api.thingspeak.com", 443, logTarget, message, "HTTP/1.1 202 Accepted");
+      myNetworkResponse = httpSecurePost(loggerHost, 443, logTarget, message, "HTTP/1.1 202 Accepted");
 
       break;
 
@@ -142,7 +142,8 @@ int networklogThis(String message, bool asProxy = false)
 
     case 3: //// IFTTT
 
-      myNetworkResponse = httpRequest("maker.ifttt.com", loggerHostPort, "POST", logTarget, "{\"value1\":\"" + message + "\"}", "Congratulations! You've", 0);
+Serial.println(loggerHost);
+      myNetworkResponse = httpRequest(loggerHost, loggerHostPort, "POST", logTarget, "{\"value1\":\"" + message + "\"}", "Congratulations! You've", 0);
 
       break;
   }

@@ -13,6 +13,7 @@
 #define RELEASE true
 //#define SERVER
 const int FW_VERSION = 2020060901;   
+int DEBUGLEVEL = 2;     // set between 0 and 5. This value will be overridden by dynamic network configuration json if it has a higher value
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +80,6 @@ char *serverMDNSname = "GreenPlanet"; //clients will look for http://GreenPlanet
 //////////////////////// LOGGING SECTION/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int DEBUGLEVEL = 2;     // set between 0 and 5. This value will be overridden by dynamic network configuration json if it has a higher value
 bool log2Serial = true; //move to false in production to save some time
 
 
@@ -101,9 +101,6 @@ String write_api_key = "";
 
 //RTC_DATA_ATTR int loggingType = 1;
 //RTC_DATA_ATTR char c_logTarget[200];
-//RTC_DATA_ATTR char loggerHost[100] = "maker.ifttt.com";
-//String logTarget =     "/trigger/GreenPlanet/with/key/dKCfx2KkgoPNCykJ3664Wa"; /// leave empty if no local logging server (will only Serial.print logs)
-//RTC_DATA_ATTR int loggerHostPort = 443;
 
 String logBuffer = "";
 String networkLogBuffer = "";
@@ -129,13 +126,14 @@ int serverDataUpdatePort = 443;
 
 #if (RELEASE)
 String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json";
+String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json"; /// see example json file in github. leave
 #else
 String serverDataUpdateURI = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig_dev.json";
+String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig_dev.json"; /// see example json file in github. leave
 #endif
 
 char *dataUpdateHost_fallback = "raw.githubusercontent.com";
 int dataUpdatePort_fallback = 443;
-String dataUpdateURI_fallback = "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig_dev.json"; /// see example json file in github. leave
 String dataUpdateURI_fallback_local = "/GreenPlanet/GreenPlanetConfig.json";                               /// see example json file in github. leave value empty if no local server
 
 int ServerConfigurationRefreshRate = 60;
@@ -424,5 +422,5 @@ void serverOtherFunctions(void *pvParameters) {
 void loop()
 {
   vTaskDelay(10 / portTICK_RATE_MS);
-  timerWrite(timer, 0);
+  timerWrite(timer, 0);Serial.println("boring");
 }

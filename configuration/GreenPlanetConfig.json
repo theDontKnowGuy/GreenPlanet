@@ -202,19 +202,19 @@
   "sleepPlans": [
     {
       "planStartHour": 1,
-      "sleepTime": 10800
+      "sleepTime": 20000
     },
     {
       "planStartHour": 6,
-      "sleepTime": 1800
+      "sleepTime": 20000
     },
     {
       "planStartHour": 14,
-      "sleepTime": 1800
+      "sleepTime": 20000
     },
     {
       "planStartHour": 21,
-      "sleepTime": 10800
+      "sleepTime": 20000
     }
   ],
   "IRcode": [

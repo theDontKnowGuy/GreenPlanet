@@ -1,5 +1,5 @@
 {
-  "ConfigurationVersion": 203,
+  "ConfigurationVersion": 204,
   "targetFWVersion_client": 2020061301,
   "GeneralConfiguration": {
     "DEBUGLEVEL": 2,
@@ -171,7 +171,7 @@
       "operationPlanName": "Turn on at 8am 24c",
       "IRcodeID": 1,
       "hour": 3,
-      "minute": 5,
+      "minute": 30,
       "weekdays": "1234567"
     },
     {
@@ -179,7 +179,7 @@
       "operationPlanName": "Turn on at 8am 24c",
       "IRcodeID": 2,
       "hour": 3,
-      "minute": 10,
+      "minute": 35,
       "weekdays": "1234567"
     },
     {
@@ -187,7 +187,7 @@
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 1,
       "hour": 3,
-      "minute": 15,
+      "minute": 40,
       "weekdays": "1234567"
     },
     {
@@ -195,7 +195,7 @@
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 2,
       "hour": 3,
-      "minute": 20,
+      "minute": 45,
       "weekdays": "1234567"
     }
   ],

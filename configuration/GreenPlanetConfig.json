@@ -202,15 +202,15 @@
   "sleepPlans": [
     {
       "planStartHour": 1,
-      "sleepTime": 20000
+      "sleepTime": 10800
     },
     {
       "planStartHour": 6,
-      "sleepTime": 20000
+      "sleepTime": 3600
     },
     {
       "planStartHour": 14,
-      "sleepTime": 20000
+      "sleepTime": 3600
     },
     {
       "planStartHour": 21,

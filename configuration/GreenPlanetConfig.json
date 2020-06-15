@@ -170,32 +170,32 @@
       "operationPlanID": 1,
       "operationPlanName": "Turn on at 8am 24c",
       "IRcodeID": 1,
-      "hour": 3,
-      "minute": 30,
+      "hour": 15,
+      "minute": 40,
       "weekdays": "1234567"
     },
     {
       "operationPlanID": 2,
       "operationPlanName": "Turn on at 8am 24c",
       "IRcodeID": 2,
-      "hour": 3,
-      "minute": 35,
+      "hour": 15,
+      "minute": 40,
       "weekdays": "1234567"
     },
     {
       "operationPlanID": 3,
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 1,
-      "hour": 3,
-      "minute": 40,
+      "hour": 15,
+      "minute": 45,
       "weekdays": "1234567"
     },
     {
       "operationPlanID": 4,
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 2,
-      "hour": 3,
-      "minute": 45,
+      "hour": 15,
+      "minute": 50,
       "weekdays": "1234567"
     }
   ],

@@ -206,15 +206,15 @@
     },
     {
       "planStartHour": 6,
-      "sleepTime": 3600
+      "sleepTime": 1800
     },
     {
       "planStartHour": 14,
-      "sleepTime": 3600
+      "sleepTime": 1800
     },
     {
       "planStartHour": 21,
-      "sleepTime": 20000
+      "sleepTime": 10800
     }
   ],
   "IRcode": [

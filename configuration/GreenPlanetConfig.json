@@ -186,7 +186,7 @@
       "operationPlanID": 3,
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 1,
-      "hour": 17,
+      "hour": 12,
       "minute": 0,
       "weekdays": "1234567"
     },
@@ -194,7 +194,7 @@
       "operationPlanID": 4,
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 2,
-      "hour": 2,
+      "hour": 11,
       "minute": 0,
       "weekdays": "1234567"
     }

@@ -207,16 +207,16 @@
       "operationPlanID": 3,
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 3,
-      "hour": 22,
-      "minute": 20,
+      "hour": 23,
+      "minute": 45,
       "weekdays": "1234567"
     },
     {
       "operationPlanID": 4,
       "operationPlanName": "Shut down at 9pm",
       "IRcodeID": 4,
-      "hour": 22,
-      "minute": 20,
+      "hour": 23,
+      "minute": 45,
       "weekdays": "1234567"
     }
   ],

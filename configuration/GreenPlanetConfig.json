@@ -1,6 +1,6 @@
 {
-  "ConfigurationVersion": 203,
-  "targetFWVersion_client": 2020060901,
+  "ConfigurationVersion": 204,
+  "targetFWVersion_client": 2020061301,
   "GeneralConfiguration": {
     "DEBUGLEVEL": 2,
     "delayBetweenExecs": 1000,
@@ -27,28 +27,28 @@
       "deviceID": "703",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "3,4"
     },
     {
       "DeviceMAC": "24:6F:28:A9:AF:98",
       "deviceID": "707",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "3,4"
     },
     {
       "DeviceMAC": "24:6F:28:9D:9A:64",
       "deviceID": "706",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "3,4"
     },
     {
       "DeviceMAC": "24:6F:28:A8:4D:F4",
       "deviceID": "500",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4",
+      "memberInOperationPlans": "4",
       "blue": 32
     },
     {
@@ -56,7 +56,7 @@
       "deviceID": "501",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4",
+      "memberInOperationPlans": "1,3,4",
       "irled": 25
     },
     {
@@ -64,163 +64,184 @@
       "deviceID": "502",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,4"
     },
     {
       "DeviceMAC": "A4:CF:12:99:EE:84",
       "deviceID": "503",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,4"
     },
     {
       "DeviceMAC": "24:0A:C4:C5:BC:B4",
       "deviceID": "504",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,3,4"
     },
     {
       "DeviceMAC": "A4:CF:12:99:EA:4C",
       "deviceID": "505",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,4"
     },
     {
-      "DeviceMAC": "A4:CF:12:9A:51:EC",
+      "DeviceMAC": "A4:CF:12:9A:BA:D8",
       "deviceID": "506",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "4"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:41:18",
       "deviceID": "507",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,4"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:BF:28",
       "deviceID": "508",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,3,4"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:41:0C",
       "deviceID": "509",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,3,4"
     },
     {
       "DeviceMAC": "24:6F:28:A8:36:DC",
       "deviceID": "510",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,4"
     },
     {
       "DeviceMAC": "24:6F:28:A8:2B:DC",
       "deviceID": "511",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "4"
     },
     {
       "DeviceMAC": "24:0A:C4:C5:B7:1C",
       "deviceID": "512",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "4"
     },
     {
       "DeviceMAC": "A4:CF:12:99:EF:AC",
       "deviceID": "513",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,2,4"
     },
     {
       "DeviceMAC": "24:6F:28:A8:52:DC",
       "deviceID": "514",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,3,4"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:C8:B8",
       "deviceID": "515",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,3,4"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:5A:64",
       "deviceID": "516",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,3,4"
+      "memberInOperationPlans": "1,4"
+    },
+    {
+      "DeviceMAC": "A4:CF:12:99:FA:D4",
+      "deviceID": "517",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "4"
+    },
+    {
+      "DeviceMAC": "A4:CF:12:9A:51:EC",
+      "deviceID": "518",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "4"
+    },
+    {
+      "DeviceMAC": "24:6F:28:A8:31:2C",
+      "deviceID": "519",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "clinic",
+      "memberInOperationPlans": "4"
     }
   ],
   "operationPlans": [
     {
       "operationPlanID": 1,
-      "operationPlanName": "Turn on at 8am 24c",
+      "operationPlanName": "Turn on 24c",
       "IRcodeID": 1,
-      "hour": 1,
+      "hour": 9,
       "minute": 30,
-      "weekdays": "1234567"
+      "weekdays": "12345"
     },
     {
       "operationPlanID": 2,
-      "operationPlanName": "Turn on at 8am 24c",
-      "IRcodeID": 4,
-      "hour": 2,
+      "operationPlanName": "Morning cold boost 20c",
+      "IRcodeID": 2,
+      "hour": 9,
       "minute": 45,
-      "weekdays": "1234567"
+      "weekdays": "12345"
     },
     {
       "operationPlanID": 3,
-      "operationPlanName": "Shut down at 9pm",
-      "IRcodeID": 4,
-      "hour": 3,
+      "operationPlanName": "Afternoon cold boost 20c",
+      "IRcodeID": 3,
+      "hour": 12,
       "minute": 0,
-      "weekdays": "1234567"
+      "weekdays": "12345"
     },
     {
       "operationPlanID": 4,
-      "operationPlanName": "Shut down at 9pm",
+      "operationPlanName": "Shut down",
       "IRcodeID": 4,
-      "hour": 7,
-      "minute": 30,
+      "hour": 20,
+      "minute": 45,
       "weekdays": "1234567"
     }
   ],
   "sleepPlans": [
     {
       "planStartHour": 1,
-      "sleepTime": 10800
+      "sleepTime": 3600
     },
     {
       "planStartHour": 6,
-      "sleepTime": 1800
+      "sleepTime": 3600
     },
     {
       "planStartHour": 14,
-      "sleepTime": 1800
+      "sleepTime": 3600
     },
     {
-      "planStartHour": 21,
-      "sleepTime": 10800
+      "planStartHour": 19,
+      "sleepTime": 1800
     }
   ],
   "IRcode": [
     {
-      "IRcodeID": 3,
-      "IRcodeDescription": "Turn AC off",
+      "IRcodeID": 1,
+      "IRcodeDescription": "Turn on 24c",
       "IRCodeBitStream": [
         9063,
         4462,
@@ -364,153 +385,8 @@
       ]
     },
     {
-      "IRcodeID": 4,
-      "IRcodeDescription": "Turn AC on, 25 degrees",
-      "IRCodeBitStream": [
-        9036,
-        4470,
-        680,
-        1626,
-        668,
-        536,
-        682,
-        524,
-        676,
-        1632,
-        680,
-        526,
-        684,
-        520,
-        674,
-        530,
-        676,
-        530,
-        674,
-        532,
-        668,
-        1638,
-        676,
-        530,
-        680,
-        1626,
-        684,
-        522,
-        680,
-        526,
-        676,
-        530,
-        676,
-        528,
-        676,
-        530,
-        674,
-        532,
-        672,
-        532,
-        678,
-        528,
-        676,
-        530,
-        682,
-        1624,
-        682,
-        1624,
-        684,
-        520,
-        682,
-        524,
-        690,
-        516,
-        692,
-        512,
-        680,
-        526,
-        678,
-        1628,
-        684,
-        520,
-        682,
-        1626,
-        680,
-        524,
-        680,
-        526,
-        680,
-        1626,
-        682,
-        524,
-        672,
-        19970,
-        680,
-        522,
-        682,
-        524,
-        678,
-        528,
-        682,
-        524,
-        682,
-        524,
-        686,
-        520,
-        670,
-        536,
-        676,
-        528,
-        688,
-        1620,
-        682,
-        524,
-        678,
-        528,
-        682,
-        524,
-        680,
-        524,
-        686,
-        1622,
-        680,
-        526,
-        676,
-        528,
-        672,
-        534,
-        678,
-        526,
-        678,
-        528,
-        678,
-        528,
-        676,
-        528,
-        674,
-        534,
-        670,
-        534,
-        682,
-        524,
-        674,
-        532,
-        686,
-        518,
-        684,
-        522,
-        686,
-        518,
-        684,
-        1622,
-        680,
-        1628,
-        680,
-        1628,
-        678,
-        1628,
-        680
-      ]
-    },
-    {
-      "IRcodeID": 1,
-      "IRcodeDescription": "Turn Office AC on, 24 degrees",
+      "IRcodeID": 2,
+      "IRcodeDescription": "cold boost 20c",
       "IRCodeBitStream": [
         8942,
         4526,
@@ -794,8 +670,8 @@
       ]
     },
     {
-      "IRcodeID": 2,
-      "IRcodeDescription": "Turn Office AC off",
+      "IRcodeID": 3,
+      "IRcodeDescription": "Shut down",
       "IRCodeBitStream": [
         8964,
         4532,
@@ -1076,6 +952,151 @@
         608,
         618,
         586
+      ]
+    },
+    {
+      "IRcodeID": 4,
+      "IRcodeDescription": "Turn AC on, 25 degrees",
+      "IRCodeBitStream": [
+        9036,
+        4470,
+        680,
+        1626,
+        668,
+        536,
+        682,
+        524,
+        676,
+        1632,
+        680,
+        526,
+        684,
+        520,
+        674,
+        530,
+        676,
+        530,
+        674,
+        532,
+        668,
+        1638,
+        676,
+        530,
+        680,
+        1626,
+        684,
+        522,
+        680,
+        526,
+        676,
+        530,
+        676,
+        528,
+        676,
+        530,
+        674,
+        532,
+        672,
+        532,
+        678,
+        528,
+        676,
+        530,
+        682,
+        1624,
+        682,
+        1624,
+        684,
+        520,
+        682,
+        524,
+        690,
+        516,
+        692,
+        512,
+        680,
+        526,
+        678,
+        1628,
+        684,
+        520,
+        682,
+        1626,
+        680,
+        524,
+        680,
+        526,
+        680,
+        1626,
+        682,
+        524,
+        672,
+        19970,
+        680,
+        522,
+        682,
+        524,
+        678,
+        528,
+        682,
+        524,
+        682,
+        524,
+        686,
+        520,
+        670,
+        536,
+        676,
+        528,
+        688,
+        1620,
+        682,
+        524,
+        678,
+        528,
+        682,
+        524,
+        680,
+        524,
+        686,
+        1622,
+        680,
+        526,
+        676,
+        528,
+        672,
+        534,
+        678,
+        526,
+        678,
+        528,
+        678,
+        528,
+        676,
+        528,
+        674,
+        534,
+        670,
+        534,
+        682,
+        524,
+        674,
+        532,
+        686,
+        518,
+        684,
+        522,
+        686,
+        518,
+        684,
+        1622,
+        680,
+        1628,
+        680,
+        1628,
+        678,
+        1628,
+        680
       ]
     }
   ],

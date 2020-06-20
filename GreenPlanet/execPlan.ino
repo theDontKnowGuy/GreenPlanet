@@ -20,7 +20,7 @@ int execPlan(int IRCodeID)
     digitalWrite(green, HIGH);
     vTaskDelay(50);
     digitalWrite(green, LOW);
-    vTaskDelay(vTaskDelayBetweenExecs * 3);
+    vTaskDelay(delayBetweenExecs * 3);
   }
   return 0;
 }

@@ -106,7 +106,7 @@ int parseConfiguration(JSONVar eyeConfig) {
 
   pinMode(red, OUTPUT); pinMode(green, OUTPUT); pinMode(blue, OUTPUT);
 
-  vTaskDelayBetweenExecs =   eyeConfig["GeneralConfiguration"]["vTaskDelayBetweenExecs"];
+  delayBetweenExecs =   eyeConfig["GeneralConfiguration"]["delayBetweenExecs"];
   sleepAfterExec =      eyeConfig["GeneralConfiguration"]["sleepAfterExec"];
   daylightOffset_sec =  eyeConfig["GeneralConfiguration"]["daylightOffset_sec"];
   gmtOffset_sec =       eyeConfig["GeneralConfiguration"]["gmtOffset_sec"];

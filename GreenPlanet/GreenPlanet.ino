@@ -243,7 +243,7 @@ void IRAM_ATTR resetModule()
 #define uS_TO_S_FACTOR 1000000ULL /* Conversion factor for micro seconds to seconds */
 int WakeUpSensorThreshold = 50;    /* Greater the value, more the sensitivity */
 touch_pad_t touchPin;
-int vTaskDelayBetweenExecs = 3;
+int delayBetweenExecs = 3;
 int sleepAfterExec = 1800;
 int sleepTime = 1800;
 int sleepAfterPanic = 200;

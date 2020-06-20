@@ -6,7 +6,7 @@ bool planDispatcher()
   for (int i = 0; i < inxParticipatingPlans; i++)
   {
 
-    if ((myOperationPlans[i].weekdays.indexOf(String(timeinfo.tm_wday + 1)) >= 0) && ((timeinfo.tm_hour == myOperationPlans[i].hour) && (abs(timeinfo.tm_min - myOperationPlans[i].minute) <= 4)))
+    if ((myOperationPlans[i].weekdays.indexOf(String(timeinfo.tm_wday + 1)) >= 0) &&  (abs(timeinfo.tm_hour * 60 + timeinfo.tm_min - myOperationPlans[i].hour * 60 - myOperationPlans[i].minute) <= 4))
     {
       if ((millis() - myOperationPlans[i].recentExecution < recessTime * 1000) && (!(myOperationPlans[i].recentExecution == 0)))
       {

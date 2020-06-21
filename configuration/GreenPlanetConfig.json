@@ -227,6 +227,15 @@
       "minute": 45,
       "weekdays": "12345"
     }
+    ,
+    {
+      "operationPlanID": 6,
+      "operationPlanName": "Turn off again",
+      "IRcodeID": 3,
+      "hour": 21,
+      "minute": 25,
+      "weekdays": "12345"
+    }
   ],
   "sleepPlans": [
     {

@@ -141,7 +141,7 @@
       "deviceID": "513",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,4"
+      "memberInOperationPlans": "1,2,4,5"
     },
     {
       "DeviceMAC": "24:6F:28:A8:52:DC",
@@ -191,7 +191,7 @@
       "operationPlanID": 1,
       "operationPlanName": "Turn on 24c",
       "IRcodeID": 1,
-      "hour": 9,
+      "hour": 7,
       "minute": 30,
       "weekdays": "12345"
     },
@@ -199,7 +199,7 @@
       "operationPlanID": 2,
       "operationPlanName": "Morning cold boost 20c",
       "IRcodeID": 2,
-      "hour": 9,
+      "hour": 7,
       "minute": 45,
       "weekdays": "12345"
     },
@@ -207,17 +207,24 @@
       "operationPlanID": 3,
       "operationPlanName": "Afternoon cold boost 20c",
       "IRcodeID": 2,
-      "hour": 12,
-      "minute": 0,
+      "hour": 11,
+      "minute": 30,
       "weekdays": "12345"
     },
     {
       "operationPlanID": 4,
       "operationPlanName": "Shut down",
       "IRcodeID": 3,
-      "hour": 20,
-      "minute": 45,
+      "hour": 18,
+      "minute": 0,
       "weekdays": "1234567"
+    },    {
+      "operationPlanID": 5,
+      "operationPlanName": "Finish Morning cold boost and restore to normal",
+      "IRcodeID": 1,
+      "hour": 11,
+      "minute": 45,
+      "weekdays": "12345"
     }
   ],
   "sleepPlans": [

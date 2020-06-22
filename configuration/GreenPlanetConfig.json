@@ -232,9 +232,9 @@
       "operationPlanID": 6,
       "operationPlanName": "Turn off again",
       "IRcodeID": 3,
-      "hour": 20,
-      "minute": 45,
-      "weekdays": "12345"
+      "hour": 21,
+      "minute": 0,
+      "weekdays": "1234567"
     }
   ],
   "sleepPlans": [

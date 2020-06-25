@@ -240,19 +240,19 @@
   "sleepPlans": [
     {
       "planStartHour": 1,
-      "sleepTime": 7200
+      "sleepTime": 10800
     },
     {
       "planStartHour": 6,
-      "sleepTime": 3600
+      "sleepTime": 10800
     },
     {
       "planStartHour": 14,
-      "sleepTime": 3600
+      "sleepTime": 10800
     },
     {
       "planStartHour": 19,
-      "sleepTime": 3600
+      "sleepTime": 10800
     }
   ],
   "IRcode": [

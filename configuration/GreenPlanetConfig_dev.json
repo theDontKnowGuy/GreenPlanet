@@ -1,6 +1,6 @@
 {
   "ConfigurationVersion": 205,
-  "targetFWVersion_client": 2020062201,
+  "targetFWVersion_client": 2020062801,
   "GeneralConfiguration": {
     "DEBUGLEVEL": 2,
     "delayBetweenExecs": 1000,
@@ -27,28 +27,28 @@
       "deviceID": "703",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "3,4,6"
+      "memberInOperationPlans": "3,4,6,7"
     },
     {
       "DeviceMAC": "24:6F:28:A9:AF:98",
       "deviceID": "707",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "3,4,6"
+      "memberInOperationPlans": "3,4,6,7"
     },
     {
       "DeviceMAC": "24:6F:28:9D:9A:64",
       "deviceID": "706",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "3,4,6"
+      "memberInOperationPlans": "3,4,6,7"
     },
     {
       "DeviceMAC": "24:6F:28:A8:4D:F4",
       "deviceID": "500",
       "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "4,6",
+      "deviceLocation": "Eng Large South",
+      "memberInOperationPlans": "1,3,4,6,7",
       "blue": 32
     },
     {
@@ -56,134 +56,134 @@
       "deviceID": "501",
       "deviceGroup": "Main floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,3,4,6",
+      "memberInOperationPlans": "1",
       "irled": 25
     },
     {
       "DeviceMAC": "24:0A:C4:C5:BA:8C",
       "deviceID": "502",
       "deviceGroup": "Main floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,4,6"
+      "deviceLocation": "Product Door",
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:99:EE:84",
       "deviceID": "503",
       "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,4,6"
+      "deviceLocation": "Agronomy",
+      "memberInOperationPlans": "4,6,7"
     },
     {
       "DeviceMAC": "24:0A:C4:C5:BC:B4",
       "deviceID": "504",
       "deviceGroup": "Main floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,3,4,6"
+      "deviceLocation": "Kitchen",
+      "memberInOperationPlans": "1,3,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:99:EA:4C",
       "deviceID": "505",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,4,6"
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:BA:D8",
       "deviceID": "506",
       "deviceGroup": "Main floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "4,6"
+      "deviceLocation": "Eng Large North",
+      "memberInOperationPlans": "1,3,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:41:18",
       "deviceID": "507",
       "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,4,6"
+      "deviceLocation": "Small Conf",
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:BF:28",
       "deviceID": "508",
       "deviceGroup": "Main floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,3,4,6"
+      "deviceLocation": "Eng South Main",
+      "memberInOperationPlans": "1,3,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:41:0C",
       "deviceID": "509",
       "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,3,4,6"
+      "deviceLocation": "Finance",
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "24:6F:28:A8:36:DC",
       "deviceID": "510",
-      "deviceGroup": "Main floor",
+      "deviceGroup": "Eng South Main",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,4,6"
+      "memberInOperationPlans": "1,3,4,6,7"
     },
     {
       "DeviceMAC": "24:6F:28:A8:2B:DC",
       "deviceID": "511",
       "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "4,6"
+      "deviceLocation": "AI",
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "24:0A:C4:C5:B7:1C",
       "deviceID": "512",
       "deviceGroup": "Main floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "4,6"
+      "deviceLocation": "People & Culture",
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:99:EF:AC",
       "deviceID": "513",
       "deviceGroup": "Second Floor",
       "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,2,4,5,6"
+      "memberInOperationPlans": "1,2,4,5,6,7"
     },
     {
       "DeviceMAC": "24:6F:28:A8:52:DC",
       "deviceID": "514",
       "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,3,4,6"
+      "deviceLocation": "Eng North Main",
+      "memberInOperationPlans": "1,3,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:C8:B8",
       "deviceID": "515",
       "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,3,4,6"
+      "deviceLocation": "Eng North",
+      "memberInOperationPlans": "1,3,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:5A:64",
       "deviceID": "516",
       "deviceGroup": "Second Floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "1,4,6"
+      "deviceLocation": "Product Exit",
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:99:FA:D4",
       "deviceID": "517",
       "deviceGroup": "Main floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "4,6"
+      "deviceLocation": "Corridor North",
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "A4:CF:12:9A:51:EC",
       "deviceID": "518",
       "deviceGroup": "Main floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "4,6"
+      "deviceLocation": "Corridor South",
+      "memberInOperationPlans": "1,4,6,7"
     },
     {
       "DeviceMAC": "24:6F:28:A8:31:2C",
       "deviceID": "519",
       "deviceGroup": "Main floor",
-      "deviceLocation": "clinic",
-      "memberInOperationPlans": "4,6"
+      "deviceLocation": "Large Conference Room",
+      "memberInOperationPlans": "1,2,4,6,7"
     }
   ],
   "operationPlans": [
@@ -226,21 +226,28 @@
       "hour": 11,
       "minute": 45,
       "weekdays": "12345"
-    }
-    ,
+    },
     {
       "operationPlanID": 6,
       "operationPlanName": "Turn off again",
       "IRcodeID": 3,
+      "hour": 21,
+      "minute": 0,
+      "weekdays": "1234567"
+    },
+    {
+      "operationPlanID": 7,
+      "operationPlanName": "test-Turn off again",
+      "IRcodeID": 3,
       "hour": 19,
-      "minute": 30,
-      "weekdays": "12345"
+      "minute": 40,
+      "weekdays": "1234567"
     }
   ],
   "sleepPlans": [
     {
       "planStartHour": 1,
-      "sleepTime": 7200
+      "sleepTime": 10800
     },
     {
       "planStartHour": 6,
@@ -248,11 +255,11 @@
     },
     {
       "planStartHour": 14,
-      "sleepTime": 3600
+      "sleepTime": 10800
     },
     {
       "planStartHour": 19,
-      "sleepTime": 3600
+      "sleepTime": 10800
     }
   ],
   "IRcode": [

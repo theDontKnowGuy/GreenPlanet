@@ -1,8 +1,8 @@
 {
-  "ConfigurationVersion": 205,
+  "ConfigurationVersion": 105,
   "targetFWVersion_client": 2020062801,
   "GeneralConfiguration": {
-    "DEBUGLEVEL": 2,
+    "DEBUGLEVEL": 5,
     "delayBetweenExecs": 1000,
     "sleepRandFactor": 120,
     "sleepAfterExec": 3600,

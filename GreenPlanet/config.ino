@@ -7,7 +7,7 @@ JSONVar loadConfiguration() {
   if (JSON.stringify(myConfig) == "-1") myConfig = loadConfigurationFromEEPROM();
   if (JSON.stringify(myConfig) == "-1") {
     logThis("Panic. No configuration found. I'm Dead.");
-    boardpanic(3);
+    boardPanic(3);
   }
 
 

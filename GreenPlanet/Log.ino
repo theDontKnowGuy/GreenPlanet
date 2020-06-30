@@ -44,7 +44,7 @@ void logThis(int debuglevel, String strMessage, int newLineHint)
   String tDHTt = (DHTt == 0.0) ? "" : String(DHTt);
 
   loggingCounter++;
-  
+
   if (  ihaveTime  )  getLocalTime(&timeinfo);
 
   if (addFakeSec == -1)
@@ -59,9 +59,9 @@ void logThis(int debuglevel, String strMessage, int newLineHint)
   }
 
   String t;
-  if (loggingType==1) t = String(timeinfo.tm_year + 1900) + "-" + String(timeinfo.tm_mon + 1) + "-" + String(timeinfo.tm_mday) + "T" + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(addFakeSec) + "-0000";
-  if (loggingType==3) t = String(timeinfo.tm_year + 1900) + "/" + String(timeinfo.tm_mon + 1) + "/" + String(timeinfo.tm_mday) + " " + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(addFakeSec);
-  
+  if (loggingType == 1) t = String(timeinfo.tm_year + 1900) + "-" + String(timeinfo.tm_mon + 1) + "-" + String(timeinfo.tm_mday) + "T" + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(addFakeSec) + "-0000";
+  if (loggingType == 3) t = String(timeinfo.tm_year + 1900) + "/" + String(timeinfo.tm_mon + 1) + "/" + String(timeinfo.tm_mday) + " " + String(timeinfo.tm_hour) + ":" + String(timeinfo.tm_min) + ":" + String(addFakeSec);
+
   String head = t + "," +                                    //timestamp
                 deviceID + "," +                             //1
                 MACID + "," +                                //2
@@ -142,7 +142,7 @@ int networklogThis(String message, bool asProxy = false)
 
     case 3: //// IFTTT
 
-Serial.println(loggerHost);
+      Serial.println(loggerHost);
       myNetworkResponse = httpRequest(loggerHost, loggerHostPort, "POST", logTarget, "{\"value1\":\"" + message + "\"}", "Congratulations! You've", 0);
 
       break;
@@ -162,8 +162,9 @@ Serial.println(loggerHost);
     RTCpanicStateCode = 3;
     failedLogging2NetworkCounter++;
     if (failedLogging2NetworkCounter == 5)
-      boardpanic(2);
+      boardPanic(2);
     return 1;
   }
+  if (readEEPROM(1) == "PANIC=2") writeString(1, "PANIC=0");
   return 0;
 }

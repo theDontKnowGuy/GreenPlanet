@@ -96,7 +96,7 @@ void networkReset()
     digitalWrite(red, LOW);
     return;
   }
-  boardpanic(1);
+  boardPanic(1);
 }
 
 NetworkResponse httpRequest(char *host, int port, String requestType, String URI, String postData, String successValidator, bool quicky)

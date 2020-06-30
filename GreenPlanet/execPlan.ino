@@ -10,7 +10,7 @@ int execPlan(int IRCodeID)
       idxIRPlanToRun = i;
   }
 
-  logThis(2, "Now executing plan " + String(IRCodeID) + " - " + myIRcode[idxIRPlanToRun].IRcodeDescription, 2);
+  logThis(2, "Now executing IRcode# " + String(IRCodeID) + " - " + myIRcode[idxIRPlanToRun].IRcodeDescription, 2);
 
   for (int i = 0; i < 3; i++)
   {

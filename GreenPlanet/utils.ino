@@ -75,6 +75,8 @@ int checkPanicMode(void)
     RTCpanicStateCode = panicState.substring(7, 1).toInt();
 
   if (RTCpanicStateCode != 0) logThis(0, "Panic mode code " + String(RTCpanicStateCode) + " was detected from previous deep sleep cycle.", 2);
+  if (RTCpanicStateCode == 3 ) logThis(0, "Panic mode code " + String(RTCpanicStateCode) + " Previous log failed to sent.", 2);
+
   return RTCpanicStateCode;
 }
 
@@ -83,17 +85,22 @@ String getDigits(int digits)
   return (digits < 10) ? "0" + String(digits) : String(digits);
 }
 
-void boardpanic(int panicReason)
+void boardPanic(int panicReason)
 {
   String panicState = readEEPROM(1);
 
+  if (panicReason == 2) // failed to log
+  {
+    writeString(1, "PANIC=" + String(panicReason));
+    Serial.println("Writing to eeprom panic=3");
+    return;
+  }
   if (panicState == "PANIC=0")
   { //first panic
     Serial.println("Reseting for panic !!!!!!!!!!!!!!!!!!!!!!!!!!!  Panic Reason is:" + String(panicReason));
     writeString(1, "PANIC=" + String(panicReason));
     ESP.restart();
   }
-  else
   {
     Serial.println("Second panic call!!!!!!!!!!!!!!!!!!!!!!!!!!! Panic Reason is:" + String(panicReason));
     writeString(1, "PANIC=0"); //if fail next time - let's try restart instead

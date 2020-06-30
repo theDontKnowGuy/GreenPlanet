@@ -7,8 +7,6 @@ void wakeupReason() {
 
   touchPin = esp_sleep_get_touchpad_wakeup_status();
 
-  esp_sleep_wakeup_cause_t wakeup_reason;
-
   wakeup_reason = esp_sleep_get_wakeup_cause();
 
   switch (wakeup_reason)
@@ -36,16 +34,18 @@ void gotoSleep(int timeToSleep)
 void gotoSleep(int timeToSleep, int panicCode)
 {
   esp_random();
-  timeToSleep = timeToSleep - (sleepRandFactor/2)  + random(sleepRandFactor);
+  timeToSleep = timeToSleep - (sleepRandFactor / 2)  + random(sleepRandFactor);
   logThis(2, "Going to sleep now for " + String(timeToSleep) + " secs....", 1);
   logThis(2, "This cycle took: " + String(millis()), 1);
 
   switch (panicCode)
   {
     case 0: //normal
-      networklogThis(networkLogBuffer);
-      Serial.println("This cycle really took (including last logging network roundtrip): " + String(millis()));
-      break;
+      { int res = networklogThis(networkLogBuffer);
+        if (res != 0) boardPanic(2);
+        Serial.println("This cycle really took (including last logging network roundtrip): " + String(millis()));
+        break;
+      }
     case 1:
       //no network, reset failed, will wait
       RTCpanicStateCode = 1;

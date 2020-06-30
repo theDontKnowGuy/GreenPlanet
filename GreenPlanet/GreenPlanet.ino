@@ -12,7 +12,7 @@
 
 #define RELEASE true
 //#define SERVER
-const int FW_VERSION = 2020062101;   
+const int FW_VERSION = 2020062901;
 int DEBUGLEVEL = 2;     // set between 0 and 5. This value will be overridden by dynamic network configuration json if it has a higher value
 
 
@@ -94,7 +94,7 @@ RTC_DATA_ATTR char c_logTarget[200];
 //RTC_DATA_ATTR char loggerHost[100] = "api.thingspeak.com";
 RTC_DATA_ATTR char loggerHost[100] = "maker.ifttt.com";
 //RTC_DATA_ATTR char loggerHost[100] = "192.168.1.200";
-//defined in secrets.h :   String logTarget =     "channels/<channel code here>/bulk_update.csv"; 
+//defined in secrets.h :   String logTarget =     "channels/<channel code here>/bulk_update.csv";
 //defined in secrets.h :   String logTarget = "/trigger/GreenPlanet2/with/key/xxxxxxx-xxx";
 RTC_DATA_ATTR int loggerHostPort = 443;
 String write_api_key = "";
@@ -246,11 +246,11 @@ touch_pad_t touchPin;
 int delayBetweenExecs = 3;
 int sleepAfterExec = 1800;
 int sleepTime = 1800;
-int sleepAfterPanic = 200;
+int sleepAfterPanic = 7200;
 int sleepRandFactor = 120;
 
 //#include "esp_system.h"
-
+esp_sleep_wakeup_cause_t wakeup_reason;
 RTC_DATA_ATTR int RTCpanicStateCode = 0;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -322,7 +322,7 @@ void setup()
   logThis(1, "********** NOT A RELEASE VERSION ******************* NOT A RELEASE VERSION ******************* NOT A RELEASE VERSION ********* ", 2);
 #endif
   logThis(3, "Starting GreenPlanet Device by the DontKnowGuy", 2);
-  logThis(3, "Firmware version " + String(FW_VERSION) + ". Unique device identifier: " + MACID, 2);
+  logThis(2, "Firmware version " + String(FW_VERSION) + ". Unique device identifier: " + MACID, 2);
 
   EEPROM.begin(4096);
   checkPanicMode();
@@ -353,7 +353,7 @@ void setup()
 
   parseConfiguration(loadConfiguration());
 
-  logThis(3, "This is device " + String(deviceID), 3);
+  logThis(1, "This is device " + String(deviceID), 3);
 
 #if defined(SERVER)
   logThis(1, "I am a server", 2);
@@ -366,7 +366,7 @@ void setup()
   DHTh = DHTsensor.getHumidity();
 
   logThis(1, "Temperature: " + String(DHTt) + " Humidity: " + String(DHTh));
-  logThis(3,"Initialization Completed.", 3);
+  logThis(3, "Initialization Completed.", 3);
   digitalWrite(blue, LOW); // system live indicator
 
 #if defined(SERVER)
@@ -391,6 +391,7 @@ void setup()
 
 #else
   planDispatcher();
+  if (wakeup_reason == ESP_SLEEP_WAKEUP_TOUCHPAD) {logThis(1, "Executing Plan becuase woke up by touchpad",2);execPlan(3);} // on wakeup by touchpad - play ir plan for testing
   gotoSleep(calcTime2Sleep()); ///is this order right ????????
 #endif
 } //setup

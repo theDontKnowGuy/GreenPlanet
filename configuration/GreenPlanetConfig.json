@@ -1,6 +1,6 @@
 {
   "ConfigurationVersion": 205,
-  "targetFWVersion_client": 2020062203,
+  "targetFWVersion_client": 2020062901,
   "GeneralConfiguration": {
     "DEBUGLEVEL": 2,
     "delayBetweenExecs": 1000,
@@ -239,8 +239,8 @@
       "operationPlanID": 7,
       "operationPlanName": "test-Turn off again",
       "IRcodeID": 3,
-      "hour": 10,
-      "minute": 10,
+      "hour": 15,
+      "minute": 30,
       "weekdays": "1234567"
     }
   ],

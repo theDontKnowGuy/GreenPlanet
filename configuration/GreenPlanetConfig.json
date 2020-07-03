@@ -251,7 +251,7 @@
     },
     {
       "planStartHour": 6,
-      "sleepTime": 3600
+      "sleepTime": 10800
     },
     {
       "planStartHour": 14,

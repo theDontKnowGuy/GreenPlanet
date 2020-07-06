@@ -176,7 +176,8 @@
       "deviceID": "518",
       "deviceGroup": "Main floor",
       "deviceLocation": "Corridor South",
-      "memberInOperationPlans": "1,4,6,7"
+      "memberInOperationPlans": "1,4,6,7",
+        "irled": 25
     },
     {
       "DeviceMAC": "24:6F:28:A8:31:2C",

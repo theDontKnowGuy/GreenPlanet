@@ -185,6 +185,12 @@
       "deviceGroup": "Main floor",
       "deviceLocation": "Large Conference Room",
       "memberInOperationPlans": "1,2,4,6,7"
+    },    {
+      "DeviceMAC": "A4:CF:12:99:EA:50",
+      "deviceID": "712",
+      "deviceGroup": "Main floor",
+      "deviceLocation": "Large Conference Room",
+      "memberInOperationPlans": "1,2,4,6,7"
     }
   ],
   "operationPlans": [

@@ -199,7 +199,7 @@
       "operationPlanID": 1,
       "operationPlanName": "Turn on 24c",
       "IRcodeID": 1,
-      "hour": 7,
+      "hour": 17,
       "minute": 30,
       "weekdays": "12345"
     },
@@ -207,7 +207,7 @@
       "operationPlanID": 2,
       "operationPlanName": "Morning cold boost 20c",
       "IRcodeID": 2,
-      "hour": 7,
+      "hour": 17,
       "minute": 45,
       "weekdays": "12345"
     },
@@ -215,7 +215,7 @@
       "operationPlanID": 3,
       "operationPlanName": "Afternoon cold boost 20c",
       "IRcodeID": 2,
-      "hour": 11,
+      "hour": 17,
       "minute": 30,
       "weekdays": "12345"
     },

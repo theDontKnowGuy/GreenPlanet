@@ -207,16 +207,25 @@ int parseConfiguration(JSONVar eyeConfig) {
   {
 
     myIRcode[i].IRcodeID = eyeConfig["IRcode"][i]["IRcodeID"];
+    myIRcode[i].IRtype = eyeConfig["IRcode"][i]["IRtype"];
     myIRcode[i].IRcodeDescription =   JSON.stringify(eyeConfig["IRcode"][i]["IRcodeDescription"]);
 
-    int l = 0;
-    while ((int)eyeConfig["IRcode"][i]["IRCodeBitStream"][l] > 0) {
-      myIRcode[i].IRCodeBitStream[l] =  (int)eyeConfig["IRcode"][i]["IRCodeBitStream"][l];
-      l++;
+    if (myIRcode[i].IRtype == 1) {
+
+      int l = 0;
+      while ((int)eyeConfig["IRcode"][i]["IRCodeBitStream"][l] > 0) {
+        myIRcode[i].IRCodeBitStream[l] =  (int)eyeConfig["IRcode"][i]["IRCodeBitStream"][l];
+        l++;
+      }
+      myIRcode[i].IRCodeBitStreamLength = l;
+      //logThis(2, "IR plan code " + String(i) + " loaded with length of " + String(l) + " bits",2);
+      i++;
     }
-    myIRcode[i].IRCodeBitStreamLength = l;
-    //logThis(2, "IR plan code " + String(i) + " loaded with length of " + String(l) + " bits",2);
-    i++;
+    if (myIRcode[i].IRtype == 2) {
+      myIRcode[i].ACprotocol = eyeConfig["IRcode"][i]["ACprotocol"];
+      myIRcode[i].targetTemp = eyeConfig["IRcode"][i]["targetTemp"];
+      myIRcode[i].power = eyeConfig["IRcode"][i]["power"];
+    }
   }
 
   inxParticipatingIRCodes = i;

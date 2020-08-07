@@ -192,6 +192,7 @@ long learningTH = 15000;
 
 uint16_t kIrLed = 14;
 const uint16_t kRecvPin = 15;
+IRac ac(kIrLed);  // Create a A/C object using GPIO to sending messages with.
 
 const uint16_t kCaptureBufferSize = 2048;
 const uint16_t kMinUnknownSize = 12;
@@ -278,10 +279,16 @@ operationPlans myOperationPlans[10];
 typedef struct
 {
   int IRcodeID;
+  int IRtype;
   String IRcodeDescription;
   uint16_t IRCodeBitStream[300];
   int IRCodeBitStreamLength;
+  int GreenPlanetProtocolType;
+  int ACprotocol;
+  int targetTemp;
+  int power;
 } IRcode;
+
 IRcode myIRcode[20];
 
 int inxParticipatingPlans = 0;
@@ -391,7 +398,10 @@ void setup()
 
 #else
   planDispatcher();
-  if (wakeup_reason == ESP_SLEEP_WAKEUP_TOUCHPAD) {logThis(1, "Executing Plan becuase woke up by touchpad",2);execPlan(3);} // on wakeup by touchpad - play ir plan for testing
+  if (wakeup_reason == ESP_SLEEP_WAKEUP_TOUCHPAD) {
+    logThis(1, "Executing Plan becuase woke up by touchpad", 2);  // on wakeup by touchpad - play ir plan for testing
+    execPlan(3);
+  }
   gotoSleep(calcTime2Sleep()); ///is this order right ????????
 #endif
 } //setup

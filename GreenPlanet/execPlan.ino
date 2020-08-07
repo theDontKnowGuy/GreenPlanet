@@ -1,5 +1,13 @@
 int execPlan(int IRCodeID)
 {
+
+  if (myIRcode[IRCodeID].IRtype == 2) {
+
+    execProtocolPlan(myIRcode[IRCodeID].power, myIRcode[IRCodeID].targetTemp, myIRcode[IRCodeID].ACprotocol);
+
+    return 0;
+  }
+
   IRsend irsend(kIrLed);      // Set the GPIO to be used to sending the message.
   irsend.begin();
 

@@ -273,6 +273,7 @@
   "IRcode": [
     {
       "IRcodeID": 1,
+      "IRtype": 1,
       "IRcodeDescription": "Turn on 24c",
       "IRCodeBitStream": [
         8962,
@@ -418,6 +419,7 @@
     },
     {
       "IRcodeID": 2,
+      "IRtype": 1,
       "IRcodeDescription": "cold boost 20c",
       "IRCodeBitStream": [
         8958,
@@ -563,6 +565,7 @@
     },
     {
       "IRcodeID": 3,
+      "IRtype": 1,
       "IRcodeDescription": "Shut down",
       "IRCodeBitStream": [
         8930,
@@ -705,6 +708,16 @@
         568,
         632
       ]
+    },
+    {
+      "IRcodeID": 4,
+      "IRtype": 2,
+      "IRcodeDescription": "Electra Shut down",
+      "ACprotocol": 1,
+
+      "targetTemp": 24,
+      "power": 0,
+      "IRCodeBitStream": []
     }
   ],
   "ServerConfiguration": {

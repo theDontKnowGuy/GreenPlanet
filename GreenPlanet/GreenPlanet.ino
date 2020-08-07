@@ -12,7 +12,7 @@
 
 #define RELEASE true
 //#define SERVER
-const int FW_VERSION = 2020062901;
+const int FW_VERSION = 2020080701;
 int DEBUGLEVEL = 2;     // set between 0 and 5. This value will be overridden by dynamic network configuration json if it has a higher value
 
 

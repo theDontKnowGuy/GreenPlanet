@@ -1,9 +1,15 @@
 int execPlan(int IRCodeID)
 {
+  int idxIRPlanToRun = -1;
+  for (int i = 0; i <= inxParticipatingIRCodes; i++)
+  {
+    if (IRCodeID == myIRcode[i].IRcodeID)
+      idxIRPlanToRun = i;
+  }
+  if (myIRcode[idxIRPlanToRun].IRtype == 2) {
 
-  if (myIRcode[IRCodeID].IRtype == 2) {
 
-    execProtocolPlan(myIRcode[IRCodeID].power, myIRcode[IRCodeID].targetTemp, myIRcode[IRCodeID].ACprotocol);
+    execProtocolPlan(myIRcode[idxIRPlanToRun].power, myIRcode[idxIRPlanToRun].targetTemp, myIRcode[idxIRPlanToRun].ACprotocol);
 
     return 0;
   }
@@ -11,7 +17,6 @@ int execPlan(int IRCodeID)
   IRsend irsend(kIrLed);      // Set the GPIO to be used to sending the message.
   irsend.begin();
 
-  int idxIRPlanToRun = -1;
   for (int i = 0; i <= inxParticipatingIRCodes; i++)
   {
     if (IRCodeID == myIRcode[i].IRcodeID)

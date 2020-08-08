@@ -2,9 +2,6 @@ int execProtocolPlan(int power ,  int targetTemp, int ACProtocol) {
 
   logThis(1, "Running plan with power = " + String(power) + " and temp = " + String(targetTemp), 2);
   
-  Serial.println(ELECTRA_AC);
-  Serial.println(ELECTRA_AC);
-  
   ac.next.protocol = decode_type_t::ELECTRA_AC;  // Set a protocol to use.
   ac.next.model = 1;  // Some A/Cs have different models. Try just the first.
   ac.next.mode = stdAc::opmode_t::kCool;  // Run in cool mode initially.

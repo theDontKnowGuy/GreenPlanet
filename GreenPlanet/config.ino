@@ -219,13 +219,14 @@ int parseConfiguration(JSONVar eyeConfig) {
       }
       myIRcode[i].IRCodeBitStreamLength = l;
       //logThis(2, "IR plan code " + String(i) + " loaded with length of " + String(l) + " bits",2);
-      i++;
+
     }
     if (myIRcode[i].IRtype == 2) {
       myIRcode[i].ACprotocol = eyeConfig["IRcode"][i]["ACprotocol"];
       myIRcode[i].targetTemp = eyeConfig["IRcode"][i]["targetTemp"];
       myIRcode[i].power = eyeConfig["IRcode"][i]["power"];
     }
+    i++;
   }
 
   inxParticipatingIRCodes = i;

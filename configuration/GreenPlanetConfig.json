@@ -7,7 +7,7 @@
     "sleepRandFactor": 120,
     "sleepAfterExec": 3600,
     "sleepAfterPanic": 3600,
-    "daylightOffset_sec": 3600,
+    "daylightOffset_sec": 0,
     "gmtOffset_sec": 10800,
     "dataUpdateHost": "raw.githubusercontent.com",
     "dataUpdateURI": "/theDontKnowGuy/GreenPlanet/master/configuration/GreenPlanetConfig.json",
@@ -22,7 +22,7 @@
     "blue": 12
   },
   "Devices": [
-        {
+    {
       "DeviceMAC": "A4:CF:12:9A:C1:68",
       "deviceID": "709",
       "deviceGroup": "Main floor",
@@ -184,7 +184,8 @@
       "deviceGroup": "Kitchen",
       "deviceLocation": "Kitchen",
       "memberInOperationPlans": "1,4,6",
-      "irled": 25
+      "irled": 25,
+      "sleepTime": 5000
     },
     {
       "DeviceMAC": "24:6F:28:A8:31:2C",

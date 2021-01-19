@@ -185,7 +185,7 @@
       "deviceLocation": "Kitchen",
       "memberInOperationPlans": "1,4,6",
       "irled": 25,
-      "sleepTime": 5000
+      "sleepTime": 50000
     },
     {
       "DeviceMAC": "24:6F:28:A8:31:2C",
